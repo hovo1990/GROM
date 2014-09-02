@@ -1,0 +1,70 @@
+;
+;	File 'topol.top' was generated
+;	By user: john1990 (1000)
+;	On host: Laptop
+;	At date: Thu Jun 21 23:59:57 2012
+;
+;	This is a standalone topology file
+;
+;	It was generated using program:
+;	pdb2gmx - VERSION 4.5.5
+;
+;	Command line was:
+;	pdb2gmx -f DNA.pdb -o DNA_processed.gro 
+;
+;	Force field was read from the standard Gromacs share directory.
+;
+
+; Include forcefield parameters
+#include "amber99sb.ff/forcefield.itp"
+
+; Include ligand topology
+#include "VIC.itp"
+
+; Ligand position restraints
+#ifdef POSRES
+#include "posre_VIC.itp"
+#endif
+
+
+; Include chain topologies
+#include "topol_DNA_chain_A.itp"
+; Include Position restraint file
+#ifdef POSRES
+#include "posre_DNA_chain_A.itp"
+#endif
+
+; Include chain topologies
+#include "topol_DNA_chain_B.itp"
+; Include Position restraint file
+#ifdef POSRES
+#include "posre_DNA_chain_B.itp"
+#endif
+
+
+
+
+; Include water topology
+#include "amber99sb.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000 
+#endif
+
+; Include topology for ions
+#include "amber99sb.ff/ions.itp"
+
+
+
+[ system ]
+; Name
+DNA 26 base pairs with Vincristine in TIP3P in water
+
+[ molecules ]
+; Compound        #mols
+DNA_chain_A         1
+DNA_chain_B         1
+VIC                 1
