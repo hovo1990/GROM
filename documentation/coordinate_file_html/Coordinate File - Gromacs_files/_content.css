@@ -1,0 +1,239 @@
+body {
+	font-family: arial,verdana,helvetica ;
+	font-size: 12px;
+	line-height: 1.5;
+}
+blockquote {
+	margin: 0 3em;	
+}
+a {
+	color: #36c;
+	text-decoration:none;
+}
+a.disabled:hover,
+a.disabled {
+	background-color:transparent!important;
+	text-decoration:none !important;
+	cursor:pointer;
+	opacity:.5 !important;
+	color:#999 !important;
+}
+em {
+	font-style: italic;	
+}
+strong {
+	font-weight:bold;	
+}
+strong em,
+em strong {
+	font-weight:bold;	
+	font-style:italic;
+}
+a.new {
+	text-decoration: none;
+	border-bottom: 1px dotted #af6666;
+	color: #af6666;	
+}
+a.new:hover {
+	color: #790000;
+	border-bottom: 1px solid #790000;
+}
+a:hover {
+	color: #004a80;
+	text-decoration:underline;
+}
+a.disabled:hover,
+a.disabled {
+	cursor:default;
+	text-decoration:none;
+}
+p, 
+blockquote, 
+pre,
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+ol, 
+ul, 
+dl {
+	margin: 0.5em 0 ;
+}
+
+ol, 
+ul, 
+dd {
+	padding-left: 2em; 
+}
+ol li {
+	list-style-type: decimal;
+}
+div.wiki-toc ol li {
+	list-style-type: none;
+}
+ul li {
+	list-style-type: disc;
+}
+ul ul, 
+ul ol, 
+ol ul, 
+ol ol {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+ol ul, 
+ul ul	{
+   list-style-type: circle;
+}
+
+ol ol ul, 
+ol ul ul, 
+ul ol ul, 
+ul ul ul {
+	list-style-type: square;
+}
+blockquote {
+	border-top: 1px dotted #aaa;
+	border-bottom: 1px dotted #aaa;
+	margin-left: 1.8em;
+	margin-right: 1.8em;
+	padding: 0.6em;
+	text-align: center;
+	color: #777;
+	font-size: 12px;
+}
+/*** 
+ * specificity kills us here
+ */
+body.deki-content-edit span.comment,
+body.deki-content-edit div.comment, 
+body.deki-content-edit p.comment {
+	background-color: #fff799;
+	padding: 3px;
+}
+code {
+	font-family: "Lucida Console", Courier, Monospace;
+	font-size: 14px;
+	color: #003471;
+}
+pre {
+	color: #777;
+	margin-left: 1em;
+	padding-left: 1em;
+	border-left: 4px solid #aaa;
+	background-color: #fefefe;
+	overflow: visible;
+}
+/** 
+	Editor scripting styles 
+*/
+body.deki-content-edit pre.script {
+	color: #004184;
+	font-size: 12px;
+	line-height: 18px;
+}
+h2, 
+h3, 
+h4, 
+h5, 
+h6 {
+	padding: 0;
+	padding-top: 0.375em;
+	margin-bottom: 10px;
+	line-height: 1;
+}
+
+#deki-new-page-title,
+h1,
+.header_1,
+#body div.title h1 {
+	color: #333;
+	font-size: 28px;
+	line-height: 1.2;
+	margin:0;
+	padding:0 0 5px 0;
+}
+h1#title {
+	border-bottom:1px dotted #aaa;
+}
+#deki-new-page-title {
+	margin:10px 0;
+	width:450px;	
+}
+h2,
+.header_2 {
+	font-size: 26px;
+	color:#365f91;
+}
+h3,
+.header_3 {
+	font-size: 24px;
+	color:#4f81bd;
+}
+h4,
+.header_4 {
+	font-size: 22px;
+	color: #4f81bd;
+}
+h5,
+.header_5 {
+	font-size: 20px;
+	color: #333;
+}
+h6,
+.header_6 {
+	font-size: 18px;
+	color: #666;
+}
+
+/**
+	Table Styles
+*/
+table {
+	border: 1px solid #aaa;
+}
+table th {
+	color: #4f6b72;
+	border-bottom: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	background: url(images/bg-tbl-header.gif) no-repeat;
+	background-color: #d9d9d9;
+	font-size:13px;
+	padding:2px 5px;
+	font-weight:bold;
+}
+table td {
+	color: #4f6b72;
+	padding:5px;
+}
+table td.bg2, 
+table tr.bg2 td {
+	background-color: #f5f8fe;	
+}
+
+/* script styles */
+pre.script {
+	padding-left: 12px;
+	padding-top: 16px;
+	background: transparent url(/skins/common/images/bg-script.png) no-repeat top left;
+	border: 1px solid #c66;
+	border-width: 1px 1px 1px 5px;
+	color: #004184;
+}
+pre.script-jem {
+	padding-left: 12px;
+	padding-top: 16px;
+	background: transparent url(/skins/common/images/bg-script-jem.png) no-repeat top left;
+	border: 1px solid #c96;
+	border-width: 1px 1px 1px 5px;
+	color: #004184;
+}
+pre.script-css {
+	padding-left: 12px;
+	padding-top: 16px;
+	background: transparent url(/skins/common/images/bg-script-css.png) no-repeat top left;
+	border: 1px solid #66c;
+	border-width: 1px 1px 1px 5px;
+	color: #004184;
+}
