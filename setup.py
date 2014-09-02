@@ -1,0 +1,33 @@
+#Script for making an executable with cx_freeze. Warning Buggy!!!!
+
+
+
+import sys
+from cx_Freeze import setup, Executable
+
+base = None
+if sys.platform == 'win32':
+    base = 'Win32GUI'
+
+
+
+options = {
+    'build_exe': {
+        'includes': 'GROM.py','include_files':['documentation/'],'path':['GROM/','ui/'],
+    }
+}
+
+#buildOptions = dict(include_files = ['GROM/','documentation/','ui/']) #folder,relative path. Use tuple like in the single file to set a absolute path.
+
+
+
+executables = [
+    Executable('RunGROM.py', base=base)
+]
+
+setup(name='GROM',
+      version='0.5 alpha',
+      description='GROMACS (.mdp,.itp,.top) Editor with Syntax Highlighting and pbd file editor',
+      options = options,
+      executables=executables
+      )
