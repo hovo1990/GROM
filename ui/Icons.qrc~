@@ -1,0 +1,29 @@
+<RCC>
+  <qresource prefix="Icons">
+    <file>icons/Actions-document-save-as-icon.png</file>
+    <file>icons/Actions-document-save-icon.png</file>
+    <file>icons/export-icon.png</file>
+    <file>icons/Files-New-File-icon.png</file>
+    <file>icons/open-file-icon.png</file>
+    <file>icons/Imagetools-Expand-icon.png</file>
+  </qresource>
+  <qresource prefix="Program_Icon">
+    <file>icons/dnahelixpixels.jpg</file>
+  </qresource>
+  <qresource prefix="Edit">
+    <file>icons/edit/Zoom_in.png</file>
+    <file>icons/edit/Zoom_out.png</file>
+    <file>icons/edit/Actions-redo-icon.png</file>
+    <file>icons/edit/Actions-undo-icon.png</file>
+    <file>icons/edit/copy-icon.png</file>
+    <file>icons/edit/cut-icon.png</file>
+    <file>icons/edit/paste-icon.png</file>
+    <file>icons/edit/Sign-Delete-icon.png</file>
+  </qresource>
+  <qresource prefix="Search">
+    <file>icons/find/Actions-go-down-search-icon.png</file>
+    <file>icons/find/Actions-go-up-search-icon.png</file>
+    <file>icons/find/Search-icon.png</file>
+    <file>icons/find/Start-Menu-Search-icon.png</file>
+  </qresource>
+</RCC>
