@@ -1,3 +1,7 @@
+#Script for making an executable with cx_freeze. Warning Buggy!!!!
+
+
+
 import sys
 from cx_Freeze import setup, Executable
 

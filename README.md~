@@ -1,21 +1,25 @@
 GROM
 
 version: 0.5 alpha
+-----
 
-GROM is a GROMACS(mdp,itp,top) files with Syntax Highlighting and PDB Editor wtih visual cues in one package based on Qt5,PyQt5 and Python3. It's GPL licensed!(See LICENSE)
+GROM is a GROMACS(mdp,itp,top) files with Syntax Highlighting and PDB Editor wtih visual cues in one package  based on Qt5,PyQt5 and Python3.
+It's GPL licensed!(See LICENSE)
+
 
 Dependencies
 
 Python >= 3.0 (or Python3)
-
 PyQt >= 5.0
+
 
 License
 
 GPLv3+ (GPLv3 or any other version later published by FSF at your option)
 
-Before you run it:
 
+Before you run it:
+`````````````````
 
     Please Install Qt5, Pyqt5 and Python3:
         On Ubuntu:
