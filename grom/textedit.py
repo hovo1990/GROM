@@ -29,6 +29,9 @@ class TextEdit(QTextEdit):
 
     NextId = 1
 
+    FONT_MAX_SIZE = 40
+    FONT_MIN_SIZE = 1
+
     def __init__(self, filename= None, parent=None):
         """
         Creates an Instance of QTextEdit
@@ -49,7 +52,7 @@ class TextEdit(QTextEdit):
         self.document().setModified(False)
         self.setWindowTitle(QFileInfo(self.filename).fileName())
         font = QFont("Courier", 11)
-        font.setFixedPitch(True)
+        self.document().setDefaultFont(font)
         self.setFont(font)
         self.setAutoFillBackground(False)
         self.setStyleSheet("QTextEdit { background-color: rgb(30, 30, 30); color: rgb(154, 190, 154);}")
@@ -62,6 +65,23 @@ class TextEdit(QTextEdit):
         self.textChanged.connect(self.updateSearchText)
         self.cursorPositionChanged.connect(self.CursorPosition)
         #: ---> Signals End
+
+    def zoom_in(self):
+        font = self.document().defaultFont()
+        size = font.pointSize()
+        if size < self.FONT_MAX_SIZE:
+            size += 2
+            font.setPointSize(size)
+        self.setFont(font)
+
+
+    def zoom_out(self):
+        font = self.document().defaultFont()
+        size = font.pointSize()
+        if size > self.FONT_MIN_SIZE:
+            size -= 2
+            font.setPointSize(size)
+        self.setFont(font)
 
     def setSearchTextValue(self,val1,val2):
         self.frTextObject.setFindVal(val1,val2)

@@ -180,7 +180,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         None
         """
         textEdit = self.tabWidget.currentWidget() #Gets the address of the current Widget in Tabs
-        textEdit.zoomIn(1) #Zooms In
+        textEdit.zoom_in() #This fixes the problem
 
     def ZoomOut(self):
         """
@@ -190,7 +190,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         None
         """
         textEdit = self.tabWidget.currentWidget() #Gets the address of the current Widget in Tabs
-        textEdit.zoomOut(1) #Zooms out
+        textEdit.zoom_out() #This fixes the problem with font
 
 
     def configureStuff(self):

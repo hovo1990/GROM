@@ -21,15 +21,13 @@
 # DOC
 ###############################################################################
 
-"""GROM is Text and Table Editor for GROMACS(.itp,.top,.mdp) and
-"""
 
 
 """
 GROM
 -----
 
-GROM is a GROMACS(mdp,itp,top) and PDB Editor in one package  based on Qt5,PyQt5 and Python3.
+GROM is a GROMACS(mdp,itp,top)  with Syntax Highlighting and PDB Editor with visual cues in one package  based on Qt5,PyQt5 and Python3.
 It's GPL licensed!(See LICENSE)
 
 
