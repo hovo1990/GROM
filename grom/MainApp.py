@@ -167,6 +167,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         text += "\n"
         text += "Version: %s\n" %(self.version)
         text += "Source Code: https://github.com/hovo1990/GROM"
+        text += "\n"
+        text += "Author: Hovakim Grabski"
         QMessageBox.about(self,"About G.R.O.M.",text)
 
     def showAboutQt(self):
