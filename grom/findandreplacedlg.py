@@ -38,6 +38,7 @@ class FindAndReplaceDlg(QDialog,
         self.state = state
         self.__table = table #Careful Here
         self.setupUi(self)
+        self.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.resize(300,200)
         self.setAttribute(Qt.WA_DeleteOnClose)
         if not MAC:
