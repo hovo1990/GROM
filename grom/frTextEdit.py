@@ -42,6 +42,7 @@ class frTextObject():
 
 
         self.found = False
+        self.selectedText = False
         self.__index = 0
 
         self.resPTRdown = 0
@@ -79,12 +80,13 @@ class frTextObject():
 
     def replace(self,replaceText,syntaxCombo):
         try:
-            self.__replaceText = replaceText
-            print('fuck fuck fuck ',replaceText)
-            self.cursor.removeSelectedText()
-            self.cursor.insertText(replaceText)
-            self.search(self.__findText,syntaxCombo)
-            self.fixResFindValues()
+            if self.selectedText == True:
+                self.__replaceText = replaceText
+                self.cursor.removeSelectedText()
+                self.cursor.insertText(replaceText)
+                self.search(self.__findText,syntaxCombo)
+                self.fixResFindValues()
+                self.selectedText = False
         except:
             print("something  didn't work with replace")
 
@@ -119,6 +121,7 @@ class frTextObject():
             self.cursor.movePosition(QTextCursor.NextCharacter,QTextCursor.KeepAnchor ,to_move)
             self.__textEditor.setFocus()
             self.__textEditor.setTextCursor(self.cursor)
+            self.selectedText = True
         except:
             print("something  didn't work with cursorMove")
 
