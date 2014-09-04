@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# This file is part of NINJA-IDE (http://ninja-ide.org).
+# This file is part of GROM.
 #
 # GROM is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

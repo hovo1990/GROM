@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# This file is part of NINJA-IDE (http://ninja-ide.org).
+# This file is part of GROM.
 #
 # GROM is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@
 __prj__ = "GROM"
 __author__ = "Hovakim Grabski"
 __mail__ = "johnwo1990@hotmail.com, hovakim_grabski@yahoo.com, johngra1990@gmail.com"
-__source__ = "https://github.com/ninja-ide/ninja-ide"
+__source__ = "https://github.com/hovo1990/GROM"
 __version__ = "0.5-alpha"
 __license__ = "GPL3"
 
