@@ -9,12 +9,14 @@
     :license: GPL, see LICENSE for more details.
 """""
 
+import os
 import sys
-from PyQt5.QtCore import (Qt, QFileInfo, QUrl)
+import platform
+from PyQt5.QtCore import (Qt, QFileInfo, QUrl) #QDir new
 from PyQt5.QtWidgets import (QMainWindow, QApplication,QWidget, QUndoStack, QFileDialog,QTextEdit, QMessageBox, QHBoxLayout, QMenu)
 sys.path.append('ui/')
 sys.path.append('documentation/')
-import os
+
 import ui_mainWindow as MW #Imports MainWindow GUI
 
 
@@ -68,6 +70,12 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         #: lists defines combobox content for Help
         lists = ['mdp options','PDB file structure']
         self.comboBox.addItems(lists)
+
+
+
+
+        #: Detect OS
+        self.detectOS()
 
         #: disables help Widget
         self.moreFrame_open = False
@@ -696,6 +704,14 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
 
 
 
+    def detectOS(self):
+        self.os = platform.system()
+        #print('OS: ',self.os)
+        if self.os == 'Windows':
+            self.fileOpen = "file:///"
+        else:
+            self.fileOpen = "file://"
+
 
 
     def showHelpMenu(self):
@@ -712,8 +728,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             self.gridLayout.addWidget(self.view, 1, 0, 1, 2)
             self.comboBox.currentIndexChanged.connect(self.showHTML)
             if self.moreFrame_open  == False:
-                #print("Ahoy")
-                place = place = "file://" +str(__current_directory__)+ "/documentation/mdp_param_html/mdp%20options.html"
+                place =  self.fileOpen +str(__current_directory__)+ "/documentation/mdp_param_html/mdp%20options.html"
                 self.view.load(QUrl(place))#
             self.moreFrame_show = True
         else:
@@ -726,10 +741,11 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         Method to show  HTML help files
         """
         if self.comboBox.currentText() == 'mdp options':
-            place = place = "file://" +str(__current_directory__)+ "/documentation/mdp_param_html/mdp%20options.html"
+            #print('tada ',str(__current_directory__))
+            place = self.fileOpen +str(__current_directory__)+ "/documentation/mdp_param_html/mdp%20options.html"
             self.view.load(QUrl(place))#
         else:
-            place = "file://" +str(__current_directory__)+ "/documentation/coordinate_file_html/Coordinate%20File%20-%20Gromacs.html"
+            place = self.fileOpen +str(__current_directory__)+ "/documentation/coordinate_file_html/Coordinate%20File%20-%20Gromacs.html"
             self.view.load(QUrl(place))# #this works
         self.moreFrame_open = True
 
