@@ -21,7 +21,7 @@ setup(
     name = "GROM",
     version = "0.5",
     author = "Hovakim Grabski",
-    description = "GROM is a Gromacs parameter(.mdp,.itp,.top) Text and .pdb  Table Editor ",
+    description = "GROM editor",
     options = {'build_exe': {'include_files':includefiles}},
     executables = [exe]
     )
