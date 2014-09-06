@@ -14,6 +14,15 @@ License
 
 GPLv3+ (GPLv3 or any other version later published by FSF at your option)
 
+Screenshots:
+
+![Alt text](/screenshots/screen1.jpg?raw=true "Screen 1")
+![Alt text](/screenshots/screen2.jpg?raw=true "Screen 2")
+![Alt text](/screenshots/screen3.jpg?raw=true "Screen 3")
+![Alt text](/screenshots/screen4.jpg?raw=true "Screen 4")
+![Alt text](/screenshots/screen5.jpg?raw=true "Screen 5")
+![Alt text](/screenshots/screen6.jpg?raw=true "Screen 6")
+
 Before you run it:
 
 
@@ -28,6 +37,8 @@ And run it:
 
 .. code:: bash
     $ python3 GROM.py
+
+
 
 
 Author:2014 by Hovakim Grabski(hovakim_grabski@yahoo.com,johnwo1990@hotmail.com)
