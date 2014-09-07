@@ -68,7 +68,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         self.version = __version__
 
         #: lists defines combobox content for Help
-        lists = ['mdp options','PDB file structure']
+        lists = ['mdp options(v5.0)','mdp options(v4.6)','PDB file structure']
         self.comboBox.addItems(lists)
 
 
@@ -728,7 +728,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             self.gridLayout.addWidget(self.view, 1, 0, 1, 2)
             self.comboBox.currentIndexChanged.connect(self.showHTML)
             if self.moreFrame_open  == False:
-                place =  self.fileOpen +str(__current_directory__)+ "/documentation/mdp_param_html/mdp%20options.html"
+                place =  self.fileOpen +str(__current_directory__)+ "/documentation/mdp_param_v5/mdp%20options.html"
                 self.view.load(QUrl(place))#
             self.moreFrame_show = True
         else:
@@ -740,9 +740,12 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         """
         Method to show  HTML help files
         """
-        if self.comboBox.currentText() == 'mdp options':
+        if self.comboBox.currentText() == 'mdp options(v5.0)':
             #print('tada ',str(__current_directory__))
-            place = self.fileOpen +str(__current_directory__)+ "/documentation/mdp_param_html/mdp%20options.html"
+            place = self.fileOpen +str(__current_directory__)+ "/documentation/mdp_param_v5/mdp%20options.html"
+            self.view.load(QUrl(place))#
+        elif self.comboBox.currentText() == 'mdp options(v4.6)':
+            place = self.fileOpen +str(__current_directory__)+ "/documentation/mdp_param_v4.6/mdp%20options.html"
             self.view.load(QUrl(place))#
         else:
             place = self.fileOpen +str(__current_directory__)+ "/documentation/coordinate_file_html/Coordinate%20File%20-%20Gromacs.html"
