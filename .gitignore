@@ -1,0 +1,11 @@
+*.[pyc]
+*~
+
+# a comment - this is ignored
+# no .pyc files
+*.pyc
+# no ~ files
+*~
+
+# ignore all files in the build/ directory
+build/

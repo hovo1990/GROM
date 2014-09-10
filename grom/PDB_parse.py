@@ -51,6 +51,8 @@ def PDBparse(filename):
         return final_list,info
     except:
         print('Oh come on  PDB parse problem')
+    finally:
+        inFile.close()
 
 
 def make_info(info_list):
