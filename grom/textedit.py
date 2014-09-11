@@ -12,7 +12,7 @@
 
 from PyQt5.QtCore import (Qt,QFile, QFileInfo, QIODevice, QTextStream)
 from PyQt5.QtGui import (QFont)
-from PyQt5.QtWidgets import (QTextEdit,QFileDialog)
+from PyQt5.QtWidgets import (QPlainTextEdit,QFileDialog)
 
 try:
     from PyQt5.QtCore import QString
@@ -25,7 +25,7 @@ import frTextEdit
 
 
 
-class TextEdit(QTextEdit):
+class TextEdit(QPlainTextEdit):
 
     NextId = 1
 
@@ -34,7 +34,7 @@ class TextEdit(QTextEdit):
 
     def __init__(self, filename= None, parent=None):
         """
-        Creates an Instance of QTextEdit
+        Creates an Instance of QPlainTextEdit
 
          Args:
              filename (str): for opening a parameter file
@@ -55,7 +55,7 @@ class TextEdit(QTextEdit):
         self.document().setDefaultFont(font)
         self.setFont(font)
         self.setAutoFillBackground(False)
-        self.setStyleSheet("QTextEdit { background-color: rgb(30, 30, 30); color: rgb(154, 190, 154);}")
+        self.setStyleSheet("QPlainTextEdit { background-color: rgb(30, 30, 30); color: rgb(154, 190, 154);}")
 
         #: Creates Syntax Highlighter and Find Replace Object for current Widget
         self.highlighter = GROMHighlight.GROMHighlighter(self)
@@ -70,7 +70,7 @@ class TextEdit(QTextEdit):
 
 
     def checkChange(self):
-        print('blah blah')
+        print('blah blah time to see')
 
     def zoom_in(self):
         font = self.document().defaultFont()
