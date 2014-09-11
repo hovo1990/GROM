@@ -63,8 +63,14 @@ class TextEdit(QTextEdit):
 
         #: ---> Signals Start
         self.textChanged.connect(self.updateSearchText)
+
+        self.modificationChanged.connect(self.checkChange)
         self.cursorPositionChanged.connect(self.CursorPosition)
         #: ---> Signals End
+
+
+    def checkChange(self):
+        print('blah blah')
 
     def zoom_in(self):
         font = self.document().defaultFont()
@@ -100,6 +106,7 @@ class TextEdit(QTextEdit):
         """
         Method for updating findLineEdit
         """
+        #print('color changed')
         self.frTextObject.updateTextContent()
 
     def search(self,findText,replaceText,syntaxCombo = None,caseCheckBox = False,wholeCheckBox = False):

@@ -110,6 +110,7 @@ class frTextObject():
             cursor_clear.setPosition(0)
             cursor_clear.movePosition(QTextCursor.End,QTextCursor.KeepAnchor)
             cursor_clear.mergeCharFormat(format_clear)
+            self.__textEditor.document().setModified(False)
         except:
             print("something  didn't work with fixFormat")
 
@@ -187,6 +188,7 @@ class frTextObject():
                     self.resFoundText.append([match.start(),match.end()])
                     self.__index = match.end()
                     self.highlightText(findText,match.start())
+            self.__textEditor.document().setModified(False)
         self.returnToStart()
 
     def returnToStart(self):
@@ -194,6 +196,7 @@ class frTextObject():
         cursor.setPosition(0)
         self.__textEditor.setFocus()
         self.__textEditor.setTextCursor(cursor)
+        self.__textEditor.document().setModified(False)
 
     def highlightText(self,findText,where):
         cursor = self.__textEditor.textCursor()
@@ -205,4 +208,5 @@ class frTextObject():
         cursor.mergeCharFormat(format)
         self.__textEditor.setFocus()
         self.__textEditor.setTextCursor(cursor)
+        self.__textEditor.document().setModified(False)
 
