@@ -11,8 +11,8 @@
 
 
 from PyQt5.QtCore import (Qt,QFile, QFileInfo, QIODevice, QTextStream)
-from PyQt5.QtGui import (QFont)
-from PyQt5.QtWidgets import (QPlainTextEdit,QFileDialog)
+from PyQt5.QtGui import (QFont,QPainter, QColor,QTextCharFormat, QTextFormat)
+from PyQt5.QtWidgets import (QTextEdit,QPlainTextEdit,QFileDialog, QWidget)
 
 try:
     from PyQt5.QtCore import QString
@@ -23,6 +23,18 @@ except ImportError:
 import GROMHighlight
 import frTextEdit
 
+
+class LineNumberArea(QWidget):
+
+    def __init__(self,editor):
+        self.codeEditor=editor
+        QWidget.__init__(self, editor)
+
+    def sizeHint(self):
+        return QtCore.QSize(self.codeEditor.lineNumberAreaWidth(),0)
+
+    def paintEvent(self, event):
+        self.codeEditor.lineNumberAreaPaintEvent(event)
 
 
 class TextEdit(QPlainTextEdit):
@@ -50,6 +62,7 @@ class TextEdit(QPlainTextEdit):
                                     TextEdit.NextId))
             TextEdit.NextId += 1
         self.document().setModified(False)
+        self.setLineWrapMode(QPlainTextEdit.NoWrap)
         self.setWindowTitle(QFileInfo(self.filename).fileName())
         font = QFont("Courier", 11)
         self.document().setDefaultFont(font)
@@ -58,15 +71,111 @@ class TextEdit(QPlainTextEdit):
         self.setStyleSheet("QPlainTextEdit { background-color: rgb(30, 30, 30); color: rgb(154, 190, 154);}")
 
         #: Creates Syntax Highlighter and Find Replace Object for current Widget
-        self.highlighter = GROMHighlight.GROMHighlighter(self)
-        self.frTextObject = frTextEdit.frTextObject(self)
+        #self.highlighter = GROMHighlight.GROMHighlighter(self)
+        #self.frTextObject = frTextEdit.frTextObject(self)
 
-        #: ---> Signals Start
-        self.textChanged.connect(self.updateSearchText)
+        ##: ---> Signals Start
+        #self.textChanged.connect(self.updateSearchText)
 
-        self.modificationChanged.connect(self.checkChange)
-        self.cursorPositionChanged.connect(self.CursorPosition)
-        #: ---> Signals End
+        ##self.modificationChanged.connect(self.checkChange)
+        #self.cursorPositionChanged.connect(self.CursorPosition)
+        ##: ---> Signals End
+
+
+        self.lineNumberArea = LineNumberArea(self)
+        self.blockCountChanged.connect(self.updateLineNumberAreaWidth)
+
+        self.updateRequest.connect(self.updateLineNumberArea)
+
+        self.cursorPositionChanged.connect(self.highlightCurrentLine)
+
+        self.updateLineNumberAreaWidth(0)
+        self.errorPos=None
+        self.highlightCurrentLine()
+
+    def lineNumberAreaPaintEvent(self, event):
+        painter=QPainter(self.lineNumberArea)
+        painter.fillRect(event.rect(), Qt.lightGray)
+
+        block = self.firstVisibleBlock()
+        blockNumber = block.blockNumber();
+        top = int(self.blockBoundingGeometry(block).translated(self.contentOffset()).top())
+        bottom = top + int(self.blockBoundingRect(block).height())
+
+        while block.isValid() and top <= event.rect().bottom():
+
+
+            if block.isVisible() and bottom >= event.rect().top():
+                number = str(blockNumber + 1)
+                painter.setPen(Qt.black)
+                painter.drawText(0, top, self.lineNumberArea.width(),
+                    self.fontMetrics().height(),
+                    Qt.AlignRight, number)
+
+            block = block.next()
+            top = bottom
+            bottom = top + int(self.blockBoundingRect(block).height())
+            blockNumber+=1
+
+    def lineNumberAreaWidth(self):
+        digits = 1
+        _max = max (1, self.blockCount())
+        while (_max >= 10):
+            _max = _max/10
+            digits+=1
+        space = 5 + self.fontMetrics().width('9') * digits
+        return space
+
+    def updateLineNumberAreaWidth(self, newBlockCount):
+        self.setViewportMargins(self.lineNumberAreaWidth(), 0, 0, 0)
+
+
+    def updateLineNumberArea(self, rect, dy):
+
+        if dy:
+            self.lineNumberArea.scroll(0, dy);
+        else:
+            self.lineNumberArea.update(0, rect.y(),
+                self.lineNumberArea.width(), rect.height())
+
+        if rect.contains(self.viewport().rect()):
+            self.updateLineNumberAreaWidth(0)
+
+    def resizeEvent(self, e):
+        QPlainTextEdit.resizeEvent(self,e)
+        self.cr = self.contentsRect()
+        self.lineNumberArea.setGeometry(self.cr.left(),
+                                        self.cr.top(),
+                                        self.lineNumberAreaWidth(),
+                                        self.cr.height())
+
+    def highlightError(self,pos):
+        self.errorPos=pos
+        self.highlightCurrentLine()
+
+
+    def highlightCurrentLine(self):
+        extraSelections=[]
+        if not self.isReadOnly():
+            selection = QTextEdit.ExtraSelection() #
+            lineColor = QColor(38,38,38)
+            selection.format.setBackground(lineColor)
+            selection.format.setProperty(QTextFormat.FullWidthSelection, True)
+            selection.cursor = self.textCursor()
+            selection.cursor.clearSelection()
+            extraSelections.append(selection)
+
+            if self.errorPos is not None:
+                errorSel = QPlainTextEdit.ExtraSelection()
+                lineColor = QColor(Qt.red).lighter(160)
+                errorSel.format.setBackground(lineColor)
+                errorSel.format.setProperty(QTextFormat.FullWidthSelection, True)
+                errorSel.cursor = QTextCursor(self.document())
+                errorSel.cursor.setPosition(self.errorPos)
+                errorSel.cursor.clearSelection()
+                extraSelections.append(errorSel)
+
+        self.setExtraSelections(extraSelections)
 
 
     def checkChange(self):
