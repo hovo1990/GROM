@@ -9,6 +9,7 @@
     :license: GPL, see LICENSE for more details.
 """""
 
+from __future__ import absolute_import
 
 from PyQt5.QtCore import (Qt,QFile, QFileInfo, QIODevice, QTextStream)
 from PyQt5.QtGui import (QFont,QPainter, QColor,QTextCharFormat, QTextFormat)
@@ -20,8 +21,8 @@ except ImportError:
     # we are using Python3 so QString is not defined
     QString = str
 
-import GROMHighlight
-import frTextEdit
+from  .GROMHighlight import GROMHighlighter
+from  .frTextEdit import frTextObject
 
 
 class LineNumberArea(QWidget):

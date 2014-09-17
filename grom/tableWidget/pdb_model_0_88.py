@@ -18,9 +18,10 @@ from PyQt5.QtWidgets import (QWidget, QStyledItemDelegate, QUndoStack,
                              QUndoCommand, QComboBox,QSpinBox,QDoubleSpinBox,
                              QLineEdit)
 #import richtextlineedit
-from undoCommands import CommandElementChange
 
-import PDB_parse
+
+from .undoCommands import CommandElementChange
+import tableWidget.PDB_parse as PDB_parse
 
 
 comitDataSignal = pyqtSignal(QWidget , name = "commitData" )

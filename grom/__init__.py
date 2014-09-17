@@ -75,7 +75,9 @@ import PyQt5.QtPrintSupport
 sys.path.append('grom/')
 import MainApp
 
-
+#import sys
+#from os.path import join, dirname
+#__path__.append(join(dirname(__file__), sys.platform))
 
 ###############################################################################
 # MAIN

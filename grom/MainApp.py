@@ -9,25 +9,27 @@
     :license: GPL, see LICENSE for more details.
 """""
 
+from __future__ import absolute_import
 import os
 import sys
 import platform
 from PyQt5.QtCore import (Qt, QFileInfo, QUrl) #QDir new
 from PyQt5.QtWidgets import (QMainWindow, QApplication,QWidget, QUndoStack, QFileDialog,QTextEdit, QMessageBox, QHBoxLayout, QMenu)
-sys.path.append('ui/')
-sys.path.append('documentation/')
+#sys.path.append('ui/')
+#sys.path.append('documentation/')
 
-import ui_mainWindow as MW #Imports MainWindow GUI
-
+from  ui import ui_mainWindow as MW #Imports MainWindow GUI
+import findandreplacedlg #Imports
 
 import Icons_rc
 
+#sys.path.append('textWidget/')
+#sys.path.append('tableWidget/')
+from textWidget import textedit # Imports custom Text Editor
 
-import textedit # Imports custom Text Editor
-import findandreplacedlg #Imports
-import PDB_parse #Imports PDB parse and write module
-import PDB_tableview as PDB_Table  #Imports custom TableView widget
-from modules import * #Import various modules for Help, MultiRename and Choose Dialog Widgets
+from tableWidget import  PDB_parse #Imports PDB parse and write module
+from tableWidget import  PDB_tableview as PDB_Table  #Imports custom TableView widget
+from modules import *  #Import various modules for Help, MultiRename and Choose Dialog Widgets
 
 
 

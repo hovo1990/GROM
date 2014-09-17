@@ -9,6 +9,7 @@
     :license: GPL, see LICENSE for more details.
 """""
 
+from __future__ import absolute_import
 
 from PyQt5.QtCore import (Qt, QFileInfo)
 #from PyQt5.QtGui import *
@@ -21,10 +22,14 @@ except ImportError:
     # we are using Python3 so QString is not defined
     QString = str
 
-import PDB_parse
-import pdb_model_0_88 as pdb_model
-from undoCommands import * #CommandRename, CommandAddRow,CommandRemoveRow
-import frTableEdit
+import sys
+from pprint import pprint as pp
+print(pp(sys.path))
+
+from  tableWidget.PDB_parse import *
+import tableWidget.pdb_model_0_88 as pdb_model
+from tableWidget.undoCommands import * #CommandRename, CommandAddRow,CommandRemoveRow
+import tableWidget.frTableEdit as frTableEdit
 
 (ATOM, serial, name, resName,
  ChainID, resNum,X,Y,Z, occupancy, charge, element) = range(12)

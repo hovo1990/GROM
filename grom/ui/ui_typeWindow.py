@@ -8,6 +8,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import type_rc
+
 
 class Ui_fileType(object):
     def setupUi(self, fileType):
@@ -56,4 +58,3 @@ class Ui_fileType(object):
         self.ParamButton.setText(_translate("fileType", "Param File"))
         self.CoordButton.setText(_translate("fileType", "Coordinate File"))
 
-import type_rc

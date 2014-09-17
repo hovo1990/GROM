@@ -14,7 +14,7 @@ import re
 from PyQt5.QtCore import (Qt,QItemSelectionModel)
 #from PyQt5.QtGui import *
 from PyQt5.QtWidgets import (QWidget, QMessageBox)
-import undoCommands
+import tableWidget.undoCommands as undoCommands
 
 
 try:

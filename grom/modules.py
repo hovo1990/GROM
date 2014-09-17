@@ -12,8 +12,8 @@
 
 from PyQt5.QtWidgets import (QDialog,QDialogButtonBox )
 from  PyQt5.QtWebKitWidgets import (QWebView)
-import ui_multiRename as MR #This is new
-import ui_typeWindow as TW #Adding New Stuff for New File
+from ui import ui_multiRename as MR #This is new
+from ui import ui_typeWindow as TW #Adding New Stuff for New File
 
 
 class Browser(QWebView):

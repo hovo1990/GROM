@@ -16,7 +16,7 @@ from PyQt5.QtCore import  (Qt )
 #from PyQt5.QtGui import  (QTextCharFormat)
 from PyQt5.QtWidgets import (QDialog, QTextEdit)
 sys.path.append('ui/')
-import ui_findReplace
+import ui.ui_findReplace as ui_findReplace
 import Icons_rc
 
 MAC = True
