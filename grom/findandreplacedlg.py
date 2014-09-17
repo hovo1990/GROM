@@ -14,7 +14,8 @@ import re
 import sys
 from PyQt5.QtCore import  (Qt )
 #from PyQt5.QtGui import  (QTextCharFormat)
-from PyQt5.QtWidgets import (QDialog, QTextEdit)
+#from PyQt5.QtWidgets import (QDialog, QTextEdit)
+from PyQt5.QtWidgets import (QDialog, QPlainTextEdit)
 sys.path.append('ui/')
 import ui.ui_findReplace as ui_findReplace
 import Icons_rc
@@ -133,7 +134,7 @@ class FindAndReplaceDlg(QDialog,
         self.currenWidget = currentWidget
         if self.currenWidget is None:
             pass
-        elif  isinstance(self.currenWidget, QTextEdit):
+        elif  isinstance(self.currenWidget, QPlainTextEdit):
             self.findButton.hide()
             self.CoordOptionsButton.setEnabled(False)
             self.frameCoord.hide()

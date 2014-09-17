@@ -72,11 +72,11 @@ class TextEdit(QPlainTextEdit):
         self.setStyleSheet("QPlainTextEdit { background-color: rgb(30, 30, 30); color: rgb(154, 190, 154);}")
 
         #: Creates Syntax Highlighter and Find Replace Object for current Widget
-        #self.highlighter = GROMHighlight.GROMHighlighter(self)
-        #self.frTextObject = frTextEdit.frTextObject(self)
+        self.highlighter = GROMHighlighter(self.document())
+        self.frTextObject = frTextObject(self)
 
-        ##: ---> Signals Start
-        #self.textChanged.connect(self.updateSearchText)
+        #: ---> Signals Start
+        self.textChanged.connect(self.updateSearchText)
 
         ##self.modificationChanged.connect(self.checkChange)
         #self.cursorPositionChanged.connect(self.CursorPosition)
@@ -84,15 +84,17 @@ class TextEdit(QPlainTextEdit):
 
 
         self.lineNumberArea = LineNumberArea(self)
+
+
         self.blockCountChanged.connect(self.updateLineNumberAreaWidth)
 
         self.updateRequest.connect(self.updateLineNumberArea)
 
-        self.cursorPositionChanged.connect(self.highlightCurrentLine)
+        #self.cursorPositionChanged.connect(self.highlightCurrentLine) #Need to fix this part
 
         self.updateLineNumberAreaWidth(0)
         self.errorPos=None
-        self.highlightCurrentLine()
+        #self.highlightCurrentLine() #Need to fix this part
 
     def lineNumberAreaPaintEvent(self, event):
         painter=QPainter(self.lineNumberArea)
@@ -218,6 +220,7 @@ class TextEdit(QPlainTextEdit):
         """
         #print('color changed')
         self.frTextObject.updateTextContent()
+
 
     def search(self,findText,replaceText,syntaxCombo = None,caseCheckBox = False,wholeCheckBox = False):
         """

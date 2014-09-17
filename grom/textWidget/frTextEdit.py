@@ -11,8 +11,8 @@
 
 import re
 #from PyQt5.QtCore import *
-from PyQt5.QtGui import  (QBrush, QColor, QTextCharFormat, QTextCursor)
-from PyQt5.QtWidgets import (QTextEdit)
+from PyQt5.QtGui import  (QBrush, QColor,QTextFormat, QTextCharFormat, QTextCursor)
+from PyQt5.QtWidgets import (QTextEdit, QPlainTextEdit)
 
 try:
     from PyQt5.QtCore import QString
@@ -173,6 +173,7 @@ class frTextObject():
         self.__index = 0
         self.__findText = findText
         self.resFoundText = []
+        self.extraSelections = []
         findText = findText
         if len(findText) < 1:
             self.fixFormat()
@@ -189,6 +190,7 @@ class frTextObject():
                     self.__index = match.end()
                     self.highlightText(findText,match.start())
             self.__textEditor.document().setModified(False)
+        self.__textEditor.setExtraSelections(self.extraSelections)
         self.returnToStart()
 
     def returnToStart(self):
@@ -200,13 +202,37 @@ class frTextObject():
 
     def highlightText(self,findText,where):
         cursor = self.__textEditor.textCursor()
-        format = QTextCharFormat()
-        format.setBackground(QBrush(QColor("cyan")))
+        #format = QTextCharFormat()
+        #format.setBackground(QBrush(QColor("cyan")))
         cursor.setPosition(where)
         findText = len(findText)
         cursor.movePosition(QTextCursor.NextCharacter,QTextCursor.KeepAnchor ,findText)
-        cursor.mergeCharFormat(format)
-        self.__textEditor.setFocus()
-        self.__textEditor.setTextCursor(cursor)
-        self.__textEditor.document().setModified(False)
+        selection = QTextEdit.ExtraSelection()
+        selection.format.setBackground(QBrush(QColor("cyan")))
+        #selection.format.setProperty(QTextFormat.BackgroundBrush,True)
+        selection.cursor = cursor
+        #selection.cursor.clearSelection()
+        self.extraSelections.append(selection)
+        #cursor.mergeCharFormat(format)
+        ##self.__textEditor.setFocus()
+        ##self.__textEditor.setTextCursor(cursor)
+        ##self.__textEditor.document().setModified(False)
 
+
+#: example code of extraSelections
+#def highlightCurrentLine(self):
+
+    #extraSelections = []
+
+    #if not self.isReadOnly():
+        #selection = QTextEdit.ExtraSelection()
+
+        #lineColor = QColor(Qt.yellow).lighter(160)
+
+        #selection.format.setBackground(lineColor)
+        #selection.format.setProperty(QTextFormat.FullWidthSelection, QVariant(True))
+        #selection.cursor = self.textCursor()
+        #selection.cursor.clearSelection()
+        #extraSelections.append(selection)
+
+    #self.setExtraSelections(extraSelections)
