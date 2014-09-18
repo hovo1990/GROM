@@ -11,7 +11,7 @@
 
 import re
 #from PyQt5.QtCore import *
-from PyQt5.QtGui import  (QBrush, QColor,QTextFormat, QTextCharFormat, QTextCursor)
+from PyQt5.QtGui import  (QBrush, QColor,QTextFormat, QTextCharFormat, QTextCursor,QTextDocument)
 from PyQt5.QtWidgets import (QTextEdit, QPlainTextEdit)
 
 try:
@@ -93,14 +93,39 @@ class frTextObject():
 
     def replaceAll(self,findText,replaceText,syntaxCombo = None,caseCheckBox = False,wholeCheckBox = False):
         try:
-            self.__replaceText = replaceText
-            regex = self.makeRegex(findText,syntaxCombo)
-            self.__text = regex.sub(replaceText,
-                                    self.__text)
-            self.__textEditor.setText(self.__text)
-            self.fixFormat(self.__textEditor)
-        except:
-            print("something  didn't work with replace all")
+            # Here I am just getting the replacement data
+            # from my UI so it will be different for you
+
+            old=findText
+            print('old is ',old)
+            new=replaceText
+            print('new is ',new)
+
+            # Beginning of undo block
+            cursor=self.__textEditor.textCursor()
+            cursor.beginEditBlock()
+
+            # Use flags for case match
+            flags=QTextDocument.FindFlags()
+            if caseCheckBox:
+                flags=flags|QTextDocument.FindCaseSensitively
+
+            # Replace all we can
+            while True:
+                # self.editor is the QPlainTextEdit
+                r=self.__textEditor.find(old,flags)
+                if r:
+                    qc=self.__textEditor.textCursor()
+                    if qc.hasSelection():
+                        qc.insertText(new)
+                else:
+                    break
+
+            # Mark end of undo block
+            cursor.endEditBlock()
+            #self.fixFormat()
+        except Exception as e:
+            print("something  didn't work with replace all: ",e)
 
     def fixFormat(self):
         try:
@@ -110,9 +135,8 @@ class frTextObject():
             cursor_clear.setPosition(0)
             cursor_clear.movePosition(QTextCursor.End,QTextCursor.KeepAnchor)
             cursor_clear.mergeCharFormat(format_clear)
-            self.__textEditor.document().setModified(False)
-        except:
-            print("something  didn't work with fixFormat")
+        except Exception as e:
+            print("something  didn't work with fixFormat: ",e)
 
     def cursorMove(self,start,end):
         try:
@@ -173,7 +197,8 @@ class frTextObject():
         self.__index = 0
         self.__findText = findText
         self.resFoundText = []
-        self.extraSelections = []
+        self.extraSelections = self.__textEditor.extraSelections
+        self.extraSelections[1] = []
         findText = findText
         if len(findText) < 1:
             self.fixFormat()
@@ -190,15 +215,13 @@ class frTextObject():
                     self.__index = match.end()
                     self.highlightText(findText,match.start())
             self.__textEditor.document().setModified(False)
-        self.__textEditor.setExtraSelections(self.extraSelections)
+
+
+        extra = self.extraSelections[0] + self.extraSelections[1]
+        self.__textEditor.setExtraSelections(extra)
         self.returnToStart()
 
-    def returnToStart(self):
-        cursor = self.__textEditor.textCursor()
-        cursor.setPosition(0)
-        self.__textEditor.setFocus()
-        self.__textEditor.setTextCursor(cursor)
-        self.__textEditor.document().setModified(False)
+
 
     def highlightText(self,findText,where):
         cursor = self.__textEditor.textCursor()
@@ -212,12 +235,14 @@ class frTextObject():
         #selection.format.setProperty(QTextFormat.BackgroundBrush,True)
         selection.cursor = cursor
         #selection.cursor.clearSelection()
-        self.extraSelections.append(selection)
-        #cursor.mergeCharFormat(format)
-        ##self.__textEditor.setFocus()
-        ##self.__textEditor.setTextCursor(cursor)
-        ##self.__textEditor.document().setModified(False)
+        self.extraSelections[1].append(selection)
 
+    def returnToStart(self):
+        cursor = self.__textEditor.textCursor()
+        cursor.setPosition(0)
+        self.__textEditor.setFocus()
+        self.__textEditor.setTextCursor(cursor)
+        self.__textEditor.document().setModified(False)
 
 #: example code of extraSelections
 #def highlightCurrentLine(self):

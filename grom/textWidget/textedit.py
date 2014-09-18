@@ -42,8 +42,8 @@ class TextEdit(QPlainTextEdit):
 
     NextId = 1
 
-    FONT_MAX_SIZE = 40
-    FONT_MIN_SIZE = 1
+    FONT_MAX_SIZE = 30
+    FONT_MIN_SIZE = 10
 
     def __init__(self, filename= None, parent=None):
         """
@@ -75,28 +75,28 @@ class TextEdit(QPlainTextEdit):
         self.highlighter = GROMHighlighter(self.document())
         self.frTextObject = frTextObject(self)
 
+        self.extraSelections = [[],[]] # [0] for selected Line, [1] for Search Results
+
+
+
         #: ---> Signals Start
         self.textChanged.connect(self.updateSearchText)
+        self.blockCountChanged.connect(self.updateLineNumberAreaWidth)
 
-        ##self.modificationChanged.connect(self.checkChange)
+        self.updateRequest.connect(self.updateLineNumberArea)
+
+        self.cursorPositionChanged.connect(self.highlightCurrentLine) #Need to fix this part
         #self.cursorPositionChanged.connect(self.CursorPosition)
         ##: ---> Signals End
 
 
         self.lineNumberArea = LineNumberArea(self)
-
-
-        self.blockCountChanged.connect(self.updateLineNumberAreaWidth)
-
-        self.updateRequest.connect(self.updateLineNumberArea)
-
-        #self.cursorPositionChanged.connect(self.highlightCurrentLine) #Need to fix this part
-
         self.updateLineNumberAreaWidth(0)
         self.errorPos=None
-        #self.highlightCurrentLine() #Need to fix this part
+        self.highlightCurrentLine() #Need to fix this part
 
-    def lineNumberAreaPaintEvent(self, event):
+
+    def lineNumberAreaPaintEvent(self, event): #When text zoomed line number not zoomed
         painter=QPainter(self.lineNumberArea)
         painter.fillRect(event.rect(), Qt.lightGray)
 
@@ -108,7 +108,14 @@ class TextEdit(QPlainTextEdit):
         while block.isValid() and top <= event.rect().bottom():
 
 
+
             if block.isVisible() and bottom >= event.rect().top():
+                font_original = self.document().defaultFont()
+                size = font_original.pointSize()
+                font = painter.font()
+                font.setPointSize(size)
+                painter.setFont(font)
+
                 number = str(blockNumber + 1)
                 painter.setPen(Qt.black)
                 painter.drawText(0, top, self.lineNumberArea.width(),
@@ -158,7 +165,7 @@ class TextEdit(QPlainTextEdit):
 
 
     def highlightCurrentLine(self):
-        extraSelections=[]
+        self.extraSelections[0] = []
         if not self.isReadOnly():
             selection = QTextEdit.ExtraSelection() #
             lineColor = QColor(38,38,38)
@@ -166,7 +173,7 @@ class TextEdit(QPlainTextEdit):
             selection.format.setProperty(QTextFormat.FullWidthSelection, True)
             selection.cursor = self.textCursor()
             selection.cursor.clearSelection()
-            extraSelections.append(selection)
+            self.extraSelections[0].append(selection)
 
             if self.errorPos is not None:
                 errorSel = QPlainTextEdit.ExtraSelection()
@@ -176,9 +183,11 @@ class TextEdit(QPlainTextEdit):
                 errorSel.cursor = QTextCursor(self.document())
                 errorSel.cursor.setPosition(self.errorPos)
                 errorSel.cursor.clearSelection()
-                extraSelections.append(errorSel)
+                self.extraSelections[0].append(errorSel)
 
-        self.setExtraSelections(extraSelections)
+
+        extra = self.extraSelections[0] + self.extraSelections[1]
+        self.setExtraSelections(extra)
 
 
     def checkChange(self):
@@ -191,6 +200,7 @@ class TextEdit(QPlainTextEdit):
             size += 2
             font.setPointSize(size)
         self.setFont(font)
+        #print('tada ',self.fontMetrics().height())
 
 
     def zoom_out(self):
@@ -251,7 +261,7 @@ class TextEdit(QPlainTextEdit):
         Args:
              replaceAllText (str): replace All with this value
         """
-        self.frTextObject.replaceAll(replaceAllText)
+        self.frTextObject.replaceAll(findText,replaceAllText)
 
 
     def closeEvent(self, event):

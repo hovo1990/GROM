@@ -14,7 +14,7 @@ import os
 import sys
 import platform
 from PyQt5.QtCore import (Qt, QFileInfo, QUrl) #QDir new
-from PyQt5.QtWidgets import (QMainWindow, QApplication,QWidget, QUndoStack, QFileDialog,QTextEdit, QMessageBox, QHBoxLayout, QMenu)
+from PyQt5.QtWidgets import (QMainWindow, QApplication,QWidget, QUndoStack, QFileDialog,QPlainTextEdit, QMessageBox, QHBoxLayout, QMenu)
 #sys.path.append('ui/')
 #sys.path.append('documentation/')
 
@@ -520,7 +520,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
               currentWidget (QWidget*): reference of the widget Instance
 
         """
-        if currentWidget is None or not isinstance(currentWidget, QTextEdit):
+        if currentWidget is None or not isinstance(currentWidget, QPlainTextEdit):
             self.actionZoom_In.setEnabled(False)
             self.actionZoom_Out.setEnabled(False)
             self.actionMulti_Rename.setEnabled(True)
