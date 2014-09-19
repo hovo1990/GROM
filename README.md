@@ -32,6 +32,8 @@ Before you run it:
             sudo apt-get install python3
             sudo apt-get install qt5-default qttools5-dev-tools
             sudo apt-get install python3-pyqt5
+            sudo apt-get install libqt5webkit5
+            sudo apt-get install python3-pyqt5.qtwebkit
 
 And run it:
 
