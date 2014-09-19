@@ -78,6 +78,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
 
         #: Detect OS
         self.detectOS()
+        self.setFocusPolicy(Qt.StrongFocus)
 
         #: disables help Widget
         self.moreFrame_open = False
@@ -106,6 +107,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         self.actionIconHelp.triggered.connect(self.showHelpMenu)
         self.actionCopy.triggered.connect(self.editCopy)
         self.actionPaste.triggered.connect(self.editPaste)
+
+        self.actionCut.setShortcutContext(Qt.ApplicationShortcut)
         self.actionCut.triggered.connect(self.editCut)
         self.actionSelect_All.triggered.connect(self.editSelectAll)
         self.actionDeselect_All.triggered.connect(self.editDeselectAll)
@@ -430,6 +433,10 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         Method for loading a Parameter File
         """
         textEdit = textedit.TextEdit(filename)
+        textEdit.addAction(self.actionCut)
+        textEdit.addAction(self.actionCopy)
+        textEdit.addAction(self.actionPaste)
+        #print(textEdit.actions())
         self.activateEssential(textEdit) #Activates QActions and Widgets
         self.tabWidget.show()
         try:
@@ -445,6 +452,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         else:
             self.tabWidget.addTab(textEdit, textEdit.windowTitle())
             self.tabWidget.setCurrentWidget(textEdit)
+            print('tada ',textEdit.actions())
 
     def showParamStuff(self):
         self.tabWidget.show()
@@ -604,7 +612,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         try:
             currentWidget.editCopy()
         except:
-            if currentWidget  is None or not isinstance(currentWidget, QTextEdit):
+            if currentWidget  is None or not isinstance(currentWidget, QPlainTextEdit):
                 return
             cursor = currentWidget.textCursor()
             text = cursor.selectedText()
@@ -615,12 +623,13 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
 
 
     def editCut(self):
+        print('Cut Cut buddy')
         currentWidget = self.tabWidget.currentWidget()
         currentWidget.setFocus()
         try:
             currentWidget.editCut()
         except:
-            if currentWidget is None or not isinstance(currentWidget, QTextEdit):
+            if currentWidget is None or not isinstance(currentWidget, QPlainTextEdit):
                 return
             cursor = currentWidget.textCursor()
             text = cursor.selectedText()
@@ -636,7 +645,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         try:
             currentWidget.editPaste()
         except:
-            if currentWidget is None or not isinstance(currentWidget, QTextEdit):
+            if currentWidget is None or not isinstance(currentWidget, QPlainTextEdit):
                 return
             clipboard = QApplication.clipboard()
             currentWidget.insertPlainText(clipboard.text())
@@ -651,17 +660,38 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         currentWidget.setFocus()
         try:
             currentWidget.undo()
-        except:
-            print("Problem with undo")
+            self.restoreTextSearch(currentWidget)
+        except Exception as e:
+            print("Problem with undo: ",e)
+
+    def restoreTextSearch(self,widget):
+        print('oops ')
+        currentWidget = widget
+        if isinstance(currentWidget, QPlainTextEdit):
+            print('yo')
+            if len(currentWidget.extraSelections[1]) > 0:
+                print('come on')
+                #currentWidget.frTextObject.search(currentWidget.getSearchTextValue())
 
     def editRedo(self):
         currentWidget = self.tabWidget.currentWidget()
         currentWidget.setFocus()
         try:
             currentWidget.redo()
-        except:
-            print("Problem with redo")
+            self.restoreTextSearch(currentWidget)
+        except Exception as e:
+            print("Problem with redo: ",e)
 
+    #def keyPressEvent(self, event):
+        #print('yay')
+        #if event.key() == QKeySeq:
+            #print('A is called')
+        #if(event.type() == QEvent.KeyPress):
+            #QMessageBox.information(None,"Filtered Key Press Event!!","You Pressed: "+ event.text())
+            #return True
+        #else:
+            #pass
+           #return super(MyEventFilter,self).eventFilter(receiver, event)
 
     def editSelectAll(self):
         currentWidget = self.tabWidget.currentWidget()

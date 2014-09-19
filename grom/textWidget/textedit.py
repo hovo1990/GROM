@@ -12,7 +12,7 @@
 from __future__ import absolute_import
 
 from PyQt5.QtCore import (Qt,QFile, QFileInfo, QIODevice, QTextStream)
-from PyQt5.QtGui import (QFont,QPainter, QColor,QTextCharFormat, QTextFormat)
+from PyQt5.QtGui import (QFont,QPainter, QColor,QTextCharFormat, QTextFormat, QKeySequence)
 from PyQt5.QtWidgets import (QTextEdit,QPlainTextEdit,QFileDialog, QWidget)
 
 try:
@@ -80,7 +80,7 @@ class TextEdit(QPlainTextEdit):
 
 
         #: ---> Signals Start
-        self.textChanged.connect(self.updateSearchText)
+        self.textChanged.connect(self.updateSearchText) #Here lets see
         self.blockCountChanged.connect(self.updateLineNumberAreaWidth)
 
         self.updateRequest.connect(self.updateLineNumberArea)
@@ -223,6 +223,12 @@ class TextEdit(QPlainTextEdit):
     def downMove(self):
         self.frTextObject.downSearch()
 
+    #def keyPressEvent(self, event):
+        #print('yay')
+        #if event.key() == Qt.Key_Tab:
+            #print('oh shit')
+            #return True
+
 
     def updateSearchText(self):
         """
@@ -232,7 +238,7 @@ class TextEdit(QPlainTextEdit):
         self.frTextObject.updateTextContent()
 
 
-    def search(self,findText,replaceText,syntaxCombo = None,caseCheckBox = False,wholeCheckBox = False):
+    def search(self,findText,replaceText = None,syntaxCombo = None,caseCheckBox = False,wholeCheckBox = False):
         """
         Method for searching
 

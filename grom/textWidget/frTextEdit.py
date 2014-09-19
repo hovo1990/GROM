@@ -82,8 +82,10 @@ class frTextObject():
         try:
             if self.selectedText == True:
                 self.__replaceText = replaceText
+                self.cursor.beginEditBlock() #Very IMportant
                 self.cursor.removeSelectedText()
                 self.cursor.insertText(replaceText)
+                self.cursor.endEditBlock() #Very IMportant
                 self.search(self.__findText,syntaxCombo)
                 self.fixResFindValues()
                 self.selectedText = False
@@ -123,6 +125,9 @@ class frTextObject():
 
             # Mark end of undo block
             cursor.endEditBlock()
+            self.search(self.__findText,syntaxCombo)
+            self.fixResFindValues()
+            self.selectedText = False
             #self.fixFormat()
         except Exception as e:
             print("something  didn't work with replace all: ",e)
@@ -219,7 +224,7 @@ class frTextObject():
 
         extra = self.extraSelections[0] + self.extraSelections[1]
         self.__textEditor.setExtraSelections(extra)
-        self.returnToStart()
+        #self.returnToStart()
 
 
 
@@ -244,20 +249,3 @@ class frTextObject():
         self.__textEditor.setTextCursor(cursor)
         self.__textEditor.document().setModified(False)
 
-#: example code of extraSelections
-#def highlightCurrentLine(self):
-
-    #extraSelections = []
-
-    #if not self.isReadOnly():
-        #selection = QTextEdit.ExtraSelection()
-
-        #lineColor = QColor(Qt.yellow).lighter(160)
-
-        #selection.format.setBackground(lineColor)
-        #selection.format.setProperty(QTextFormat.FullWidthSelection, QVariant(True))
-        #selection.cursor = self.textCursor()
-        #selection.cursor.clearSelection()
-        #extraSelections.append(selection)
-
-    #self.setExtraSelections(extraSelections)
