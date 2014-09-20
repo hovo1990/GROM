@@ -211,6 +211,10 @@ class TableEdit(QTableView):
             self.editCopy()
         elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
             self.editPaste()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_A in keyspressed):
+            self.clearSelection() #Problem?
+        elif (Qt.Key_Control in keyspressed and Qt.Key_A in keyspressed):
+            self.selectAll()
         elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_Z in keyspressed):
             #print("redo Working")
             self.redo()

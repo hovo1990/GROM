@@ -686,9 +686,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         try:
             currentWidget.clearSelection()
         except:
-            cursor = currentWidget.textCursor()
-            cursor.movePosition( QTextCursor.End )
-            currentWidget.setTextCursor( cursor )
+            currentWidget.deselectAll()
 
 
     def tableAdd_Row(self):

@@ -16,7 +16,7 @@ from PyQt5.QtGui import (QFont,QPainter, QColor,QTextCharFormat, QTextFormat, QK
 from PyQt5.QtWidgets import (QAction,QApplication,QTextEdit,QPlainTextEdit,QFileDialog, QWidget)
 
 
-from PyQt5.QtGui import QKeySequence, QWheelEvent
+from PyQt5.QtGui import QKeySequence, QWheelEvent,QTextCursor
 from PyQt5.QtWidgets import QShortcut
 
 try:
@@ -180,6 +180,14 @@ class TextEdit(QPlainTextEdit):
             self.textCopy()
         elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
             self.textPaste()
+        elif (Qt.Key_Control in keyspressed and  Qt.Key_Plus in keyspressed):
+            self.zoom_in()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Minus in keyspressed ):
+            self.zoom_out()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_A in keyspressed):
+            self.deselectAll()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_A in keyspressed):
+            self.selectAll()
         elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_Z in keyspressed):
             #print("redo Working")
             self.customRedo()
@@ -188,6 +196,10 @@ class TextEdit(QPlainTextEdit):
             self.customUndo()
 
 
+    def deselectAll(self):
+        cursor = self.textCursor()
+        cursor.movePosition( QTextCursor.End )
+        self.setTextCursor( cursor )
 
 
     def customUndo(self):
