@@ -155,6 +155,7 @@ class TextEdit(QPlainTextEdit):
         if Key_Control not in self.keylist:# or  Qt.Key_Shift not in self.keylist:
             #print('Choice 1')
             QPlainTextEdit.keyPressEvent(self,event)
+            return
         #elif Shift_Control not in self.keylist:
             #print('Choice 2')
             #QPlainTextEdit.keyPressEvent(self,event)

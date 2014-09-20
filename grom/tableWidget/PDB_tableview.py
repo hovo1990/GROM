@@ -75,6 +75,7 @@ class TableEdit(QTableView):
 
         #: Create Search Instance for this Widget
         self.frTableObject = frTableEdit.frTableObject(self)
+        self.keylist = []
 
     def updateSelectionValues(self):
         values = self.selectedIndexes()[0]
@@ -174,6 +175,48 @@ class TableEdit(QTableView):
     def redo(self):
         self.undo_Stack.redo()
 
+    def keyPressEvent(self, event):
+        self.firstrelease = True
+        event_check = int(event.key())
+        #event = event.key
+        self.keylist.append(event_check)
+        #print(self.keylist)
+        Key_Control = 16777249
+        Shift_Control = 16777248
+        if Key_Control not in self.keylist:# or  Qt.Key_Shift not in self.keylist:
+            #print('Choice 1')
+            QTableView.keyPressEvent(self,event)
+            return
+        #elif Shift_Control not in self.keylist:
+            #print('Choice 2')
+            #QPlainTextEdit.keyPressEvent(self,event)
+
+    def keyReleaseEvent(self, event):
+        try:
+            if self.firstrelease == True:
+                self.processmultikeys(self.keylist)
+
+
+            self.firstrelease = False
+
+            del self.keylist[-1]
+        except:
+            pass
+
+    def processmultikeys(self,keyspressed):
+        #print('keysPressed is ',keyspressed)
+        if Qt.Key_Control  in keyspressed and Qt.Key_X in keyspressed:
+            self.editCut()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_C in keyspressed):
+            self.editCopy()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
+            self.editPaste()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_Z in keyspressed):
+            #print("redo Working")
+            self.redo()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Z in keyspressed):
+            #print("undo working")
+            self.undo()
 
     def  AddRow(self,rows):
         command = CommandAddRow(self, self.model, rows,
