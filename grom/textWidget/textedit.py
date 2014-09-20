@@ -195,6 +195,20 @@ class TextEdit(QPlainTextEdit):
             #print("undo working")
             self.customUndo()
 
+    def wheelEvent(self,event):
+        if (event.modifiers() & Qt.ControlModifier):
+            self.y = event.angleDelta()/120
+            #print('wheel is ',self.x.y())
+            delta = self.y.y()
+            self.zoomOption(delta)
+        else:
+            QPlainTextEdit.wheelEvent(self, event)
+
+    def zoomOption(self, delta):
+        if delta < 0:
+            self.zoom_out()
+        elif delta > 0:
+            self.zoom_in()
 
     def deselectAll(self):
         cursor = self.textCursor()
