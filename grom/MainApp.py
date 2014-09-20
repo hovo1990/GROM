@@ -433,9 +433,9 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         Method for loading a Parameter File
         """
         textEdit = textedit.TextEdit(filename)
-        textEdit.addAction(self.actionCut)
-        textEdit.addAction(self.actionCopy)
-        textEdit.addAction(self.actionPaste)
+        #textEdit.addAction(self.actionCut)
+        #textEdit.addAction(self.actionCopy)
+        #textEdit.addAction(self.actionPaste)
         #print(textEdit.actions())
         self.activateEssential(textEdit) #Activates QActions and Widgets
         self.tabWidget.show()
@@ -452,7 +452,6 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         else:
             self.tabWidget.addTab(textEdit, textEdit.windowTitle())
             self.tabWidget.setCurrentWidget(textEdit)
-            print('tada ',textEdit.actions())
 
     def showParamStuff(self):
         self.tabWidget.show()
@@ -614,12 +613,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         except:
             if currentWidget  is None or not isinstance(currentWidget, QPlainTextEdit):
                 return
-            cursor = currentWidget.textCursor()
-            text = cursor.selectedText()
-            if not text == '':
-                clipboard = QApplication.clipboard()
-                clipboard.setText(text)
-
+            currentWidget.textCopy()
 
 
     def editCut(self):
@@ -631,13 +625,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         except:
             if currentWidget is None or not isinstance(currentWidget, QPlainTextEdit):
                 return
-            cursor = currentWidget.textCursor()
-            text = cursor.selectedText()
-            if not len(text)<1:
-                cursor.removeSelectedText()
-                clipboard = QApplication.clipboard()
-                clipboard.setText(text)
-
+            currentWidget.textCut()
 
     def editPaste(self):
         currentWidget = self.tabWidget.currentWidget()
@@ -647,8 +635,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         except:
             if currentWidget is None or not isinstance(currentWidget, QPlainTextEdit):
                 return
-            clipboard = QApplication.clipboard()
-            currentWidget.insertPlainText(clipboard.text())
+            currentWidget.textPaste()
 
 
 
@@ -660,18 +647,10 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         currentWidget.setFocus()
         try:
             currentWidget.undo()
-            self.restoreTextSearch(currentWidget)
         except Exception as e:
             print("Problem with undo: ",e)
 
-    def restoreTextSearch(self,widget):
-        print('oops ')
-        currentWidget = widget
-        if isinstance(currentWidget, QPlainTextEdit):
-            print('yo')
-            if len(currentWidget.extraSelections[1]) > 0:
-                print('come on')
-                #currentWidget.frTextObject.search(currentWidget.getSearchTextValue())
+
 
     def editRedo(self):
         currentWidget = self.tabWidget.currentWidget()
