@@ -57,7 +57,7 @@ class TableEdit(QTableView):
         """
         super(TableEdit, self).__init__(parent)
         self.setAttribute(Qt.WA_DeleteOnClose)
-
+        self.parent = parent
         self.filename = filename
         print("self.filename at start is ",self.filename)
         self.setWindowTitle(QFileInfo(self.filename).fileName())
@@ -211,6 +211,10 @@ class TableEdit(QTableView):
             self.editCopy()
         elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
             self.editPaste()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_F in keyspressed):
+            self.parent.FindReplace()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_R in keyspressed):
+            self.parent.FindReplace()
         elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_A in keyspressed):
             self.clearSelection() #Problem?
         elif (Qt.Key_Control in keyspressed and Qt.Key_A in keyspressed):

@@ -61,6 +61,7 @@ class TextEdit(QPlainTextEdit):
 
         """
         super(TextEdit, self).__init__(parent)
+        self.parent = parent
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.filename = filename
         print('self.filename is ---->>>> ',self.filename)
@@ -180,6 +181,10 @@ class TextEdit(QPlainTextEdit):
             self.textCopy()
         elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
             self.textPaste()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_F in keyspressed):
+            self.parent.FindReplace()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_R in keyspressed):
+            self.parent.FindReplace()
         elif (Qt.Key_Control in keyspressed and  Qt.Key_Plus in keyspressed):
             self.zoom_in()
         elif (Qt.Key_Control in keyspressed and Qt.Key_Minus in keyspressed ):

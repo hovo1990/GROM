@@ -410,7 +410,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         """
         Method for loading a Coordinate File
         """
-        tableWidget = PDB_Table.TableEdit(filename)
+        tableWidget = PDB_Table.TableEdit(filename,self)
         self.activateEssential(tableWidget) #Activates QActions and Widgets
         self.customMenuCoord(tableWidget) #sets up custom Context Menu
         self.tabWidget.show()
@@ -432,11 +432,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         """
         Method for loading a Parameter File
         """
-        textEdit = textedit.TextEdit(filename)
-        #textEdit.addAction(self.actionCut)
-        #textEdit.addAction(self.actionCopy)
-        #textEdit.addAction(self.actionPaste)
-        #print(textEdit.actions())
+        textEdit = textedit.TextEdit(filename,self)
         self.activateEssential(textEdit) #Activates QActions and Widgets
         self.tabWidget.show()
         try:
@@ -455,7 +451,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
 
     def showParamStuff(self):
         self.tabWidget.show()
-        textEdit = textedit.TextEdit()
+        textEdit = textedit.TextEdit(parent = self)
         self.activateEssential(textEdit)
         self.tabWidget.addTab(textEdit, 'Unnamed-%s'%self.index_tabs)
         self.index_tabs += 1
@@ -482,7 +478,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
 
     def showCoordStuff(self):
         self.tabWidget.show()
-        tableWidget = PDB_Table.TableEdit()
+        tableWidget = PDB_Table.TableEdit(parent = self)
         self.activateEssential(tableWidget)
         self.tabWidget.addTab(tableWidget, 'Unnamed-%s.pdb'%self.index_tabs)
         self.index_tabs += 1
@@ -661,16 +657,13 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         except Exception as e:
             print("Problem with redo: ",e)
 
-    #def keyPressEvent(self, event):
-        #print('yay')
-        #if event.key() == QKeySeq:
-            #print('A is called')
-        #if(event.type() == QEvent.KeyPress):
-            #QMessageBox.information(None,"Filtered Key Press Event!!","You Pressed: "+ event.text())
-            #return True
+    def keyPressEvent(self,event):
+        if event.key()==(Qt.Key_Control and Qt.Key_F):
+            self.FindReplace()
+        elif event.key()==(Qt.Key_Control and Qt.Key_R):
+            self.FindReplace()
         #else:
-            #pass
-           #return super(MyEventFilter,self).eventFilter(receiver, event)
+            #MainWindow.keyPressEvent(self,event)
 
     def editSelectAll(self):
         currentWidget = self.tabWidget.currentWidget()
