@@ -192,7 +192,14 @@ class PDBTableModel(QAbstractTableModel): #This part is the ultimate important p
         self.dirty = False
         self.PDB_rows = []
         self.resNum_temp = 1
+        self.modelType = 'PDB'
 
+    def getModelType(self):
+        return self.modelType
+
+    def getVal(self,row,column):
+        val = self.PDB_rows[row].access[column]
+        return val
 
     def sortByName(self):
         self.PDB_rows = sorted(self.PDB_rows)

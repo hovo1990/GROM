@@ -53,30 +53,12 @@ class CommandPaste(QUndoCommand): #this is gonna a lot  tougher
             row = self.to_modify[ind][0][0]
             column = self.to_modify[ind][0][1]
             index = self.to_modify[ind][0][2]
-            if (column == resNum or column == serial)  and (str(self.data_copy[ind][1][0]).isalpha() or str(self.data_copy[ind][1][0]).isdigit() == False):
-                print('come on dude')
+            try:
+                item = self.data_copy[ind][1][0]
+                self.model.setData(index,item)
+                self.selectItems(index)
+            except:
                 QMessageBox.warning(None,"Oops","You can't copy")
-                break #oops
-            elif (column == X or column ==Y or column ==Z or column == occupancy or column == charge) and \
-                isfloat((str(self.data_copy[ind][1][0]))) == False:
-                    print('tada you ',str(self.data_copy[ind][1][0]))
-                    QMessageBox.warning(None,"Oops","You can't  fuck copy") #Bug is here
-                    break
-            elif column != ATOM and (str(self.data_copy[ind][1][0]) == 'ATOM' or  str(self.data_copy[ind][1][0]) == 'HETATM'):
-                QMessageBox.warning(None,"Oops","You can't copy")
-                break
-            elif column == ATOM and (str(self.data_copy[ind][1][0]) != 'ATOM' or  str(self.data_copy[ind][1][0]) != 'HETATM'):
-                #print(str(self.data_copy[ind][1]) != 'ATOM')
-                #print(str(self.data_copy[ind][1]) != 'HETATM')
-                if str(self.data_copy[ind][1][0]) == 'ATOM' or str(self.data_copy[ind][1][0]) == 'HETATM':
-                    pass
-                else:
-                    QMessageBox.warning(None,"Oops","You can't copy")
-                    break
-                print('maybe here ?')
-            item = self.data_copy[ind][1][0]
-            self.model.setData(index,item)
-            self.selectItems(index)
 
 
     def selectItems(self,index):

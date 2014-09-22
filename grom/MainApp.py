@@ -27,8 +27,7 @@ import Icons_rc
 #sys.path.append('tableWidget/')
 from textWidget import textedit # Imports custom Text Editor
 
-from tableWidget import  PDB_parse #Imports PDB parse and write module
-from tableWidget import  PDB_tableview as PDB_Table  #Imports custom TableView widget
+from tableWidget import  tableView  #Imports custom TableView widget
 from modules import *  #Import various modules for Help, MultiRename and Choose Dialog Widgets
 
 
@@ -309,10 +308,11 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
                 if self.filename is not None else ".")
         fname_load = QFileDialog.getOpenFileName(self,
                 "G.R.O.M. Editor - Choose File", dir,
-                "MD files ( *.pdb *.mdp *.itp *.top)")
+                "MD files ( *.pdb *.gro *.mdp *.itp *.top)")
         fname = fname_load[0]
-        #print('fname is ',fname)
-        if 'pdb' not in fname: #Later need to add gro support
+        print('fname is ',fname)
+        #print("test case ",('pdb'  not in fname) or ('gro'  not in fname))
+        if ('gro'  not in fname and 'pdb' not in fname): #Later need to add gro support Bug Here
                 if not len(fname) < 2:
                     for i in range(self.tabWidget.count()):
                         textEdit = self.tabWidget.widget(i)
@@ -322,13 +322,37 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
                     else:
                         self.loadParamFile(fname)
         else:
-            mol,info_ready = PDB_parse.PDBparse(fname)
-            if len(mol[0]) != 12:
+            try:
+                self.loadCoordFile(fname)
+            except Exception as e:
+                print("Error in loading ",e)
                 QMessageBox.warning(self,
                 "G.R.O.M. Editor -- Load Error",
-                "Please check your PDB file, len < 12")
-            else:
-                self.loadCoordFile(fname)
+                "Please check your PDB/GRO file")
+
+    def loadCoordFile(self, filename):
+        """
+        Method for loading a Coordinate File
+        """
+        tableWidget = tableView.TableEdit(filename,self)
+        self.activateEssential(tableWidget) #Activates QActions and Widgets
+        self.customMenuCoord(tableWidget) #sets up custom Context Menu
+        self.tabWidget.show()
+        try:
+            tableWidget.initialLoad() #Loads file
+            self.index_tabs += 1
+        except EnvironmentError as e:
+            QMessageBox.warning(self,
+                    "G.R.O.M. Editor -- Load Error",
+                    "Failed to load {0}: {1}".format(filename,e))
+            tableWidget.close()
+            del tableWidget
+        else:
+            self.tabWidget.addTab(tableWidget, tableWidget.windowTitle())
+            self.tabWidget.setCurrentWidget(tableWidget)
+
+
+
 
     def showError(self,error):
         """Opens a QMessageBox with the error message"""
@@ -342,7 +366,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         """
         try:
             currentWidget = self.tabWidget.currentWidget()
-            if  isinstance(currentWidget, QTextEdit):
+            if  isinstance(currentWidget, QPlainTextEdit):
                 try:
                     currentWidget.save()
                     self.tabWidget.setTabText(self.tabWidget.currentIndex(),
@@ -376,7 +400,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         """
         try:
             currentWidget = self.tabWidget.currentWidget()
-            if  isinstance(currentWidget, QTextEdit):
+            if  isinstance(currentWidget, QPlainTextEdit):
                 try:
                     filename = QFileDialog.getSaveFileName(self,
                         "G.R.O.M. Editor -- Save File As", currentWidget.filename,
@@ -406,26 +430,6 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             self.showError(error)
 
 
-    def loadCoordFile(self, filename):
-        """
-        Method for loading a Coordinate File
-        """
-        tableWidget = PDB_Table.TableEdit(filename,self)
-        self.activateEssential(tableWidget) #Activates QActions and Widgets
-        self.customMenuCoord(tableWidget) #sets up custom Context Menu
-        self.tabWidget.show()
-        try:
-            tableWidget.initialLoad() #Loads file
-            self.index_tabs += 1
-        except EnvironmentError as e:
-            QMessageBox.warning(self,
-                    "G.R.O.M. Editor -- Load Error",
-                    "Failed to load {0}: {1}".format(filename,e))
-            tableWidget.close()
-            del tableWidget
-        else:
-            self.tabWidget.addTab(tableWidget, tableWidget.windowTitle())
-            self.tabWidget.setCurrentWidget(tableWidget)
 
 
     def loadParamFile(self,filename):
@@ -478,7 +482,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
 
     def showCoordStuff(self):
         self.tabWidget.show()
-        tableWidget = PDB_Table.TableEdit(parent = self)
+        tableWidget = tableView.TableEdit(parent = self)
         self.activateEssential(tableWidget)
         self.tabWidget.addTab(tableWidget, 'Unnamed-%s.pdb'%self.index_tabs)
         self.index_tabs += 1
