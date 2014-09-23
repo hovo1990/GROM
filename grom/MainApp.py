@@ -269,10 +269,14 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             if dialogOption.ParamButton.isChecked():
                     self.fileNewParam() #Need to work this out
             elif dialogOption.CoordButton.isChecked():
-                self.fileNewCoord()
+                if dialogOption.pdbButton.isChecked():
+                    modelType = 'PDB'
+                elif dialogOption.groButton.isChecked():
+                    modelType = 'GRO'
+                self.fileNewCoord(modelType)
             self.filename = "Untitled"
-        else:
-            QMessageBox.warning(self,'App','Dialog Canceled')
+        #else:
+            #QMessageBox.warning(self,'App','Dialog Canceled')
 
 
 
@@ -290,10 +294,10 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
 
 
 
-    def fileNewCoord(self):
+    def fileNewCoord(self,modelType):
         #This creates new Coordinate File(.pdb)
         if self.tabWidget.count() < self.tabs_allowed  :
-            self.showCoordStuff()
+            self.showCoordStuff(modelType)
         else:
             print('Ouch')
             QMessageBox.warning(self,"Oops",'No more tabs are allowed')
@@ -480,11 +484,11 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         self.horizontalHeaders.customContextMenuRequested.connect(self.horizontalHeader_popup)
         tableWidget.customContextMenuRequested.connect(self.tableContextMenu)
 
-    def showCoordStuff(self):
+    def showCoordStuff(self,ModelType):
         self.tabWidget.show()
-        tableWidget = tableView.TableEdit(parent = self)
+        tableWidget = tableView.TableEdit(modelType = ModelType,parent = self)
         self.activateEssential(tableWidget)
-        self.tabWidget.addTab(tableWidget, 'Unnamed-%s.pdb'%self.index_tabs)
+        self.tabWidget.addTab(tableWidget, 'Unnamed-%s.%s'%(self.index_tabs,ModelType.lower()))
         self.index_tabs += 1
         self.tabWidget.setCurrentWidget(tableWidget)
         tableWidget.setAlternatingRowColors(True)

@@ -52,14 +52,36 @@ class ChooseDialog(QDialog, TW.Ui_fileType):
         self.setupUi(self)
         #self.ParamButton.setChecked(True)
         self.buttonBox.button(QDialogButtonBox.Ok).setDisabled(True)
+        self.groupModelType.setDisabled(True)
 
         self.ParamButton.clicked.connect(self.update)
-        self.CoordButton.clicked.connect(self.update)
+        #self.ParamButton.clicked.connect(self.deactivateModelButtons)
+        self.CoordButton.clicked.connect(self.disableBox)
+        self.CoordButton.clicked.connect(self.updateModelButtons)
 
+        self.pdbButton.clicked.connect(self.update)
+        self.groButton.clicked.connect(self.update)
 
+        self.CoordButton.clicked.connect(self.enableModelType)
+        self.ParamButton.clicked.connect(self.disableModelType)
 
         self.buttonBox.accepted.connect(self.accept) #This way it works right !!! :D
         self.buttonBox.rejected.connect(self.reject)
 
+    def disableBox(self):
+        self.buttonBox.button(QDialogButtonBox.Ok).setDisabled(True)
+
     def update(self):
         self.buttonBox.button(QDialogButtonBox.Ok).setDisabled(False)
+
+    def enableModelType(self):
+        self.groupModelType.setDisabled(False)
+
+    def disableModelType(self):
+        self.groupModelType.setDisabled(True)
+
+    def updateModelButtons(self):
+        if self.pdbButton.isChecked():
+            self.update()
+        elif self.groButton.isChecked():
+            self.update()

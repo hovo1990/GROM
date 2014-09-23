@@ -50,7 +50,7 @@ def isfloat(x):
 class TableEdit(QTableView):
 
 
-    def __init__(self, filename= '', parent=None):
+    def __init__(self, filename= '', modelType = None,parent=None):
         """
         Method defines  Custom QTableView
         Args:
@@ -60,6 +60,7 @@ class TableEdit(QTableView):
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.parent = parent
         self.filename = filename
+        self.modelType = modelType
         print("self.filename at start is ",self.filename)
         self.setWindowTitle(QFileInfo(self.filename).fileName())
 
@@ -76,12 +77,12 @@ class TableEdit(QTableView):
 
 
     def setCustomModel(self):
-        if 'pdb' in self.filename:
+        if 'pdb' in self.filename or self.modelType == 'PDB':
             self.model = pdb_model.PDBTableModel(self.filename)
             self.setModel(self.model)
             self.delegate = pdb_model.PDBDelegate(self)
             self.setItemDelegate(self.delegate) #
-        elif 'gro' in self.filename:
+        elif 'gro' in self.filename or self.modelType == 'GRO':
             self.model = gro_model.GROTableModel(self.filename)
             self.setModel(self.model)
             self.delegate = gro_model.GRODelegate(self)
