@@ -11,13 +11,13 @@
 
 from __future__ import absolute_import
 
-from PyQt5.QtCore import (Qt,QFile, QFileInfo, QIODevice, QTextStream)
-from PyQt5.QtGui import (QFont,QPainter, QColor,QTextCharFormat, QTextFormat, QKeySequence)
+from PyQt5.QtCore import (QCoreApplication, pyqtSignal,Qt,QSize, QFile, QFileInfo, QIODevice, QTextStream)
+from PyQt5.QtGui import (QFont,QPainter, QColor, QTextFormat, QKeySequence)
 from PyQt5.QtWidgets import (QAction,QApplication,QTextEdit,QPlainTextEdit,QFileDialog, QWidget)
 
 
-from PyQt5.QtGui import QKeySequence, QWheelEvent,QTextCursor
-from PyQt5.QtWidgets import QShortcut
+from PyQt5.QtGui import QKeySequence, QWheelEvent,QTextCursor, QPalette
+from PyQt5.QtWidgets import QShortcut, QMenu
 
 try:
     from PyQt5.QtCore import QString
@@ -25,8 +25,15 @@ except ImportError:
     # we are using Python3 so QString is not defined
     QString = str
 
+try:
+    import enchant
+except ImportError:
+    enchant = None
+
+
 from  .GROMHighlight import GROMHighlighter
 from  .frTextEdit import frTextObject
+from .keyWords import create_custom_Dict
 
 
 class LineNumberArea(QWidget):
@@ -36,10 +43,25 @@ class LineNumberArea(QWidget):
         QWidget.__init__(self, editor)
 
     def sizeHint(self):
-        return QtCore.QSize(self.codeEditor.lineNumberAreaWidth(),0)
+        return QSize(self.codeEditor.lineNumberAreaWidth(),0)
 
     def paintEvent(self, event):
         self.codeEditor.lineNumberAreaPaintEvent(event)
+
+
+class SpellAction(QAction):
+
+    '''
+    A special QAction that returns the text in a signal.
+    '''
+
+    correct = pyqtSignal(str)
+
+    def __init__(self, *args):
+        QAction.__init__(self, *args)
+
+        self.triggered.connect(lambda x: self.correct.emit(
+            str(self.text())))
 
 
 class TextEdit(QPlainTextEdit):
@@ -81,203 +103,96 @@ class TextEdit(QPlainTextEdit):
         #: Creates Syntax Highlighter and Find Replace Object for current Widget
         self.highlighter = GROMHighlighter(self.document())
         self.frTextObject = frTextObject(self)
+        self.initDict()
 
         self.extraSelections = [[],[]] # [0] for selected Line, [1] for Search Results
 
 
-        self.createActionsAndSignals()
 
 
         #: ---> Signals Start
-        self.textChanged.connect(self.updateSearchText) #Here lets see
-        #self.textChanged.connect(self.undoCheck) #Here lets see
+        self.textChanged.connect(self.updateSearchText)
         self.blockCountChanged.connect(self.updateLineNumberAreaWidth)
 
         self.updateRequest.connect(self.updateLineNumberArea)
 
-        self.cursorPositionChanged.connect(self.highlightCurrentLine) #Need to fix this part
-        #self.cursorPositionChanged.connect(self.CursorPosition)
+        self.cursorPositionChanged.connect(self.highlightCurrentLine)
         ##: ---> Signals End
 
 
         self.lineNumberArea = LineNumberArea(self)
         self.updateLineNumberAreaWidth(0)
+
+
+
         self.errorPos=None
         self.highlightCurrentLine() #Need to fix this part
 
         self.keylist = []
 
 
-
-
-
-    def createActionsAndSignals(self): #Just an idea
-        print("Setting createActionsAndSignals")
-        #self.actionCutText = QAction(self)
-        #self.actionCutText.setShortcut(QKeySequence("Ctrl+P"))
-        #self.actionCutText.setShortcutContext(Qt.WidgetShortcut)
-        ##self.actionCutText.setShortcutContext("Ctrl+M")
-        #self.actionCopy = QAction(self)
-        #self.actionPaste = QAction(self)
-        #self.actionCutText.triggered.connect(self.textCut)
-        #self.setContextMenuPolicy(Qt.NoContextMenu)
-        QShortcut(QKeySequence("Ctrl+K"), self, self.textCut) # context=Qt.WidgetShortcut) #Use this for tableView
-
-
-    #def keyPressEvent(self,event):
-        #if event.key()==(Qt.Key_Control and Qt.Key_X):
-            #self.textCut()
-        #elif event.key()==(Qt.Key_Control and Qt.Key_C):
-            #self.textCopy()
-        #elif event.key()==(Qt.Key_Control and Qt.Key_V):
-            #self.textPaste()
-        #modifiers = QApplication.keyboardModifiers()
-        #if modifiers == Qt.ShiftModifier and Qt.ControlModifier :
-            #print('Shift+Control+ Click')
-        ##elif event.modifiers() and Qt.ControlModifier and Qt.ShiftModifier: #Buggy
-            ##print('tada')
-            ##if Qt.ControlModifier and Qt.ShiftModifier:
-                ##if event.key()==( Qt.Key_Z):
-                    ##self.customRedo()
-            ##elif event.key()==( Qt.Key_Z):
-                ##self.customUndo()
-        #else:
-            ##To get the remaining functionality back (e.g. without this, typing would not work):
-            #QPlainTextEdit.keyPressEvent(self,event)
-
-    def keyPressEvent(self, event):
-        self.firstrelease = True
-        event_check = int(event.key())
-        #event = event.key
-        self.keylist.append(event_check)
-        #print(self.keylist)
-        Key_Control = 16777249
-        Shift_Control = 16777248
-        if Key_Control not in self.keylist:# or  Qt.Key_Shift not in self.keylist:
-            #print('Choice 1')
-            QPlainTextEdit.keyPressEvent(self,event)
-            return
-        #elif Shift_Control not in self.keylist:
-            #print('Choice 2')
-            #QPlainTextEdit.keyPressEvent(self,event)
-
-    def keyReleaseEvent(self, event):
-        try:
-            if self.firstrelease == True:
-                self.processmultikeys(self.keylist)
-
-
-            self.firstrelease = False
-
-            del self.keylist[-1]
-        except:
-            pass
-
-    def processmultikeys(self,keyspressed):
-        #print('keysPressed is ',keyspressed)
-        if Qt.Key_Control  in keyspressed and Qt.Key_X in keyspressed:
-            self.textCut()
-        elif (Qt.Key_Control in keyspressed and Qt.Key_C in keyspressed):
-            self.textCopy()
-        elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
-            self.textPaste()
-        elif (Qt.Key_Control in keyspressed and Qt.Key_F in keyspressed):
-            self.parent.FindReplace()
-        elif (Qt.Key_Control in keyspressed and Qt.Key_R in keyspressed):
-            self.parent.FindReplace()
-        elif (Qt.Key_Control in keyspressed and  Qt.Key_Plus in keyspressed):
-            self.zoom_in()
-        elif (Qt.Key_Control in keyspressed and Qt.Key_Minus in keyspressed ):
-            self.zoom_out()
-        elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_A in keyspressed):
-            self.deselectAll()
-        elif (Qt.Key_Control in keyspressed and Qt.Key_A in keyspressed):
-            self.selectAll()
-        elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_Z in keyspressed):
-            #print("redo Working")
-            self.customRedo()
-        elif (Qt.Key_Control in keyspressed and Qt.Key_Z in keyspressed):
-            #print("undo working")
-            self.customUndo()
-
-    def wheelEvent(self,event):
-        if (event.modifiers() & Qt.ControlModifier):
-            self.y = event.angleDelta()/120
-            #print('wheel is ',self.x.y())
-            delta = self.y.y()
-            self.zoomOption(delta)
+    def initDict(self):
+        if enchant:
+                try:
+                    self.dict = create_custom_Dict()
+                except enchant.DictNotFoundError:
+                    self.dict=None
         else:
-            QPlainTextEdit.wheelEvent(self, event)
+            self.dict=None
+        #self.highlighter = SpellHighlighter(self.document())
+        #if self.dict:
+            #self.highlighter.setDict(self.dict)
+            #self.highlighter.rehighlight()
 
-    def zoomOption(self, delta):
-        if delta < 0:
-            self.zoom_out()
-        elif delta > 0:
-            self.zoom_in()
+    def contextMenuEvent(self, event):
+        popup_menu = self.createStandardContextMenu()
+        # color: rgb(154, 190, 154);
+        menu_style="QMenu { background-color: rgb(38,38,38);selection-color: black; selection-background-color: grey;}"
+        popup_menu.setStyleSheet(menu_style)
 
-    def deselectAll(self):
+        # Select the word under the cursor.
         cursor = self.textCursor()
-        cursor.movePosition( QTextCursor.End )
-        self.setTextCursor( cursor )
+        cursor.select(QTextCursor.WordUnderCursor)
+        self.setTextCursor(cursor)
 
+        # Check if the selected word is misspelled and offer spelling
+        # suggestions if it is.
+        if enchant and self.dict:
+            if self.textCursor().hasSelection():
+                text = str(self.textCursor().selectedText())
+                if not self.dict.check(text):
+                    spell_menu = QMenu(QCoreApplication.translate('app','Spelling Suggestions'), self)
+                    spell_menu.setStyleSheet(menu_style)
+                    for word in self.dict.suggest(text):
+                        #print('word is ',word)
+                        action = SpellAction(word, spell_menu)
+                        action.correct.connect(self.correctWord)
+                        spell_menu.addAction(action)
+                    # Only add the spelling suggests to the menu if there are
+                    # suggestions.
+                    if len(spell_menu.actions()) != 0:
+                        popup_menu.insertSeparator(popup_menu.actions()[0])
+                        popup_menu.insertMenu(popup_menu.actions()[0], spell_menu)
 
-    def customUndo(self):
-        print('Custom Undo Called')
-        self.undo()
-        self.restoreTextSearch() #Recursion problem
+        # FIXME: add change dict and disable spellcheck options
 
-    def customRedo(self):
-        print('Custom Redo Called')
-        self.redo()
-        #self.restoreTextSearch() #Recursion problem
+        popup_menu.exec_(event.globalPos())
 
-    def restoreTextSearch(self):
-        #print('oops ')
-        check = self.getSearchTextValue()
-        #print('check is ',check)
-        if len(check[0]) > 0:
-            if len(self.extraSelections[1]) > 0:
-                #print('come on')
-                self.frTextObject.search(check[0])
+    def correctWord(self, word):
+        '''
+        Replaces the selected text with word.
+        '''
+        cursor = self.textCursor()
+        cursor.beginEditBlock()
 
-    def textCut(self):
-        try:
-            print('textCut is called')
-            cursor = self.textCursor()
-            text = cursor.selectedText()
-            if not len(text)<1:
-                cursor.removeSelectedText()
-                clipboard = QApplication.clipboard()
-                clipboard.setText(text)
-        except Exception as e:
-            print("problem with textCut: ",e)
+        cursor.removeSelectedText()
+        cursor.insertText(word)
 
-    def textCopy(self):
-        try:
-            print('textCopy is called')
-            cursor = self.textCursor()
-            text = cursor.selectedText()
-            if not text == '':
-                clipboard = QApplication.clipboard()
-                clipboard.setText(text)
-        except Exception as e:
-            print("problem with textCopy: ",e)
-
-    def textPaste(self):
-        try:
-            print('textPaste is called')
-            cursor = self.textCursor()
-            cursor.beginEditBlock()
-            clipboard = QApplication.clipboard()
-            cursor.insertText(clipboard.text())
-            #self.insertPlainText(clipboard.text())
-            cursor.endEditBlock()
-        except Exception as e:
-            print("problem with textPaste: ",e)
-
+        cursor.endEditBlock()
 
 
     def lineNumberAreaPaintEvent(self, event): #When text zoomed line number not zoomed
+        """Painting line number area"""
         painter=QPainter(self.lineNumberArea)
         painter.fillRect(event.rect(), Qt.lightGray)
 
@@ -285,6 +200,10 @@ class TextEdit(QPlainTextEdit):
         blockNumber = block.blockNumber();
         top = int(self.blockBoundingGeometry(block).translated(self.contentOffset()).top())
         bottom = top + int(self.blockBoundingRect(block).height())
+        #font_height = self.fontMetrics().height()
+
+
+
 
         while block.isValid() and top <= event.rect().bottom():
 
@@ -302,6 +221,8 @@ class TextEdit(QPlainTextEdit):
                 painter.drawText(0, top, self.lineNumberArea.width(),
                     self.fontMetrics().height(),
                     Qt.AlignRight, number)
+
+
 
             block = block.next()
             top = bottom
@@ -371,8 +292,6 @@ class TextEdit(QPlainTextEdit):
         self.setExtraSelections(extra)
 
 
-    def checkChange(self):
-        print('blah blah time to see')
 
     def zoom_in(self):
         font = self.document().defaultFont()
@@ -381,7 +300,7 @@ class TextEdit(QPlainTextEdit):
             size += 2
             font.setPointSize(size)
         self.setFont(font)
-        #print('tada ',self.fontMetrics().height())
+
 
 
     def zoom_out(self):
@@ -521,3 +440,132 @@ class TextEdit(QPlainTextEdit):
             if exception is not None:
                 raise exception
 
+    def keyPressEvent(self, event):
+        self.firstrelease = True
+        event_check = int(event.key())
+        #event = event.key
+        self.keylist.append(event_check)
+        #print(self.keylist)
+        Key_Control = 16777249
+        Shift_Control = 16777248
+        if Key_Control not in self.keylist:# or  Qt.Key_Shift not in self.keylist:
+            #print('Choice 1')
+            QPlainTextEdit.keyPressEvent(self,event)
+            return
+        #elif Shift_Control not in self.keylist:
+            #print('Choice 2')
+            #QPlainTextEdit.keyPressEvent(self,event)
+
+    def keyReleaseEvent(self, event):
+        try:
+            if self.firstrelease == True:
+                self.processmultikeys(self.keylist)
+
+
+            self.firstrelease = False
+
+            del self.keylist[-1]
+        except:
+            pass
+
+    def processmultikeys(self,keyspressed):
+        #print('keysPressed is ',keyspressed)
+        if Qt.Key_Control  in keyspressed and Qt.Key_X in keyspressed:
+            self.textCut()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_C in keyspressed):
+            self.textCopy()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
+            self.textPaste()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_F in keyspressed):
+            self.parent.FindReplace()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_H in keyspressed):
+            self.parent.FindReplace()
+        elif (Qt.Key_Control in keyspressed and  Qt.Key_Plus in keyspressed):
+            self.zoom_in()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Minus in keyspressed ):
+            self.zoom_out()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_A in keyspressed):
+            self.deselectAll()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_A in keyspressed):
+            self.selectAll()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_Z in keyspressed):
+            #print("redo Working")
+            self.customRedo()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Z in keyspressed):
+            #print("undo working")
+            self.customUndo()
+
+    def wheelEvent(self,event):
+        if (event.modifiers() & Qt.ControlModifier):
+            self.y = event.angleDelta()/120
+            #print('wheel is ',self.x.y())
+            delta = self.y.y()
+            self.zoomOption(delta)
+        else:
+            QPlainTextEdit.wheelEvent(self, event)
+
+    def zoomOption(self, delta):
+        if delta < 0:
+            self.zoom_out()
+        elif delta > 0:
+            self.zoom_in()
+
+    def deselectAll(self):
+        cursor = self.textCursor()
+        cursor.movePosition( QTextCursor.End )
+        self.setTextCursor( cursor )
+
+
+    def customUndo(self):
+        print('Custom Undo Called')
+        self.undo()
+        self.restoreTextSearch() #Recursion problem
+
+    def customRedo(self):
+        print('Custom Redo Called')
+        self.redo()
+        #self.restoreTextSearch() #Recursion problem
+
+    def restoreTextSearch(self):
+        #print('oops ')
+        check = self.getSearchTextValue()
+        #print('check is ',check)
+        if len(check[0]) > 0:
+            if len(self.extraSelections[1]) > 0:
+                #print('come on')
+                self.frTextObject.search(check[0])
+
+    def textCut(self):
+        try:
+            print('textCut is called')
+            cursor = self.textCursor()
+            text = cursor.selectedText()
+            if not len(text)<1:
+                cursor.removeSelectedText()
+                clipboard = QApplication.clipboard()
+                clipboard.setText(text)
+        except Exception as e:
+            print("problem with textCut: ",e)
+
+    def textCopy(self):
+        try:
+            print('textCopy is called')
+            cursor = self.textCursor()
+            text = cursor.selectedText()
+            if not text == '':
+                clipboard = QApplication.clipboard()
+                clipboard.setText(text)
+        except Exception as e:
+            print("problem with textCopy: ",e)
+
+    def textPaste(self):
+        try:
+            print('textPaste is called')
+            cursor = self.textCursor()
+            cursor.beginEditBlock()
+            clipboard = QApplication.clipboard()
+            cursor.insertText(clipboard.text())
+            #self.insertPlainText(clipboard.text())
+            cursor.endEditBlock()
+        except Exception as e:
+            print("problem with textPaste: ",e)

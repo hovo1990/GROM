@@ -668,7 +668,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
     def keyPressEvent(self,event):
         if event.key()==(Qt.Key_Control and Qt.Key_F):
             self.FindReplace()
-        elif event.key()==(Qt.Key_Control and Qt.Key_R):
+        elif event.key()==(Qt.Key_Control and Qt.Key_H):
             self.FindReplace()
         #else:
             #MainWindow.keyPressEvent(self,event)

@@ -309,7 +309,7 @@ class TableEdit(QTableView):
             self.editPaste()
         elif (Qt.Key_Control in keyspressed and Qt.Key_F in keyspressed):
             self.parent.FindReplace()
-        elif (Qt.Key_Control in keyspressed and Qt.Key_R in keyspressed):
+        elif (Qt.Key_Control in keyspressed and Qt.Key_H in keyspressed):
             self.parent.FindReplace()
         elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_A in keyspressed):
             self.clearSelection() #Problem?
