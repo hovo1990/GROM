@@ -160,6 +160,11 @@ class TextEdit(QPlainTextEdit):
         if enchant and self.dict:
             if self.textCursor().hasSelection():
                 text = str(self.textCursor().selectedText())
+                if self.dict.check(text):
+                    self.gotoHelp = QAction('Goto in Help', self)
+                    self.gotoHelp.triggered.connect(self.showInHelpFile)
+                    popup_menu.insertAction(popup_menu.actions()[0], self.gotoHelp)
+                    popup_menu.insertSeparator(popup_menu.actions()[1])
                 if not self.dict.check(text):
                     spell_menu = QMenu(QCoreApplication.translate('app','Spelling Suggestions'), self)
                     spell_menu.setStyleSheet(menu_style)
@@ -177,6 +182,10 @@ class TextEdit(QPlainTextEdit):
         # FIXME: add change dict and disable spellcheck options
 
         popup_menu.exec_(event.globalPos())
+
+    def showInHelpFile(self):
+        text = str(self.textCursor().selectedText())
+        self.parent.findInHelp(text)
 
     def correctWord(self, word):
         '''

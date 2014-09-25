@@ -24,7 +24,7 @@ class Browser(QWebView):
 
     def _result_available(self, ok):
         frame = self.page().mainFrame()
-        print(unicode(frame.toHtml()).encode('utf-8'))
+        print(str(frame.toHtml()).encode('utf-8'))
 
 
 class MultipleRenameDialog(QDialog, MR.Ui_Multi_Rename_Dialog): #Need to fix these

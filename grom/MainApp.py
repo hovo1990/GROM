@@ -15,8 +15,7 @@ import sys
 import platform
 from PyQt5.QtCore import (Qt, QFileInfo, QUrl) #QDir new
 from PyQt5.QtWidgets import (QMainWindow, QApplication,QWidget, QUndoStack, QFileDialog,QPlainTextEdit, QMessageBox, QHBoxLayout, QMenu)
-#sys.path.append('ui/')
-#sys.path.append('documentation/')
+from  PyQt5.QtWebKitWidgets import (QWebPage)
 
 from  ui import ui_mainWindow as MW #Imports MainWindow GUI
 import findandreplacedlg #Imports
@@ -744,6 +743,13 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         else:
             self.moreFrame.hide()
             self.moreFrame_show = False
+
+    def findInHelp(self,text): #Buggy need to fix it
+        if self.moreFrame_show == False:
+            self.showHelpMenu()
+        self.view.findText('',QWebPage.HighlightAllOccurrences)
+        self.view.findText(text,QWebPage.HighlightAllOccurrences)
+        self.view.findText(text,QWebPage.HighlightAllOccurrences)
 
 
     def showHTML(self):
