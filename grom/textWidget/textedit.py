@@ -11,13 +11,36 @@
 
 from __future__ import absolute_import
 
-from PyQt5.QtCore import (QCoreApplication, pyqtSignal,Qt,QSize, QFile, QFileInfo, QIODevice, QTextStream)
-from PyQt5.QtGui import (QFont,QPainter, QColor, QTextFormat, QKeySequence)
-from PyQt5.QtWidgets import (QAction,QApplication,QTextEdit,QPlainTextEdit,QFileDialog, QWidget)
+#: Import from PyQt5.QtCore
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QSize
+from PyQt5.QtCore import QFile
+from PyQt5.QtCore import QFileInfo
+from PyQt5.QtCore import QIODevice
+from PyQt5.QtCore import QTextStream
 
 
-from PyQt5.QtGui import QKeySequence, QWheelEvent,QTextCursor, QPalette
-from PyQt5.QtWidgets import QShortcut, QMenu
+#: Import from PyQt5.QtQtGui
+from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QPainter
+from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QTextFormat
+from PyQt5.QtGui import QKeySequence
+from PyQt5.QtGui import QWheelEvent
+from PyQt5.QtGui import QTextCursor
+from PyQt5.QtGui import QPalette
+
+#: Import from PyQt5.QtWidgets
+from PyQt5.QtWidgets import QAction
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QPlainTextEdit
+from PyQt5.QtWidgets import QTextEdit
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QShortcut
+from PyQt5.QtWidgets import QMenu
 
 try:
     from PyQt5.QtCore import QString

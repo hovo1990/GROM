@@ -10,9 +10,19 @@
 """""
 
 import re
-#from PyQt5.QtCore import *
-from PyQt5.QtGui import  (QBrush, QColor,QTextFormat, QTextCharFormat, QTextCursor,QTextDocument)
-from PyQt5.QtWidgets import (QTextEdit, QPlainTextEdit)
+#: Importing from PyQt5.QtGui
+from PyQt5.QtGui import  QBrush
+from PyQt5.QtGui import  QTextFormat
+from PyQt5.QtGui import  QColor
+from PyQt5.QtGui import  QTextCharFormat
+from PyQt5.QtGui import  QTextCursor
+from PyQt5.QtGui import  QTextDocument
+
+
+#: Importing from PyQt5.QtWidgets
+from PyQt5.QtWidgets import QPlainTextEdit
+
+
 
 try:
     from PyQt5.QtCore import QString

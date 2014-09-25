@@ -11,9 +11,16 @@
 
 
 import re
-from PyQt5.QtCore import (Qt,QItemSelectionModel)
-#from PyQt5.QtGui import *
-from PyQt5.QtWidgets import (QWidget, QMessageBox)
+
+#: Import from PyQt5.QtCore
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QItemSelectionModel
+
+#Importfrom PyQt5.QtWidgets
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QMessageBox
+
+
 import tableWidget.undoCommands as undoCommands
 
 

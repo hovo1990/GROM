@@ -63,6 +63,7 @@ class TableEdit(QTableView):
         self.modelType = modelType
         print("self.filename at start is ",self.filename)
         self.setWindowTitle(QFileInfo(self.filename).fileName())
+        self.setStyleSheet("QTableView { background-color: rgb(230, 230, 230);}")
 
         #: Create Model Instant
         self.setCustomModel()

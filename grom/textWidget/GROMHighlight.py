@@ -13,12 +13,24 @@
 
 
 import sys
-from PyQt5.QtCore import (Qt, QRegularExpression)
-from PyQt5.QtGui import (QFont, QColor, QSyntaxHighlighter, QTextCharFormat)
-sys.path.append('ui/')
 import re
 
+#: Import from PyQt5.QtCore
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QRegularExpression
+
+#: Import from PyQt5.QtQtGui
+from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QColor
+from PyQt5.QtGui import QSyntaxHighlighter
+from PyQt5.QtGui import QTextCharFormat
+
+
+
+
+
 from .keyWords import Total
+sys.path.append('ui/')
 
 class GROMHighlighter(QSyntaxHighlighter):
 

@@ -71,7 +71,7 @@ from PyQt5.QtWidgets import QApplication
 #: for cx_freeze
 import PyQt5.QtNetwork
 import PyQt5.QtWebKit
-import PyQt5.QtPrintSupport
+#import PyQt5.QtPrintSupport
 sys.path.append('grom/')
 import MainApp
 
