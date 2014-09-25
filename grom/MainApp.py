@@ -22,8 +22,7 @@ import findandreplacedlg #Imports
 
 import Icons_rc
 
-#sys.path.append('textWidget/')
-#sys.path.append('tableWidget/')
+
 from textWidget import textedit # Imports custom Text Editor
 
 from tableWidget import  tableView  #Imports custom TableView widget
@@ -40,7 +39,7 @@ except ImportError:
 
 
 
-__version__ = "0.5-alpha"
+__version__ = "0.6.0.1"
 __current_directory__ = os.getcwd()
 
 
