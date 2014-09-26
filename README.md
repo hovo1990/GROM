@@ -18,10 +18,14 @@ Screenshots:
 
 ![Alt text](/screenshots/screen1.png?raw=true "Screen 1")
 ![Alt text](/screenshots/screen2.png?raw=true "Screen 2")
+![Alt text](/screenshots/screen7.png?raw=true "Screen 7")
+![Alt text](/screenshots/screen8.png?raw=true "Screen 8")
+![Alt text](/screenshots/screen9.png?raw=true "Screen 9")
 ![Alt text](/screenshots/screen3.png?raw=true "Screen 3")
 ![Alt text](/screenshots/screen4.png?raw=true "Screen 4")
 ![Alt text](/screenshots/screen5.png?raw=true "Screen 5")
 ![Alt text](/screenshots/screen6.png?raw=true "Screen 6")
+
 
 Before you run it:
 
@@ -34,6 +38,7 @@ Before you run it:
             sudo apt-get install python3-pyqt5
             sudo apt-get install libqt5webkit5
             sudo apt-get install python3-pyqt5.qtwebkit
+            sudo pip3 install pyenchant # For spelling Suggestion of Parameters
 
 And run it:
 

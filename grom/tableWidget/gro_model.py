@@ -11,13 +11,32 @@
 
 import platform
 import re
-from PyQt5.QtCore import  (QModelIndex,QAbstractTableModel,
-                           QSize, Qt, pyqtSignal)
-from PyQt5.QtGui import (QColor, QTextDocument)
-from PyQt5.QtWidgets import (QWidget, QTextEdit, QStyledItemDelegate, QUndoStack,
-                             QUndoCommand, QComboBox,QSpinBox,QDoubleSpinBox,
-                             QLineEdit)
-#import richtextlineedit
+
+#Importing from  PyQt5.QtCore
+from PyQt5.QtCore import  QModelIndex
+from PyQt5.QtCore import QAbstractTableModel
+from PyQt5.QtCore import QSize
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import pyqtSignal
+
+#Importing from  PyQt5.QtGui
+from PyQt5.QtGui import  QColor
+from PyQt5.QtGui import QTextDocument
+
+
+#Importing from  PyQt5.QtWidgets
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QTextEdit
+from PyQt5.QtWidgets import QStyledItemDelegate
+from PyQt5.QtWidgets import QUndoStack
+from PyQt5.QtWidgets import QUndoCommand
+from PyQt5.QtWidgets import QComboBox
+from PyQt5.QtWidgets import QSpinBox
+from PyQt5.QtWidgets import QDoubleSpinBox
+from PyQt5.QtWidgets import QLineEdit
+
+
+
 
 
 from .undoCommands import CommandElementChange

@@ -13,12 +13,30 @@ from __future__ import absolute_import
 import os
 import sys
 import platform
-from PyQt5.QtCore import (Qt, QFileInfo, QUrl) #QDir new
-from PyQt5.QtWidgets import (QMainWindow, QApplication,QWidget, QUndoStack, QFileDialog,QPlainTextEdit, QMessageBox, QHBoxLayout, QMenu)
-from  PyQt5.QtWebKitWidgets import (QWebPage)
+
+
+#: Importing from  PyQt5.QtCore
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QFileInfo
+from PyQt5.QtCore import QUrl
+
+
+#: Importing from  PyQt5.QtWidgets
+from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QUndoStack
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QPlainTextEdit
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QHBoxLayout
+from PyQt5.QtWidgets import QMenu
+
+#: Importing from  PyQt5.QtWebKitWidgets
+from  PyQt5.QtWebKitWidgets import QWebPage
 
 from  ui import ui_mainWindow as MW #Imports MainWindow GUI
-import findandreplacedlg #Imports
+import findandreplacedlg #Search Dialog
 
 import Icons_rc
 

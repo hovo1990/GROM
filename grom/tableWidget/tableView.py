@@ -11,9 +11,14 @@
 
 from __future__ import absolute_import
 
-from PyQt5.QtCore import (Qt, QFileInfo)
-#from PyQt5.QtGui import *
-from PyQt5.QtWidgets import (QTableView, QFileDialog)
+#: Importing from  PyQt5.QtCore
+from PyQt5.QtCore import  Qt
+from PyQt5.QtCore import QFileInfo
+
+#: Importing from  PyQt5.QtWidgets
+
+from PyQt5.QtWidgets import QTableView
+from PyQt5.QtWidgets import QFileDialog
 
 
 try:

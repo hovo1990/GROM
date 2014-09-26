@@ -10,10 +10,18 @@
 """
 
 
-from PyQt5.QtWidgets import (QDialog,QDialogButtonBox )
-from  PyQt5.QtWebKitWidgets import (QWebView)
-from ui import ui_multiRename as MR #This is new
-from ui import ui_typeWindow as TW #Adding New Stuff for New File
+
+
+#: Importing from  PyQt5.QtWidgets
+from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QDialogButtonBox
+
+#: Importing from  PyQt5.QtWebKitWidgets
+from  PyQt5.QtWebKitWidgets import QWebView
+
+
+from ui import ui_multiRename as MR
+from ui import ui_typeWindow as TW
 
 
 class Browser(QWebView):

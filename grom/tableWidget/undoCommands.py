@@ -11,8 +11,17 @@
 
 
 import operator
-from PyQt5.QtCore import (Qt,QItemSelectionModel)
-from PyQt5.QtWidgets import (QUndoCommand,QStyledItemDelegate,QMessageBox)
+
+#: Importing from  PyQt5.QtCore
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QItemSelectionModel
+
+#: Importing from  PyQt5.QtWidgets
+from PyQt5.QtWidgets import QUndoCommand
+from PyQt5.QtWidgets import QStyledItemDelegate
+from PyQt5.QtWidgets import QMessageBox
+
+
 
 def isfloat(x):
     try:

@@ -12,10 +12,17 @@
 
 import re
 import sys
-from PyQt5.QtCore import  (Qt )
-#from PyQt5.QtGui import  (QTextCharFormat)
-#from PyQt5.QtWidgets import (QDialog, QTextEdit)
-from PyQt5.QtWidgets import (QDialog, QPlainTextEdit)
+
+
+#: Importing from  PyQt5.QtCore
+from PyQt5.QtCore import  Qt
+
+
+#: Importing from  PyQt5.QtWidgets
+from PyQt5.QtWidgets import QDialog
+from PyQt5.QtWidgets import QPlainTextEdit
+
+
 sys.path.append('ui/')
 import ui.ui_findReplace as ui_findReplace
 import Icons_rc
