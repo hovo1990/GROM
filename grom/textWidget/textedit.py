@@ -210,6 +210,51 @@ class TextEdit(QPlainTextEdit):
         text = str(self.textCursor().selectedText())
         self.parent.findInHelp(text)
 
+
+    def numberOfSelLines(self):
+        try:
+            count = 0
+            cursor = self.textCursor()
+            if not cursor.selection().isEmpty():
+                text = cursor.selection().toPlainText()
+                count  = text.count("\n") + 1
+            return count
+        except Exception as e:
+            print("error in numberOfSelLines ",e)
+            return 0
+
+    def commentLine(self, comment = ";"):
+        '''
+        Makes line a comment
+        '''
+        numb = self.numberOfSelLines() #THis is the problem but why, it worked and then it stopped
+        #print("numb is ",numb)
+
+        cursor = self.textCursor()
+
+        cursor.beginEditBlock()
+
+        #print(cursor.position())
+        #start = cursor.selectionStart()
+        #end  = cursor.selectionEnd()
+        #print("selection ",start,end)
+        #print('block ',block.length())
+        cursor.movePosition( QTextCursor.StartOfLine)
+        cursor.insertText(comment)
+        if numb > 0:
+            for i in range(numb-1):
+                cursor.movePosition( QTextCursor.NextBlock) #This the right way
+                cursor.insertText(comment)
+
+        #current_pos = cursor.pos()
+        #cursor.setPosition(current_pos + 1)
+
+        cursor.endEditBlock()
+
+    def uncommentLine(self):
+        """ For Uncommenting a line"""
+        pass
+
     def correctWord(self, word):
         '''
         Replaces the selected text with word.
@@ -229,7 +274,7 @@ class TextEdit(QPlainTextEdit):
         painter.fillRect(event.rect(), Qt.lightGray)
 
         block = self.firstVisibleBlock()
-        blockNumber = block.blockNumber();
+        blockNumber = block.blockNumber()
         top = int(self.blockBoundingGeometry(block).translated(self.contentOffset()).top())
         bottom = top + int(self.blockBoundingRect(block).height())
         #font_height = self.fontMetrics().height()
@@ -508,6 +553,8 @@ class TextEdit(QPlainTextEdit):
             self.textCopy()
         elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
             self.textPaste()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_D in keyspressed):
+            self.commentLine()
         elif (Qt.Key_Control in keyspressed and Qt.Key_F in keyspressed):
             self.parent.FindReplace()
         elif (Qt.Key_Control in keyspressed and Qt.Key_H in keyspressed):
