@@ -239,6 +239,7 @@ class TextEdit(QPlainTextEdit):
         #end  = cursor.selectionEnd()
         #print("selection ",start,end)
         #print('block ',block.length())
+
         cursor.movePosition( QTextCursor.StartOfLine)
         cursor.insertText(comment)
         if numb > 0:
@@ -251,9 +252,26 @@ class TextEdit(QPlainTextEdit):
 
         cursor.endEditBlock()
 
-    def uncommentLine(self):
+    def uncommentLine(self,comment = ";"):
         """ For Uncommenting a line"""
-        pass
+        numb = self.numberOfSelLines()
+        cursor = self.textCursor()
+        cursor.beginEditBlock()
+        cursor.movePosition( QTextCursor.StartOfLine)
+        cursor.movePosition( QTextCursor.NextCharacter, QTextCursor.KeepAnchor,1)
+        selectedChar = cursor.selectedText()
+        #print('char is ',selectedChar)
+        if selectedChar == ";":
+            cursor.insertText('')
+        if numb > 0:
+            for i in range(numb-1):
+                cursor.movePosition( QTextCursor.NextBlock) #This the right way
+                cursor.movePosition( QTextCursor.NextCharacter, QTextCursor.KeepAnchor,1)
+                selectedChar = cursor.selectedText()
+                #print('char is ',selectedChar)
+                if selectedChar == ";":
+                    cursor.insertText('')
+        cursor.endEditBlock()
 
     def correctWord(self, word):
         '''
@@ -553,6 +571,8 @@ class TextEdit(QPlainTextEdit):
             self.textCopy()
         elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
             self.textPaste()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_D in keyspressed):
+            self.uncommentLine()
         elif (Qt.Key_Control in keyspressed and Qt.Key_D in keyspressed):
             self.commentLine()
         elif (Qt.Key_Control in keyspressed and Qt.Key_F in keyspressed):
