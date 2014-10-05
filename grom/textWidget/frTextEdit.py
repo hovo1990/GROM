@@ -21,6 +21,7 @@ from PyQt5.QtGui import  QTextDocument
 
 #: Importing from PyQt5.QtWidgets
 from PyQt5.QtWidgets import QPlainTextEdit
+from PyQt5.QtWidgets import QTextEdit
 
 
 

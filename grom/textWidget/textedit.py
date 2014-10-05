@@ -543,6 +543,9 @@ class TextEdit(QPlainTextEdit):
         #print(self.keylist)
         Key_Control = 16777249
         Shift_Control = 16777248
+        if event.key()==( Qt.Key_F1): #It should show if there action not activated
+            self.parent.showHelpMenu()
+            return
         if Key_Control not in self.keylist:# or  Qt.Key_Shift not in self.keylist:
             #print('Choice 1')
             QPlainTextEdit.keyPressEvent(self,event)
@@ -571,6 +574,12 @@ class TextEdit(QPlainTextEdit):
             self.textCopy()
         elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
             self.textPaste()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_N in keyspressed):
+            self.parent.chooseNew()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_O in keyspressed):
+            self.parent.FileOpen()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_S in keyspressed):
+            self.parent.fileSave()
         elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_D in keyspressed):
             self.uncommentLine()
         elif (Qt.Key_Control in keyspressed and Qt.Key_D in keyspressed):

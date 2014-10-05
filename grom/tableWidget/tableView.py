@@ -64,6 +64,7 @@ class TableEdit(QTableView):
         super(TableEdit, self).__init__(parent)
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.parent = parent
+        #print('parent is ',self.parent)
         self.filename = filename
         self.modelType = modelType
         print("self.filename at start is ",self.filename)
@@ -285,6 +286,9 @@ class TableEdit(QTableView):
         #print(self.keylist)
         Key_Control = 16777249
         Shift_Control = 16777248
+        if event.key()==( Qt.Key_F1): #It should show if there action not activated
+            self.parent.showHelpMenu()
+            return
         if Key_Control not in self.keylist:# or  Qt.Key_Shift not in self.keylist:
             #print('Choice 1')
             QTableView.keyPressEvent(self,event)
@@ -313,6 +317,12 @@ class TableEdit(QTableView):
             self.editCopy()
         elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
             self.editPaste()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_N in keyspressed):
+            self.parent.chooseNew()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_O in keyspressed):
+            self.parent.FileOpen()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_S in keyspressed):
+            self.parent.fileSave()
         elif (Qt.Key_Control in keyspressed and Qt.Key_F in keyspressed):
             self.parent.FindReplace()
         elif (Qt.Key_Control in keyspressed and Qt.Key_H in keyspressed):
@@ -327,6 +337,8 @@ class TableEdit(QTableView):
         elif (Qt.Key_Control in keyspressed and Qt.Key_Z in keyspressed):
             #print("undo working")
             self.undo()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_R in keyspressed): #THis is problematic
+            self.parent.MultiRename() #Multiple Rename
 
     def  AddRow(self,rows):
         command = CommandAddRow(self, self.model, rows,

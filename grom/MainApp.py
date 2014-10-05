@@ -87,6 +87,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         #: lists defines combobox content for Help
         lists = ['mdp options(v5.0)','mdp options(v4.6)','PDB file structure']
         self.comboBox.addItems(lists)
+        self.keylist = [] #For detecting pressed keys
 
 
 
@@ -138,6 +139,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         self.actionMulti_Rename.triggered.connect(self.MultiRename)
         self.actionAdd_Row.triggered.connect(self.tableAdd_Row)
         self.actionRemove_Row.triggered.connect(self.tableRemove_Row)
+        self.actionRenumerate.triggered.connect(self.ResNumFix)
         self.tabWidget.blockSignals(False)
 
         self.tabWidget.currentChanged.connect(self.configureStuff)
@@ -148,6 +150,93 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         #: if tab count more than allowed show warning
         if self.tabWidget.count() >  self.tabs_allowed:
             QMessageBox.warning(self,"Oops",'No more tabs are allowed')
+
+    #def keyPressEvent(self,event):
+        #if event.key()==(Qt.Key_Control and Qt.Key_F):
+            #self.FindReplace()
+        #elif event.key()==(Qt.Key_Control and Qt.Key_H):
+            #self.FindReplace()
+        #elif event.key()==(Qt.Key_Control and Qt.Key_N):
+            #self.chooseNew()
+        #elif event.key()==(Qt.Key_Control and Qt.Key_O):
+            #self.FileOpen()
+        #elif event.key()==(Qt.Key_Control and Qt.Key_S):
+            #self.fileSave()
+        ##else:
+            #MainWindow.keyPressEvent(self,event)
+
+    def keyPressEvent(self, event):
+        self.firstrelease = True
+        event_check = int(event.key())
+        #event = event.key
+        self.keylist.append(event_check)
+        #print(self.keylist)
+        Key_Control = 16777249
+        Shift_Control = 16777248
+        if event.key()==( Qt.Key_F1): #It should show if there action not activated
+            self.showHelpMenu()
+            return
+        #try:
+            #if Key_Control not in self.keylist:# or  Qt.Key_Shift not in self.keylist:
+                ##print('Choice 1')
+                #MainWindow.keyPressEvent(self,event)
+                #return
+        #except Exception as e:
+            #print("Error in keyPressEvent ",e)
+        #elif Shift_Control not in self.keylist:
+            #print('Choice 2')
+            #QPlainTextEdit.keyPressEvent(self,event)
+
+    def keyReleaseEvent(self, event):
+        try:
+            if self.firstrelease == True:
+                self.processmultikeys(self.keylist)
+
+
+            self.firstrelease = False
+
+            del self.keylist[-1]
+        except:
+            pass
+
+    def processmultikeys(self,keyspressed):
+        #print('keysPressed is ',keyspressed)
+        if Qt.Key_Control  in keyspressed and Qt.Key_X in keyspressed:
+            self.editCut()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_C in keyspressed):
+            self.editCopy()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_V in keyspressed):
+            self.editPaste()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_N in keyspressed):
+            self.chooseNew()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_O in keyspressed):
+            self.FileOpen()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_S in keyspressed):
+            self.fileSave()
+        #elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_D in keyspressed):
+            #self.uncommentLine() #This is new
+        #elif (Qt.Key_Control in keyspressed and Qt.Key_D in keyspressed):
+            #self.commentLine() #this is new
+        elif (Qt.Key_Control in keyspressed and Qt.Key_F in keyspressed):
+            self.FindReplace()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_H in keyspressed):
+            self.FindReplace()
+        #elif (Qt.Key_Control in keyspressed and  Qt.Key_Plus in keyspressed):
+            #self.ZoomIn()
+        #elif (Qt.Key_Control in keyspressed and Qt.Key_Minus in keyspressed ):
+            #self.ZoomOut()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_A in keyspressed):
+            self.editDeselectAll()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_A in keyspressed):
+            self.editSelectAll()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Shift in keyspressed and Qt.Key_Z in keyspressed):
+            #print("redo Working")
+            self.editRedo()
+        elif (Qt.Key_Control in keyspressed and Qt.Key_Z in keyspressed):
+            #print("undo working")
+            self.editUndo()
+
+
 
 
     def closeTab(self,index):
@@ -354,7 +443,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         """
         Method for loading a Coordinate File
         """
-        tableWidget = tableView.TableEdit(filename,self)
+        tableWidget = tableView.TableEdit(filename,parent = self)
         self.activateEssential(tableWidget) #Activates QActions and Widgets
         self.customMenuCoord(tableWidget) #sets up custom Context Menu
         self.tabWidget.show()
@@ -537,7 +626,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         self.actionReplace.setEnabled(False)
         self.actionUndo.setEnabled(False)
         self.actionRedo.setEnabled(False)
-
+        self.actionComment.setEnabled(False)
+        self.actionUncomment.setEnabled(False)
 
     def activateEssential(self,currentWidget):
         """
@@ -554,6 +644,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             self.actionRenumerate.setEnabled(True)
             self.actionAdd_Row.setEnabled(True)
             self.actionRemove_Row.setEnabled(True)
+            self.actionComment.setEnabled(False)
+            self.actionUncomment.setEnabled(False)
         else:
             self.actionZoom_In.setEnabled(True)
             self.actionZoom_Out.setEnabled(True)
@@ -561,6 +653,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             self.actionRenumerate.setEnabled(False)
             self.actionAdd_Row.setEnabled(False)
             self.actionRemove_Row.setEnabled(False)
+            self.actionComment.setEnabled(True)
+            self.actionUncomment.setEnabled(True)
         self.actionIconHelp.setEnabled(True)
         self.actionCut.setEnabled(True)
         self.actionCopy.setEnabled(True)
@@ -681,13 +775,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         except Exception as e:
             print("Problem with redo: ",e)
 
-    def keyPressEvent(self,event):
-        if event.key()==(Qt.Key_Control and Qt.Key_F):
-            self.FindReplace()
-        elif event.key()==(Qt.Key_Control and Qt.Key_H):
-            self.FindReplace()
-        #else:
-            #MainWindow.keyPressEvent(self,event)
+
 
     def editSelectAll(self):
         currentWidget = self.tabWidget.currentWidget()
@@ -744,6 +832,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         """
         Method to show Help
         """
+        if self.actionIconHelp.isEnabled() == False:
+            return
         if self.moreFrame_show == False:
             self.moreFrame.show()
             self.moreFrame.resize(200,400)
@@ -788,16 +878,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
 
     #: WIP This method hasn't been implemented yet
     def ResNumFix(self):
-        if self.state == 'coord':
-            self.tableWidget.ResNumFixer()
-            if len(self.tableWidget.selectedIndexes()) > 0:
-                renameOption = MultipleRenameDialog()
-                renameOption.RnameLabel.setText('Fix ResNum')
-                if renameOption.exec_():
-                    print('TADA ResNumFix working for now')
-                    value = renameOption.RenamelineEdit.text()
-        else:
-                QMessageBox.warning(self,"Oops",'Renumerate not yet implemented')
+        QMessageBox.warning(self,"Oops",'Renumerate not yet implemented')
 
 
     def MultiRename(self):
@@ -805,9 +886,12 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         Method for replacing multiple Cells in table Widget
         """
         currentWidget = self.tabWidget.currentWidget()
+        if currentWidget is None or  isinstance(currentWidget, QPlainTextEdit):
+            return
         try:
             if len(currentWidget.selectedIndexes()) > 0:
                 renameOption = MultipleRenameDialog()
+                renameOption.show()
                 if renameOption.exec_():
                     value = renameOption.RenamelineEdit.text()
                     currentWidget.multi_rename(value)
