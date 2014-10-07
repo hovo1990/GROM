@@ -241,6 +241,7 @@ class frTextObject():
 
     def highlightText(self,findText,where):
         cursor = self.__textEditor.textCursor()
+        #cursor.beginEditBlock() #Very IMportant
         #format = QTextCharFormat()
         #format.setBackground(QBrush(QColor("cyan")))
         cursor.setPosition(where)
@@ -252,6 +253,7 @@ class frTextObject():
         selection.cursor = cursor
         #selection.cursor.clearSelection()
         self.extraSelections[1].append(selection)
+        #cursor.endEditBlock() #Very IMportant
 
     def returnToStart(self):
         cursor = self.__textEditor.textCursor()

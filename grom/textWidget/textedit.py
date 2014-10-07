@@ -588,7 +588,7 @@ class TextEdit(QPlainTextEdit):
             self.parent.FindReplace()
         elif (Qt.Key_Control in keyspressed and Qt.Key_H in keyspressed):
             self.parent.FindReplace()
-        elif (Qt.Key_Control in keyspressed and  Qt.Key_Plus in keyspressed):
+        elif (Qt.Key_Control in keyspressed and  Qt.Key_Equal in keyspressed):
             self.zoom_in()
         elif (Qt.Key_Control in keyspressed and Qt.Key_Minus in keyspressed ):
             self.zoom_out()
@@ -627,7 +627,7 @@ class TextEdit(QPlainTextEdit):
     def customUndo(self):
         print('Custom Undo Called')
         self.undo()
-        self.restoreTextSearch() #Recursion problem
+        #self.restoreTextSearch() #Recursion problem
 
     def customRedo(self):
         print('Custom Redo Called')

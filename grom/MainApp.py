@@ -140,6 +140,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         self.actionAdd_Row.triggered.connect(self.tableAdd_Row)
         self.actionRemove_Row.triggered.connect(self.tableRemove_Row)
         self.actionRenumerate.triggered.connect(self.ResNumFix)
+        self.actionComment.triggered.connect(self.commentLine)
+        self.actionUncomment.triggered.connect(self.uncommentLine)
         self.tabWidget.blockSignals(False)
 
         self.tabWidget.currentChanged.connect(self.configureStuff)
@@ -164,6 +166,23 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             #self.fileSave()
         ##else:
             #MainWindow.keyPressEvent(self,event)
+
+    def commentLine(self):
+        currentWidget = self.tabWidget.currentWidget()
+        currentWidget.setFocus()
+        try:
+            currentWidget.commentLine()
+        except:
+            pass
+
+
+    def uncommentLine(self):
+        currentWidget = self.tabWidget.currentWidget()
+        currentWidget.setFocus()
+        try:
+            currentWidget.uncommentLine()
+        except:
+            pass
 
     def keyPressEvent(self, event):
         self.firstrelease = True
