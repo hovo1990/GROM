@@ -31,5 +31,9 @@ NUCLEOTIDES = {"DA":[160,160,255],
 
 #: Idea need to make a separator in List
 
+comboBoxList = list(AMINOACID_COLORS.keys()) + list(NUCLEOTIDES.keys())
+#print(comboBoxList)
+
+
 RESID_COLORS_RGB = dict(list(AMINOACID_COLORS.items()) + list(NUCLEOTIDES.items()))
 #print(RESID_COLORS)

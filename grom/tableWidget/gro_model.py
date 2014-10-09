@@ -484,7 +484,8 @@ class GRODelegate(QStyledItemDelegate):
             return spinbox
         elif index.column() == residName:
             combobox = QComboBox(parent)
-            combobox.addItems(list(RESID_COLORS_RGB.keys()))
+            combobox.addItems(comboBoxList)
+            combobox.insertSeparator(23)
             combobox.setEditable(True)
             return combobox
         elif index.column() == atomName:

@@ -39,7 +39,7 @@ from PyQt5.QtWidgets import QLineEdit
 
 from .undoCommands import CommandElementChange
 import tableWidget.PDB_parse as PDB_parse
-
+from .residColors import * #REsidue Color  RGB values
 
 comitDataSignal = pyqtSignal(QWidget , name = "commitData" )
 closeEditorSignal = pyqtSignal(QWidget, name = "closeEditor")
@@ -65,7 +65,7 @@ FILE_VERSION = 1
 class PDB_rowInfo(object):
 
 
-    def __init__(self, ATOM,ATOM_TextColor, serial, name, resName,ChainID,
+    def __init__(self, ATOM,ATOM_TextColor, serial, name, resName,resName_color, ChainID,
                 ChainID_color,  resNum,resNum_color, X,Y,Z, occupancy,
                 charge, element):
         """
@@ -77,6 +77,7 @@ class PDB_rowInfo(object):
              serial (int) Atom  serial number
              name (str) Atom Name
              resName (str) Residue Name
+             resName_color (QColor)
              ChainID (str) Chain identifier
              ChainID_color (QColor) ChainID Color
              resNum (int)  Residue sequence number.
@@ -93,6 +94,7 @@ class PDB_rowInfo(object):
         self.serial  = serial
         self.name = name
         self.resName = resName
+        self.resName_color = resName_color
         self.ChainID = ChainID
         self.ChainID_initial  = ChainID
         self.ChainID_color = ChainID_color
@@ -262,6 +264,8 @@ class PDBTableModel(QAbstractTableModel): #This part is the ultimate important p
         elif role == Qt.BackgroundRole:
             if column == resNum:
                 return  PDB_row.resNum_color
+            elif column == resName:
+                return PDB_row.resName_color
             elif column == ChainID:
                 return PDB_row.ChainID_color
         elif role == Qt.TextColorRole:
@@ -345,6 +349,12 @@ class PDBTableModel(QAbstractTableModel): #This part is the ultimate important p
                  PDB_row.name = value
             elif column == resName:
                 PDB_row.resName = value
+                if value in RESID_COLORS_RGB:
+                    Col = RESID_COLORS_RGB[value]
+                    PDB_row.resName_color = QColor(Col[0],Col[1],Col[2])
+                else:
+                    Col = RESID_COLORS_RGB['other']
+                    PDB_row.resName_color = QColor(Col[0],Col[1],Col[2])
             elif column == ChainID:
                  PDB_row.ChainID = value
                  if PDB_row.ChainID_initial != PDB_row.ChainID:
@@ -465,13 +475,19 @@ class PDBTableModel(QAbstractTableModel): #This part is the ultimate important p
                         resNum_color = QColor(Qt.yellow)
                     elif self.flag_color == False and self.val == int(resNum):
                         resNum_color = QColor(Qt.green)
+                    if resName in RESID_COLORS_RGB:
+                        Col = RESID_COLORS_RGB[resName]
+                        resName_color = QColor(Col[0],Col[1],Col[2])
+                    else:
+                        Col = RESID_COLORS_RGB['other']
+                        resName_color = QColor(Col[0],Col[1],Col[2])
                     X = row[6]
                     Y = row[7]
                     Z = row[8]
                     occupancy = row[9]
                     charge = row[10]
                     element = row[11]
-                    PDBrow = PDB_rowInfo(ATOM, ATOM_TextColor,serial, name, resName,ChainID,ChainID_color, resNum,resNum_color, X,Y,Z, occupancy, charge, element)
+                    PDBrow = PDB_rowInfo(ATOM, ATOM_TextColor,serial, name, resName,resName_color, ChainID,ChainID_color, resNum,resNum_color, X,Y,Z, occupancy, charge, element)
                     #print('PDBrow is ',PDBrow.getValues())
                     self.PDB_rows.append(PDBrow)
                     self.dirty = False
@@ -563,9 +579,14 @@ class PDBDelegate(QStyledItemDelegate):
             editor.returnPressed.connect(self.commitAndCloseEditor)
             return editor
         elif index.column() == resName:
-            editor = QLineEdit(parent)
-            editor.returnPressed.connect(self.commitAndCloseEditor)
-            return editor
+            combobox = QComboBox(parent)
+            combobox.addItems(comboBoxList)
+            combobox.insertSeparator(23)
+            combobox.setEditable(True)
+            return combobox
+            #editor = QLineEdit(parent)
+            #editor.returnPressed.connect(self.commitAndCloseEditor)
+            #return editor
         elif index.column() == ChainID:
             editor = QLineEdit(parent)
             editor.returnPressed.connect(self.commitAndCloseEditor)
@@ -602,8 +623,8 @@ class PDBDelegate(QStyledItemDelegate):
         text = index.model().data(index, Qt.DisplayRole)
         if index.column() == name:
             editor.setText(text)
-        elif index.column() == resName:
-            editor.setText(text)
+        #elif index.column() == resName:
+            #editor.setItemText(text)
         elif  index.column() == ChainID:
             editor.setText(text)
         elif  index.column() == resNum:
