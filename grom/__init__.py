@@ -22,12 +22,28 @@
 # METADATA
 ###############################################################################
 
+
+
 __prj__ = "GROM"
 __author__ = "Hovakim Grabski"
 __mail__ = "johnwo1990@hotmail.com, hovakim_grabski@yahoo.com, johngra1990@gmail.com"
 __source__ = "https://github.com/hovo1990/GROM"
-__version__ = "0.5-alpha"
+__version__ = "0.6-beta"
 __license__ = "GPL3"
+
+
+
+VERSION = 0,6,0,1
+#: Set to ``True`` for a release. If set to ``False`` then the patch level
+#: will have the suffix "-dev".
+RELEASE = False
+if not RELEASE:
+    VERSION = VERSION[:2] + (str(VERSION[2]) + '-dev',)
+
+def get_version():
+    """Return current package version as a string."""
+    return ".".join(map(str,VERSION))
+
 
 ###############################################################################
 # DOC
@@ -74,6 +90,13 @@ import PyQt5.QtWebKit
 #import PyQt5.QtPrintSupport
 sys.path.append('grom/')
 import MainApp
+
+
+
+
+
+
+
 
 #import sys
 #from os.path import join, dirname

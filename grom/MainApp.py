@@ -13,7 +13,7 @@ from __future__ import absolute_import
 import os
 import sys
 import platform
-
+sys.path.append('grom/')
 
 #: Importing from  PyQt5.QtCore
 from PyQt5.QtCore import Qt
@@ -41,6 +41,7 @@ import findandreplacedlg #Search Dialog
 import Icons_rc
 
 
+
 from textWidget import textedit # Imports custom Text Editor
 
 from tableWidget import  tableView  #Imports custom TableView widget
@@ -58,7 +59,10 @@ except ImportError:
 
 
 __version__ = "0.6.0.1"
-__current_directory__ = os.getcwd()
+
+folder_mainAPP = os.path.realpath(__file__)[:-15]
+__current_directory__ = folder_mainAPP
+#print('folder mainAPP ',folder_mainAPP)
 
 
 
@@ -433,7 +437,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         #if not self.okToContinue():
             #return
         dir = (os.path.dirname(self.filename)
-                if self.filename is not None else ".")
+                if self.filename is not None else __current_directory__)
         fname_load = QFileDialog.getOpenFileName(self,
                 "G.R.O.M. Editor - Choose File", dir,
                 "MD files ( *.pdb *.gro *.mdp *.itp *.top)")

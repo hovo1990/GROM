@@ -1,4 +1,4 @@
- #!/usr/bin/env python3
+#!/usr/bin/env python3
 
 # -*- coding: utf-8 -*-
 #
@@ -44,6 +44,7 @@ Before you run it:
             sudo apt-get install python3-pyqt5
             sudo apt-get install libqt5webkit5
             sudo apt-get install python3-pyqt5.qtwebkit
+            sudo pip3 install pyenchant
 
 
 And run it:
@@ -55,10 +56,12 @@ And run it:
 ###############################################################################
 # IMPORTS
 ###############################################################################
-
+import sys
+import os
+folder = os.path.realpath(__file__)[:-7]
+#print('folder ',folder)
+sys.path.append(folder + 'grom')
 import grom
-
-
 ###############################################################################
 # MAIN
 ###############################################################################
