@@ -253,6 +253,8 @@ class CommandAddRow(QUndoCommand): #this is gonna be tough
             row = int(ind.row())
             temp_dict.update({ind:row})
         sorted_x = sorted(temp_dict.items(), key=operator.itemgetter(1))
+        #sorted_x = list(temp_dict.items()) #.sort( key=operator.itemgetter(1)) #New Version
+        #print('sorted_x is ',sorted_x)
         self.rows = [x[0] for x in sorted_x]
 
 

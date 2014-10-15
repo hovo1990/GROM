@@ -308,6 +308,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         text += "Version: %s\n" %(self.version)
         text += "Source Code: https://github.com/hovo1990/GROM"
         text += "\n"
+        text += "Mail: hovakim_grabski@yahoo.com"
+        text += "\n"
         text += "Author: Hovakim Grabski"
         QMessageBox.about(self,"About G.R.O.M.",text)
 
@@ -521,7 +523,9 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
                             "Failed to save {0}: {1}".format(currentWidget.filename, e))
                     return False
         except Exception as e:
-            self.showError(e)
+            #self.showError(e)
+            print("Error is Save FIle ",e)
+            pass
 
 
     def fileSaveAs(self): #Half has been achieved
@@ -559,7 +563,9 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
                             "Failed to save {0}: {1}".format(currentWidget.filename, e))
                     return False
         except Exception as error:
-            self.showError(error)
+            print("Error in Save FIle As ",e)
+            pass
+           # self.showError(error)
 
 
 

@@ -405,7 +405,8 @@ class PDBTableModel(QAbstractTableModel): #This part is the ultimate important p
                                           "Unknown"," Unknown", " Unknown",
                                           "Unknown"," Unknown", " Unknown",
                                           " Unknown"," Unknown", " Unknown",
-                                          " Unknown"," Unknown", " Unknown"))
+                                          " Unknown"," Unknown", " Unknown"
+                                          , " Unknown"))
         self.endInsertRows()
         self.dirty = True
         return True

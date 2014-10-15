@@ -38,6 +38,7 @@ Before you run it:
             sudo apt-get install python3-pyqt5
             sudo apt-get install libqt5webkit5
             sudo apt-get install python3-pyqt5.qtwebkit
+            sudo apt-get install python3-pip #Install pip
             sudo pip3 install pyenchant # For spelling Suggestion of Parameters
 
 And run it:
