@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="Icons">
+    <file>icons/pyMol.png</file>
+    <file>icons/vmd.png</file>
+    <file>icons/Avogadro.png</file>
     <file>icons/Actions-help-about-icon.png</file>
     <file>icons/Actions-document-save-as-icon.png</file>
     <file>icons/Actions-document-save-icon.png</file>

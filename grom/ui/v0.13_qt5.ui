@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>698</width>
+    <height>575</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>312</width>
+    <height>312</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>G.R.O.M.</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="Icons.qrc">
+    <normaloff>:/Program_Icon/icons/dnahelixpixels.jpg</normaloff>:/Program_Icon/icons/dnahelixpixels.jpg</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_3">
+    <item row="0" column="0">
+     <widget class="QFrame" name="MainFrame">
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QTabWidget" name="tabWidget">
+         <property name="tabShape">
+          <enum>QTabWidget::Rounded</enum>
+         </property>
+         <property name="currentIndex">
+          <number>-1</number>
+         </property>
+         <property name="documentMode">
+          <bool>false</bool>
+         </property>
+         <property name="movable">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QFrame" name="moreFrame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QComboBox" name="comboBox"/>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>698</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionIconNew"/>
+    <addaction name="actionIconOpen"/>
+    <addaction name="separator"/>
+    <addaction name="actionIconSave"/>
+    <addaction name="actionIconSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+    <addaction name="actionAbout_Qt"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="separator"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionCopy"/>
+    <addaction name="actionPaste"/>
+    <addaction name="separator"/>
+    <addaction name="actionComment"/>
+    <addaction name="actionUncomment"/>
+    <addaction name="separator"/>
+    <addaction name="actionSelect_All"/>
+    <addaction name="actionDeselect_All"/>
+    <addaction name="separator"/>
+    <addaction name="actionZoom_In"/>
+    <addaction name="actionZoom_Out"/>
+    <addaction name="separator"/>
+    <addaction name="actionAdd_Row"/>
+    <addaction name="actionRemove_Row"/>
+    <addaction name="separator"/>
+    <addaction name="actionMulti_Rename"/>
+    <addaction name="actionRenumerate"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuSearch">
+    <property name="title">
+     <string>Search</string>
+    </property>
+    <addaction name="actionFind"/>
+    <addaction name="actionReplace"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuSearch"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="toolTip">
+    <string/>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="allowedAreas">
+    <set>Qt::AllToolBarAreas</set>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>35</width>
+     <height>35</height>
+    </size>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionIconNew"/>
+   <addaction name="actionIconOpen"/>
+   <addaction name="separator"/>
+   <addaction name="actionIconSave"/>
+   <addaction name="actionIconSaveAs"/>
+   <addaction name="separator"/>
+   <addaction name="actionCut"/>
+   <addaction name="actionCopy"/>
+   <addaction name="actionPaste"/>
+   <addaction name="separator"/>
+   <addaction name="actionZoom_In"/>
+   <addaction name="actionZoom_Out"/>
+   <addaction name="separator"/>
+   <addaction name="actionOpen_in_VMD"/>
+   <addaction name="actionOpen_in_PyMol"/>
+   <addaction name="actionOpen_in_Avogadro"/>
+   <addaction name="separator"/>
+   <addaction name="actionIconHelp"/>
+  </widget>
+  <action name="actionSelect_All">
+   <property name="text">
+    <string>Select All (Ctrl+A)</string>
+   </property>
+   <property name="toolTip">
+    <string>Select All</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About G.R.O.M.</string>
+   </property>
+  </action>
+  <action name="actionIconNew">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Icons/icons/Files-New-File-icon.png</normaloff>:/Icons/icons/Files-New-File-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>New (Ctrl+N)</string>
+   </property>
+  </action>
+  <action name="actionIconOpen">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Icons/icons/open-file-icon.png</normaloff>:/Icons/icons/open-file-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open (Ctrl+O)</string>
+   </property>
+  </action>
+  <action name="actionIconSave">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Icons/icons/Actions-document-save-icon.png</normaloff>:/Icons/icons/Actions-document-save-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save (Ctrl+S)</string>
+   </property>
+  </action>
+  <action name="actionIconSaveAs">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Icons/icons/Actions-document-save-as-icon.png</normaloff>:/Icons/icons/Actions-document-save-as-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save As</string>
+   </property>
+  </action>
+  <action name="actionIconHelp">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Icons/icons/Actions-help-about-icon.png</normaloff>:/Icons/icons/Actions-help-about-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>IconHelp</string>
+   </property>
+   <property name="toolTip">
+    <string>Show Help (F1)</string>
+   </property>
+  </action>
+  <action name="actionRenumerate">
+   <property name="text">
+    <string>Renumerate</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Search/icons/find/Start-Menu-Search-icon.png</normaloff>:/Search/icons/find/Start-Menu-Search-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Find (Ctrl+F)</string>
+   </property>
+  </action>
+  <action name="actionFind_Next">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Search/icons/find/Search-icon.png</normaloff>:/Search/icons/find/Search-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Find Next</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
+   </property>
+  </action>
+  <action name="actionReplace">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/Search/icons/find/Actions-find-replace-icon.png</normaloff>:/Search/icons/find/Actions-find-replace-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Replace (Ctrl+H)</string>
+   </property>
+  </action>
+  <action name="actionSave_as">
+   <property name="text">
+    <string>Save as...</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Edit/icons/edit/Actions-undo-icon.png</normaloff>:/Edit/icons/edit/Actions-undo-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Undo (Ctrl+Z)</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Edit/icons/edit/Actions-redo-icon.png</normaloff>:/Edit/icons/edit/Actions-redo-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Redo (Ctrl+Shift+Z)</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Edit/icons/edit/cut-icon.png</normaloff>:/Edit/icons/edit/cut-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Cut (Ctrl+X)</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Edit/icons/edit/copy-icon.png</normaloff>:/Edit/icons/edit/copy-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Copy (Ctrl+C)</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Edit/icons/edit/paste-icon.png</normaloff>:/Edit/icons/edit/paste-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Paste (Ctrl+V)</string>
+   </property>
+  </action>
+  <action name="actionMulti_Rename">
+   <property name="text">
+    <string>Multi-Rename (Ctrl+R)</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About Qt</string>
+   </property>
+  </action>
+  <action name="actionZoom_In">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Edit/icons/edit/Zoom_in.png</normaloff>:/Edit/icons/edit/Zoom_in.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom In (Ctrl++)</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+  <action name="actionZoom_Out">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Edit/icons/edit/Zoom_out.png</normaloff>:/Edit/icons/edit/Zoom_out.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom Out (Ctrl+-)</string>
+   </property>
+  </action>
+  <action name="actionAdd_Row">
+   <property name="text">
+    <string>Add Row</string>
+   </property>
+  </action>
+  <action name="actionRemove_Row">
+   <property name="text">
+    <string>Remove Row</string>
+   </property>
+  </action>
+  <action name="actionDeselect_All">
+   <property name="text">
+    <string>Deselect All (Ctrl+Shift+A)</string>
+   </property>
+  </action>
+  <action name="actionComment">
+   <property name="text">
+    <string>Comment (Ctrl+D)</string>
+   </property>
+  </action>
+  <action name="actionUncomment">
+   <property name="text">
+    <string>Uncomment (Ctrl+Shift+D)</string>
+   </property>
+  </action>
+  <action name="actionOpen_in_VMD">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Icons/icons/vmd.png</normaloff>:/Icons/icons/vmd.png</iconset>
+   </property>
+   <property name="text">
+    <string>open in VMD</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;open n VMD&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionOpen_in_PyMol">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Icons/icons/pyMol.png</normaloff>:/Icons/icons/pyMol.png</iconset>
+   </property>
+   <property name="text">
+    <string>open in PyMol</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;open in PyMol&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+  <action name="actionOpen_in_Avogadro">
+   <property name="icon">
+    <iconset resource="Icons.qrc">
+     <normaloff>:/Icons/icons/Avogadro.png</normaloff>:/Icons/icons/Avogadro.png</iconset>
+   </property>
+   <property name="text">
+    <string>open in Avogadro</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;open in Avogadro&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="Icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

@@ -22,16 +22,20 @@ CHX      3
 
 [ atoms ]
 ;   nr      type  resnr resid  atom  cgnr   charge     mass
-     1       CH2     1  CHX     CAA     1    0.000  14.0270   
-     2       CH2     1  CHX     CAB     2    0.000  14.0270   
-     3       CH2     1  CHX     CAD     3    0.000  14.0270   
-     4       CH2     1  CHX     CAF     4    0.000  14.0270   
-     5       CH2     1  CHX     CAE     5    0.000  14.0270   
-     6       CH2     1  CHX     CAC     6    0.000  14.0270   
+     1       STACK     1  CHX     CAA     1    0.000  14.0270   
+     2       STACK     1  CHX     CAB     2    0.000  14.0270   
+     3       STACK     1  CHX     CAD     3    0.000  14.0270   
+     4       STACK     1  CHX     CAF     4    0.000  14.0270   
+     5       STACK     1  CHX     CAE     5    0.000  14.0270   
+     6       STACK     1  CHX     CAC     6    0.000  14.0270   
 
-[ bonds ]
-; ai  aj  fu    c0, c1, ...
-   1   2   2    0.152   5430000.0    0.152   5430000.0 ;   CAA  CAB   
+;The Coulomb potential is decreased over the whole range, using the definition from the Encad simulation package.
+
+
+
+;[ bonds ]
+;; ai  aj  fu    c0, c1, ...
+;   1   2   2    0.152   5430000.0    0.152   5430000.0 ;   CAA  CAB   
    1   6   2    0.152   5430000.0    0.152   5430000.0 ;   CAA  CAC   
    2   3   2    0.152   5430000.0    0.152   5430000.0 ;   CAB  CAD   
    3   4   2    0.152   5430000.0    0.152   5430000.0 ;   CAD  CAF   
