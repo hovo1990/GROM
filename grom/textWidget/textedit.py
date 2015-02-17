@@ -107,8 +107,12 @@ class TextEdit(QPlainTextEdit):
         """
         super(TextEdit, self).__init__(parent)
         self.parent = parent
+
         self.setAttribute(Qt.WA_DeleteOnClose)
-        self.filename = filename
+
+        self.filename = filename #VIT
+
+
         print('self.filename is ---->>>> ',self.filename)
         if self.filename == None:
             self.filename = QString("Unnamed-{0}.mdp".format(

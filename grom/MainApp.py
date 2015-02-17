@@ -36,6 +36,8 @@ from PyQt5.QtWidgets import QMenu
 from  PyQt5.QtWebKitWidgets import QWebPage
 
 from  ui import ui_mainWindow as MW #Imports MainWindow GUI
+from customQProcess import *
+
 import findandreplacedlg #Search Dialog
 
 import Icons_rc
@@ -58,7 +60,7 @@ except ImportError:
 
 
 
-__version__ = "0.6.0.1"
+__version__ = "0.6.5.0"
 
 folder_mainAPP = os.path.realpath(__file__)[:-15]
 __current_directory__ = folder_mainAPP
@@ -110,6 +112,10 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         MainWindow.Instances.add(self) #Look in this one
 
 
+
+        self.qProcess = CustomQProcess() #VIT
+
+
         self.undoStack = QUndoStack(self)
         self.setWindowTitle("G.R.O.M. Editor") #Sets application Title
 
@@ -146,6 +152,13 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         self.actionRenumerate.triggered.connect(self.ResNumFix)
         self.actionComment.triggered.connect(self.commentLine)
         self.actionUncomment.triggered.connect(self.uncommentLine)
+
+        #: THis part is for viewing coordinate files in molecular editors
+        self.actionOpen_in_VMD.triggered.connect(self.openVMD)
+        self.actionOpen_in_PyMol.triggered.connect(self.openPyMol)
+        self.actionOpen_in_Avogadro.triggered.connect(self.openAvogadro)
+
+
         self.tabWidget.blockSignals(False)
 
         self.tabWidget.currentChanged.connect(self.configureStuff)
@@ -156,6 +169,22 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         #: if tab count more than allowed show warning
         if self.tabWidget.count() >  self.tabs_allowed:
             QMessageBox.warning(self,"Oops",'No more tabs are allowed')
+
+
+    def openVMD(self):
+        currentWidget = self.tabWidget.currentWidget()
+        currentFile = currentWidget.getFileName()
+        self.qProcess.start("vmd %s" %currentFile)
+
+    def openPyMol(self):
+        currentWidget = self.tabWidget.currentWidget()
+        currentFile = currentWidget.getFileName()
+        self.qProcess.start("pymol %s" %currentFile)
+
+    def openAvogadro(self):
+        currentWidget = self.tabWidget.currentWidget()
+        currentFile = currentWidget.getFileName()
+        self.qProcess.start("avogadro %s" %currentFile)
 
     #def keyPressEvent(self,event):
         #if event.key()==(Qt.Key_Control and Qt.Key_F):

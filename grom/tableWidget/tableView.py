@@ -64,8 +64,12 @@ class TableEdit(QTableView):
         super(TableEdit, self).__init__(parent)
         self.setAttribute(Qt.WA_DeleteOnClose)
         self.parent = parent
+
         #print('parent is ',self.parent)
-        self.filename = filename
+
+        self.filename = filename #VIT
+
+
         self.modelType = modelType
         print("self.filename at start is ",self.filename)
         self.setWindowTitle(QFileInfo(self.filename).fileName())
@@ -81,6 +85,9 @@ class TableEdit(QTableView):
         #: Create Search Instance for this Widget
         self.frTableObject = frTableEdit.frTableObject(self)
         self.keylist = []
+
+    def getFileName(self):
+        return self.filename
 
 
     def setCustomModel(self):
