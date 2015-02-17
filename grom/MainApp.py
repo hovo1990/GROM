@@ -657,6 +657,10 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         self.actionRedo.setEnabled(False)
         self.actionComment.setEnabled(False)
         self.actionUncomment.setEnabled(False)
+        #: This part is new
+        self.actionOpen_in_VMD.setEnabled(False)
+        self.actionOpen_in_PyMol.setEnabled(False)
+        self.actionOpen_in_Avogadro.setEnabled(False)
 
     def activateEssential(self,currentWidget):
         """
@@ -675,6 +679,9 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             self.actionRemove_Row.setEnabled(True)
             self.actionComment.setEnabled(False)
             self.actionUncomment.setEnabled(False)
+            self.actionOpen_in_VMD.setEnabled(True)
+            self.actionOpen_in_PyMol.setEnabled(True)
+            self.actionOpen_in_Avogadro.setEnabled(True)
         else:
             self.actionZoom_In.setEnabled(True)
             self.actionZoom_Out.setEnabled(True)
@@ -684,6 +691,10 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             self.actionRemove_Row.setEnabled(False)
             self.actionComment.setEnabled(True)
             self.actionUncomment.setEnabled(True)
+            self.actionOpen_in_VMD.setEnabled(False)
+            self.actionOpen_in_PyMol.setEnabled(False)
+            self.actionOpen_in_Avogadro.setEnabled(False)
+        #:------------------------------------------------
         self.actionIconHelp.setEnabled(True)
         self.actionCut.setEnabled(True)
         self.actionCopy.setEnabled(True)
