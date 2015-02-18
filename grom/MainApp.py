@@ -114,6 +114,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
 
 
         self.qProcess = CustomQProcess() #VIT
+        self.qProcess.finished.connect(self.delTempFile) #This is it !!!!
 
 
         self.undoStack = QUndoStack(self)
@@ -171,23 +172,32 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             QMessageBox.warning(self,"Oops",'No more tabs are allowed')
 
 
+    def delTempFile(self):
+        try:
+            print("Yolo Hahahahahahahaha")
+            os.remove(self.tempFileName)
+            print("Print Temp File Deleted")
+        except Exception as e:
+            print("Error in deleting file: ",e)
+
     def openVMD(self):
         currentWidget = self.tabWidget.currentWidget()
         #currentFile = currentWidget.getFileName()
-        tempFileName = currentWidget.saveTempFile()
-        self.qProcess.start("vmd %s" %tempFileName)
+        self.tempFileName = currentWidget.saveTempFile()
+        self.qProcess.start("vmd %s" %self.tempFileName)
+
 
     def openPyMol(self):
         currentWidget = self.tabWidget.currentWidget()
         #currentFile = currentWidget.getFileName()
-        tempFileName = currentWidget.saveTempFile()
-        self.qProcess.start("pymol %s" %tempFileName)
+        self.tempFileName = currentWidget.saveTempFile()
+        self.qProcess.start("pymol %s" %self.tempFileName)
 
     def openAvogadro(self):
         currentWidget = self.tabWidget.currentWidget()
-        currentFile = currentWidget.getFileName()
-        tempFileName = currentWidget.saveTempFile()
-        self.qProcess.start("avogadro %s" %tempFileName)
+        #currentFile = currentWidget.getFileName()
+        self.tempFileName = currentWidget.saveTempFile()
+        self.qProcess.start("avogadro %s" %self.tempFileName)
 
     #def keyPressEvent(self,event):
         #if event.key()==(Qt.Key_Control and Qt.Key_F):
