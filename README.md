@@ -1,6 +1,6 @@
 GROM
 
-version: 0.6
+version: 0.6.5
 
 GROM is a GROMACS(mdp,itp,top) files with Syntax Highlighting and PDB Editor wtih visual cues in one package based on Qt5,PyQt5 and Python3. It's GPL licensed!(See LICENSE)
 

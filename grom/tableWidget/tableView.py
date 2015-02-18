@@ -156,6 +156,18 @@ class TableEdit(QTableView):
 
 
 
+    def saveTempFile(self):
+        try:
+
+            #self.model.save(self.filename)
+            tempFileName = self.filename[:-4] + '_temp'+self.filename[-4:]
+            print(tempFileName)
+            self.model.save(tempFileName)
+            return tempFileName
+        except Exception as e:
+            print("Coudn't save ",e)
+
+
     def save(self):
         try:
             if 'Untitled' in self.filename:

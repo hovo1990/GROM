@@ -173,18 +173,21 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
 
     def openVMD(self):
         currentWidget = self.tabWidget.currentWidget()
-        currentFile = currentWidget.getFileName()
-        self.qProcess.start("vmd %s" %currentFile)
+        #currentFile = currentWidget.getFileName()
+        tempFileName = currentWidget.saveTempFile()
+        self.qProcess.start("vmd %s" %tempFileName)
 
     def openPyMol(self):
         currentWidget = self.tabWidget.currentWidget()
-        currentFile = currentWidget.getFileName()
-        self.qProcess.start("pymol %s" %currentFile)
+        #currentFile = currentWidget.getFileName()
+        tempFileName = currentWidget.saveTempFile()
+        self.qProcess.start("pymol %s" %tempFileName)
 
     def openAvogadro(self):
         currentWidget = self.tabWidget.currentWidget()
         currentFile = currentWidget.getFileName()
-        self.qProcess.start("avogadro %s" %currentFile)
+        tempFileName = currentWidget.saveTempFile()
+        self.qProcess.start("avogadro %s" %tempFileName)
 
     #def keyPressEvent(self,event):
         #if event.key()==(Qt.Key_Control and Qt.Key_F):
