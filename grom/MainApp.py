@@ -511,6 +511,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         Method for loading a Coordinate File
         """
         tableWidget = tableView.TableEdit(filename,parent = self)
+        tableWidget.customDataChanged.connect(self.changeTabName)
         self.activateEssential(tableWidget) #Activates QActions and Widgets
         self.customMenuCoord(tableWidget) #sets up custom Context Menu
         self.tabWidget.show()
@@ -528,6 +529,10 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             self.tabWidget.setCurrentWidget(tableWidget)
 
 
+    def changeTabName(self):
+        currentWidget = self.tabWidget.currentWidget()
+        tempName = currentWidget.tempName
+        self.tabWidget.setTabText(self.tabWidget.currentIndex(),tempName)
 
 
     def showError(self,error):
@@ -558,6 +563,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             else:
                 try:
                     currentWidget.save()
+                    self.tabWidget.setTabText(self.tabWidget.currentIndex(),
+                            QFileInfo(currentWidget.filename).fileName())
                     self.statusbar.showMessage('Finished Location: %s' %str(currentWidget.filename))
                 except Exception as e:
                     QMessageBox.warning(self,

@@ -41,6 +41,8 @@ from PyQt5.QtWidgets import QFileDialog
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QShortcut
 from PyQt5.QtWidgets import QMenu
+from PyQt5.QtCore import (pyqtProperty, pyqtSignal)
+
 
 try:
     from PyQt5.QtCore import QString
@@ -96,6 +98,8 @@ class TextEdit(QPlainTextEdit):
 
     TEXTCHANGED = 0
 
+    customDataChanged = pyqtSignal()
+
     def __init__(self, filename= None, parent=None):
         """
         Creates an Instance of QPlainTextEdit
@@ -119,8 +123,12 @@ class TextEdit(QPlainTextEdit):
                                     TextEdit.NextId))
             TextEdit.NextId += 1
         self.document().setModified(False)
+
         self.setLineWrapMode(QPlainTextEdit.NoWrap)
+
+
         self.setWindowTitle(QFileInfo(self.filename).fileName())
+
         font = QFont("Courier", 11)
         self.document().setDefaultFont(font)
         self.setFont(font)
@@ -138,6 +146,9 @@ class TextEdit(QPlainTextEdit):
 
 
         #: ---> Signals Start
+        self.textChanged.connect(self.updateWindowTitle)
+        self.customDataChanged.connect(self.updateFileTemp)
+
         self.textChanged.connect(self.updateSearchText)
         self.blockCountChanged.connect(self.updateLineNumberAreaWidth)
 
@@ -157,6 +168,14 @@ class TextEdit(QPlainTextEdit):
 
         self.keylist = []
 
+    def updateFileTemp(self):
+        print('SDSADADSDADA HHHAHAHHHAHAHHA')
+        self.tempName = "*" + self.filename
+
+
+    def updateWindowTitle(self):
+        self.customDataChanged.emit()
+        #self.setWindowTitle(temp)
 
     def initDict(self):
         if enchant:
@@ -639,13 +658,16 @@ class TextEdit(QPlainTextEdit):
         #self.restoreTextSearch() #Recursion problem
 
     def restoreTextSearch(self):
-        #print('oops ')
-        check = self.getSearchTextValue()
-        #print('check is ',check)
-        if len(check[0]) > 0:
-            if len(self.extraSelections[1]) > 0:
-                #print('come on')
-                self.frTextObject.search(check[0])
+        try:
+            #print('oops ')
+            check = self.getSearchTextValue()
+            #print('check is ',check)
+            if len(check[0]) > 0:
+                if len(self.extraSelections[1]) > 0:
+                    #print('come on')
+                    self.frTextObject.search(check[0])
+        except Exception as e:
+            print("Problem with restoreTextSearch: ",e)
 
     def textCut(self):
         try:

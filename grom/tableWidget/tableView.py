@@ -19,7 +19,7 @@ from PyQt5.QtCore import QFileInfo
 
 from PyQt5.QtWidgets import QTableView
 from PyQt5.QtWidgets import QFileDialog
-
+from PyQt5.QtCore import (pyqtProperty, pyqtSignal)
 
 try:
     from PyQt5.QtCore import QString
@@ -55,6 +55,9 @@ def isfloat(x):
 class TableEdit(QTableView):
 
 
+    customDataChanged = pyqtSignal()
+
+
     def __init__(self, filename= '', modelType = None,parent=None):
         """
         Method defines  Custom QTableView
@@ -80,11 +83,17 @@ class TableEdit(QTableView):
 
         self.clicked.connect(self.updateSelectionValues)
 
+        self.customDataChanged.connect(self.setFileTempName)
+
         self.undo_Stack = self.delegate.undoStack
 
         #: Create Search Instance for this Widget
         self.frTableObject = frTableEdit.frTableObject(self)
         self.keylist = []
+
+    def setFileTempName(self):
+        #print("YOLLLSODOSDOSAODOSODOODAODOODAOSD")
+        self.tempName = '*'+ QFileInfo(self.filename).fileName()
 
     def getFileName(self):
         return self.filename
@@ -101,6 +110,13 @@ class TableEdit(QTableView):
             self.setModel(self.model)
             self.delegate = gro_model.GRODelegate(self)
             self.setItemDelegate(self.delegate) #
+        self.model.dataChanged.connect(self.registerDataChange) #Why double
+
+
+    def registerDataChange(self):
+        #print("Model data changed")
+        #print('-------------------')
+        self.customDataChanged.emit()
 
     def initialLoad(self):
         try:
