@@ -169,8 +169,8 @@ class TextEdit(QPlainTextEdit):
         self.keylist = []
 
     def updateFileTemp(self):
-        print('SDSADADSDADA HHHAHAHHHAHAHHA')
-        self.tempName = "*" + self.filename
+        #print('SDSADADSDADA HHHAHAHHHAHAHHA')
+        self.tempName = "*" + QFileInfo(self.filename).fileName()
 
 
     def updateWindowTitle(self):

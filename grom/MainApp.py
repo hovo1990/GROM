@@ -624,6 +624,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         Method for loading a Parameter File
         """
         textEdit = textedit.TextEdit(filename,self)
+        textEdit.customDataChanged.connect(self.changeTabName)
         self.activateEssential(textEdit) #Activates QActions and Widgets
         self.tabWidget.show()
         try:
