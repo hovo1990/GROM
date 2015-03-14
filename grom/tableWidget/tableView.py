@@ -246,7 +246,7 @@ class TableEdit(QTableView):
     def updateSearchText(self):
         self.frTableObject.updateTextContent()
 
-    def search(self,findText,replaceText,syntaxCombo = None,caseCheckBox = False,wholeCheckBox = False):
+    def search(self,findText,replaceText = None,syntaxCombo = None,caseCheckBox = False,wholeCheckBox = False):
         self.frTableObject.search(findText,replaceText,syntaxCombo)
 
 

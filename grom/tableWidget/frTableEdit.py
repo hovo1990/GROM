@@ -197,7 +197,20 @@ class frTableObject(QWidget):
             print("Duh findALLsearch ",e)
 
 
-    def search(self,findText,replaceText = None,syntaxCombo = None):
+
+    #def makeRegex(self,findText,syntaxCombo = None,caseCheckBox = False,wholeCheckBox = False):
+        #if syntaxCombo == "Literal":
+            #findText = re.escape(findText)
+        #flags = re.MULTILINE|re.DOTALL|re.UNICODE
+        #if not caseCheckBox:
+            #flags |= re.IGNORECASE
+        #if wholeCheckBox:
+            #findText = r"\b{0}\b".format(findText)
+        #return re.compile(findText, flags)
+
+
+    def search(self,findText,replaceText = None,syntaxCombo = None): #VIT
+        print("Come on")
         if self.found  == True:
             self.fixFormat()
         self.__index = 0

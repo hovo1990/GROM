@@ -184,7 +184,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         currentWidget = self.tabWidget.currentWidget()
         #currentFile = currentWidget.getFileName()
         self.tempFileName = currentWidget.saveTempFile()
-        self.qProcess.start("vmd %s" %self.tempFileName)
+        self.qProcess.startVMD(self.tempFileName,currentWidget)
+        #self.qProcess.start("vmd %s" %self.tempFileName)
 
 
     def openPyMol(self):
