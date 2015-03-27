@@ -76,7 +76,7 @@ class TableEdit(QTableView):
         self.modelType = modelType
         print("self.filename at start is ",self.filename)
         self.setWindowTitle(QFileInfo(self.filename).fileName())
-        self.setStyleSheet("QTableView { background-color: rgb(230, 230, 230);}")
+        self.setStyleSheet("QTableView { background-color: rgb(172, 172, 168);}")
 
         #: Create Model Instant
         self.setCustomModel()
@@ -174,14 +174,13 @@ class TableEdit(QTableView):
 
     def saveTempFile(self):
         try:
-
             #self.model.save(self.filename)
             tempFileName = self.filename[:-4] + '_temp'+self.filename[-4:]
             print(tempFileName)
             self.model.save(tempFileName)
             return tempFileName
         except Exception as e:
-            print("Coudn't save ",e)
+            print("Coudn't save ->",e)
 
 
     def save(self):

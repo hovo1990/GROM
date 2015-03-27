@@ -71,6 +71,7 @@ def write_SingleLine_to_PDB(open_file,line,info = None):
     s = ''
     try:
         s = str(line[0]) + '{:>7}'.format(line[1])
+        print('line 2 is ',line[2])
         if len(line[2]) < 4:
             s  +=  2*' ' + '{:<3}'.format(line[2]) + '{:>4}'.format(line[3])
         else:

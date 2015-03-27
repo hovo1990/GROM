@@ -523,6 +523,10 @@ class PDBTableModel(QAbstractTableModel): #This part is the ultimate important p
                 occupancy = row.occupancy
                 charge = row.charge
                 element = row.element
+                if len(element) == 1:
+                    element = ' \n'
+                #print('element is ',element)
+                #print('element is ',len(element))
                 line= [atom,serial,name,resName,chainID,resNum,x,y,z,occupancy,charge,element]
                 #print('line is ',line)
                 PDB_parse.write_SingleLine_to_PDB(open_file,line)

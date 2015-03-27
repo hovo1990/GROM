@@ -192,7 +192,8 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         currentWidget = self.tabWidget.currentWidget()
         #currentFile = currentWidget.getFileName()
         self.tempFileName = currentWidget.saveTempFile()
-        self.qProcess.start("pymol %s" %self.tempFileName)
+        self.qProcess.startPYMOL(self.tempFileName,currentWidget)
+        #self.qProcess.start("pymol %s" %self.tempFileName)
 
     def openAvogadro(self):
         currentWidget = self.tabWidget.currentWidget()
@@ -554,7 +555,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
                     self.tabWidget.setTabText(self.tabWidget.currentIndex(),
                             QFileInfo(currentWidget.filename).fileName())
                     print('save name ',currentWidget.filename)
-                    self.statusbar.showMessage('Finished Location: %s' %str(currentWidget.filename))
+                    #self.statusbar.showMessage('Finished Location: %s' %str(currentWidget.filename))
                     return True
                 except EnvironmentError as e:
                     QMessageBox.warning(self,
@@ -566,7 +567,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
                     currentWidget.save()
                     self.tabWidget.setTabText(self.tabWidget.currentIndex(),
                             QFileInfo(currentWidget.filename).fileName())
-                    self.statusbar.showMessage('Finished Location: %s' %str(currentWidget.filename))
+                    #self.statusbar.showMessage('Finished Location: %s' %str(currentWidget.filename))
                 except Exception as e:
                     QMessageBox.warning(self,
                             "Tabbed Text Editor -- Save Error",
