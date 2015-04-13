@@ -30,7 +30,7 @@ def PDBparse(filename):
             if cleanVal(line[0:7]) == 'ATOM' or cleanVal(line[0:7]) == 'HETATM':
                 temp.append(cleanVal(line[0:7])) #Record name
                 temp.append(cleanVal(line[7:12])) #Atom serial number
-                temp.append(cleanVal(line[13:17])) #Atom name
+                temp.append(cleanVal(line[12:17])) #Atom name
                 temp.append(cleanVal(line[17:21])) #Residue name
                 temp.append(cleanVal(line[21:23])) #Chain identifier
                 temp.append(cleanVal(line[23:27])) #Residue sequence number
