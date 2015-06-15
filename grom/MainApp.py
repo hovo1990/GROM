@@ -47,6 +47,9 @@ import Icons_rc
 from textWidget import textedit # Imports custom Text Editor
 
 from tableWidget import  tableView  #Imports custom TableView widget
+
+from plotWidget import plotTool #Imports Gromacs edr Plot Tool
+
 from modules import *  #Import various modules for Help, MultiRename and Choose Dialog Widgets
 
 
@@ -61,6 +64,11 @@ except ImportError:
 
 
 __version__ = "0.6.5.0"
+
+
+#file_formats = "*.pdb *.gro *.mdp *.itp *.top"
+file_formats = "*.pdb *.gro *.mdp *.itp *.top *.edr" #Adding new format .edr
+
 
 folder_mainAPP = os.path.realpath(__file__)[:-15]
 __current_directory__ = folder_mainAPP
@@ -477,20 +485,47 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             QMessageBox.warning(self,"Oops",'No more tabs are allowed')
 
 
+    def loadEdrFile(self,filename):
+        """
+        Method for loading a Gromacs edr File
+        """
+        plotShow = plotTool.plotWidget(filename,self)
+        #textEdit.customDataChanged.connect(self.changeTabName)
+        #self.activateEssential(textEdit) #Activates QActions and Widgets
+        self.tabWidget.show()
+        try:
+            #textEdit.load()
+            #textEdit.frTextObject.getText()
+            self.index_tabs += 1
+        except EnvironmentError as e:
+            QMessageBox.warning(self,
+                    "G.R.O.M. Editor -- Load Error",
+                    "Failed to load {0}: {1}".format(filename, e))
+            plotShow.close()
+            del plotShow
+        else:
+            self.tabWidget.addTab(plotShow, plotShow.windowTitle())
+            self.tabWidget.setCurrentWidget(plotShow)
+
+
+
 
     def FileOpen(self):
         """This is for loading file and putting into QTable QTextEditor"""
         #if not self.okToContinue():
             #return
-        dir = (os.path.dirname(self.filename)
+        directory = (os.path.dirname(self.filename)
                 if self.filename is not None else __current_directory__)
         fname_load = QFileDialog.getOpenFileName(self,
-                "G.R.O.M. Editor - Choose File", dir,
-                "MD files ( *.pdb *.gro *.mdp *.itp *.top)")
+                "G.R.O.M. Editor - Choose File", directory,
+                "MD files ( %s )" %file_formats) #This import especially for edr Files
         fname = fname_load[0]
         print('fname is ',fname)
         #print("test case ",('pdb'  not in fname) or ('gro'  not in fname))
-        if ('gro'  not in fname and 'pdb' not in fname): #Later need to add gro support Bug Here
+        if ('edr'  in fname):
+            print("Oops edr File")
+            self.loadEdrFile(fname)
+        elif ('gro'  not in fname and 'pdb' not in fname): #Later need to add gro support Bug Here
                 if not len(fname) < 2:
                     for i in range(self.tabWidget.count()):
                         textEdit = self.tabWidget.widget(i)
@@ -617,6 +652,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             print("Error in Save FIle As ",e)
             pass
            # self.showError(error)
+
 
 
 
