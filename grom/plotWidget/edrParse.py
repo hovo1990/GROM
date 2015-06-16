@@ -295,6 +295,10 @@ class EdrIO(IOHandler):
 
             #return np.array(self.times), np.array(ret)
 
+
+    def getUnits(self,row):
+        return self.units[row]
+
     def dataExtractFromRow(self,row):
         i = row
         ret = []

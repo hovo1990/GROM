@@ -95,21 +95,16 @@ class MyMplCanvas(FigureCanvas):
 
 class showPlot(MyMplCanvas):
     """Simple canvas with a sine plot."""
-    def plotFigure(self,x, y):
+    def plotFigure(self,x, y, xlabel, ylabel, title):
         self.x = x
         self.y = y
         self.axes.plot(self.x, self.y)
+        self.axes.set_title(title)
+        self.axes.set_xlabel(xlabel)
+        self.axes.set_ylabel(ylabel)
         self.draw()
         #FigureCanvas.updateGeometry(self)
 
-
-
-class MyStaticMplCanvas(MyMplCanvas):
-    """Simple canvas with a sine plot."""
-    def compute_initial_figure(self):
-        t = arange(0.0, 3.0, 0.01)
-        s = sin(2*pi*t)
-        self.axes.plot(t, s)
 
 
 class plotWidget(QWidget):
@@ -150,6 +145,8 @@ class plotWidget(QWidget):
 
         self.listWidget = QListWidget(self)
         self.listWidget.currentRowChanged.connect(self.updatePlot)
+        #self.listWidget.setMinimumWidth(200)
+        self.listWidget.setMaximumWidth(200)
 
         self.splitter = QtWidgets.QSplitter(QtCore.Qt.Horizontal) #This is Yeah
         self.splitter.addWidget(self.plotToolWidget)  #This is Yeah
@@ -163,12 +160,16 @@ class plotWidget(QWidget):
     def updatePlot(self):
         print("Update Plot Yahooooo ")
         row = self.listWidget.currentRow()
+        title = self.listWidget.item(row).text()
         print('Row ',row)
         print('----------------------------')
         x,y = self.edrObject.dataExtractFromRow(row)
+        unit = self.edrObject.getUnits(row)
+        print('Unit is ',unit)
         #print('x ',len(x))
         #print('y ',len(y))
-        self.plotToolWidget.plotFigure(x,y)
+
+        self.plotToolWidget.plotFigure(x,y, 'ps', unit, title)
 
     def readData(self):
         self.edrObject = EdrIO(self.filename, 'float') #for now
@@ -178,6 +179,8 @@ class plotWidget(QWidget):
     def populateList(self):
         self.props = self.edrObject.read('avail quantities')
         print('props ',self.props)
+        index = 0
         for i in self.props:
-            self.listWidget.addItem(i)
+            self.listWidget.addItem(str(index) + '. ' +i)
+            index += 1
 
