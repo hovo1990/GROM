@@ -1,32 +1,5 @@
 ## -*- coding: utf-8 -*-
 
-#import numpy as np
-#import xdrlib
-#import difflib
-
-
-
-#f = open(filename,'rb').read()
-#data = xdrlib.Unpacker(f)
-
-#magic  = data.unpack_int()
-
-#print(magic)
-
-#version = data.unpack_int()
-#print(version)
-
-
-#nre = data.unpack_int()
-#print(nre)
-
-#from chemlab.core import Atom
-#from chemlab.core import Molecule
-#from chemlab.io.handlers import EdrIO
-
-
-#from chemlab.io import datafile
-
 
 import numpy as np
 import xdrlib
@@ -263,6 +236,9 @@ class EdrIO(IOHandler):
         self.decode_mode = decode_mode
 
 
+    #def getProps(self):
+        #return self.props
+
     def read(self, feature, *args):
         self.check_feature(feature, 'read')
 
@@ -319,6 +295,30 @@ class EdrIO(IOHandler):
 
             #return np.array(self.times), np.array(ret)
 
+    def dataExtractFromRow(self,row):
+        i = row
+        ret = []
+        #print('frames is ',frames)
+        for f in self.frames:
+            #print('f is ',f) #There's a problem with frames check it out
+            ret.append(f[i][0])
+
+        return np.array(self.times), np.array(ret)
+
+
+    def dataExtract(self,quant):
+            i = self.props.index(quant)
+            #print('quant is ',quant)
+            #print('i is ',i)
+            #print(self.props[i])
+            #:---------------------------
+            ret = []
+            #print('frames is ',frames)
+            for f in self.frames:
+                #print('f is ',f) #There's a problem with frames check it out
+                ret.append(f[i][0])
+
+            return np.array(self.times), np.array(ret)
 
 
     def process_frames(self): #This is VERY IMPORTANT
@@ -333,7 +333,7 @@ class EdrIO(IOHandler):
             self.decJob = self.up.unpack_double
 
 
-        self.times = []
+        self.times = [0]
         self.dts = []
         self.frames = []
 
@@ -567,19 +567,7 @@ class EdrIO(IOHandler):
         #print('len ',len(self.times))
 
 
-    def dataExtract(self,quant):
-            i = self.props.index(quant)
-            #print('quant is ',quant)
-            #print('i is ',i)
-            #print(self.props[i])
-            #:---------------------------
-            ret = []
-            #print('frames is ',frames)
-            for f in self.frames:
-                #print('f is ',f) #There's a problem with frames check it out
-                ret.append(f[i][0])
 
-            return np.array(self.times), np.array(ret)
 
 
     def _unpack_timeStep(self,up): #The quest right it's for single precision, but what if it's
@@ -990,27 +978,27 @@ def datafile(filename, mode="rb", format=None):
 
 
 
-#filename = 'full_ener.edr' #Problems
-filename = 'md_2_1.edr' #Problems
+##filename = 'full_ener.edr' #Problems
+#filename = 'md_2_1.edr' #Problems
 
-#filename = 'md_3_1.edr' #Problems
+##filename = 'md_3_1.edr' #Problems
 
-#filename = 'em.edr' #Problems
-test =  EdrIO(filename, 'float') #datafile(filename)# .read('avail quantities')
-
-
-
-props = test.read('avail quantities')
-
-print('props ', props)
+##filename = 'em.edr' #Problems
+#test =  EdrIO(filename, 'float') #datafile(filename)# .read('avail quantities')
 
 
 
-for energy  in props:
-    print('Parameter Name ',energy)
-    final_data = test.read('quantity', energy)
-    print(final_data)
-    print('-----------------------------')
+#props = test.read('avail quantities')
+
+#print('props ', props)
+
+
+
+#for energy  in props:
+    #print('Parameter Name ',energy)
+    #final_data = test.read('quantity', energy)
+    #print(final_data)
+    #print('-----------------------------')
 
 
 #time, LJ = datafile(filename).read('quantity', 'LJ (SR)')

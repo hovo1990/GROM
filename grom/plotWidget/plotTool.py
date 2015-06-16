@@ -19,13 +19,20 @@ import random
 import matplotlib
 matplotlib.use("Qt5Agg")
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QVBoxLayout, QSizePolicy, QMessageBox, QWidget
+from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import  QMainWindow
+from PyQt5.QtWidgets import  QMenu
+from PyQt5.QtWidgets import  QHBoxLayout
+from PyQt5.QtWidgets import  QSizePolicy
+from PyQt5.QtWidgets import  QMessageBox
+from PyQt5.QtWidgets import  QWidget
+from PyQt5.QtWidgets import QListWidget
 from numpy import arange, sin, pi
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
 
-
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 #: Import from PyQt5.QtCore
@@ -60,7 +67,7 @@ from PyQt5.QtWidgets import QShortcut
 from PyQt5.QtWidgets import QMenu
 from PyQt5.QtCore import (pyqtProperty, pyqtSignal)
 
-
+from .edrParse import *
 
 
 
@@ -72,7 +79,7 @@ class MyMplCanvas(FigureCanvas):
         # We want the axes cleared every time plot() is called
         self.axes.hold(False)
 
-        self.compute_initial_figure()
+        #self.compute_initial_figure()
 
         #
         FigureCanvas.__init__(self, fig)
@@ -85,6 +92,17 @@ class MyMplCanvas(FigureCanvas):
 
     def compute_initial_figure(self):
           pass
+
+class showPlot(MyMplCanvas):
+    """Simple canvas with a sine plot."""
+    def plotFigure(self,x, y):
+        self.x = x
+        self.y = y
+        self.axes.plot(self.x, self.y)
+        self.draw()
+        #FigureCanvas.updateGeometry(self)
+
+
 
 class MyStaticMplCanvas(MyMplCanvas):
     """Simple canvas with a sine plot."""
@@ -107,7 +125,7 @@ class plotWidget(QWidget):
 
     def __init__(self, filename= None, parent=None):
         """
-        Creates an Instance of QPlainTextEdit
+        Creates an Instance of QWidget
 
          Args:
              filename (str): for opening a parameter file
@@ -120,11 +138,46 @@ class plotWidget(QWidget):
         self.setAttribute(Qt.WA_DeleteOnClose)
 
         self.filename = filename #VIT
+
+
+
+
+
         self.setWindowTitle(QFileInfo(self.filename).fileName())
 
-        l = QVBoxLayout(self)
-        sc = MyStaticMplCanvas(self, width=5, height=4, dpi=100)
-        l.addWidget(sc)
+        hbox = QHBoxLayout(self)
+        self.plotToolWidget = showPlot(self, width=5, height=4, dpi=100)
 
+        self.listWidget = QListWidget(self)
+        self.listWidget.currentRowChanged.connect(self.updatePlot)
 
+        self.splitter = QtWidgets.QSplitter(QtCore.Qt.Horizontal) #This is Yeah
+        self.splitter.addWidget(self.plotToolWidget)  #This is Yeah
+        self.splitter.addWidget(self.listWidget) #This is Yeah
+
+        hbox.addWidget(self.splitter)
+        #hbox.addWidget(listWidget)
+
+        self.readData()
+
+    def updatePlot(self):
+        print("Update Plot Yahooooo ")
+        row = self.listWidget.currentRow()
+        print('Row ',row)
+        print('----------------------------')
+        x,y = self.edrObject.dataExtractFromRow(row)
+        #print('x ',len(x))
+        #print('y ',len(y))
+        self.plotToolWidget.plotFigure(x,y)
+
+    def readData(self):
+        self.edrObject = EdrIO(self.filename, 'float') #for now
+        print('edrObject ', self.edrObject)
+        self.populateList()
+
+    def populateList(self):
+        self.props = self.edrObject.read('avail quantities')
+        print('props ',self.props)
+        for i in self.props:
+            self.listWidget.addItem(i)
 
