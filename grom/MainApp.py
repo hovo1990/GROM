@@ -506,6 +506,7 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         else:
             self.tabWidget.addTab(plotShow, plotShow.windowTitle())
             self.tabWidget.setCurrentWidget(plotShow)
+            self.deactivateForEdr()
 
 
 
@@ -749,6 +750,31 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         self.actionOpen_in_VMD.setEnabled(False)
         self.actionOpen_in_PyMol.setEnabled(False)
         self.actionOpen_in_Avogadro.setEnabled(False)
+
+
+    def deactivateForEdr(self):
+        self.actionZoom_In.setEnabled(False)
+        self.actionZoom_Out.setEnabled(False)
+        self.actionMulti_Rename.setEnabled(False)
+        self.actionRenumerate.setEnabled(False)
+        self.actionAdd_Row.setEnabled(False)
+        self.actionRemove_Row.setEnabled(False)
+        self.actionComment.setEnabled(False)
+        self.actionUncomment.setEnabled(False)
+        self.actionOpen_in_VMD.setEnabled(False)
+        self.actionOpen_in_PyMol.setEnabled(False)
+        self.actionOpen_in_Avogadro.setEnabled(False)
+        #:------------------------------------------------
+        self.actionIconHelp.setEnabled(False)
+        self.actionCut.setEnabled(False)
+        self.actionCopy.setEnabled(False)
+        self.actionPaste.setEnabled(False)
+        self.actionSelect_All.setEnabled(False)
+        self.actionDeselect_All.setEnabled(False)
+        self.actionFind.setEnabled(False)
+        self.actionReplace.setEnabled(False)
+        self.actionUndo.setEnabled(False)
+        self.actionRedo.setEnabled(False)
 
     def activateEssential(self,currentWidget):
         """

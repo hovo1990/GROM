@@ -69,20 +69,81 @@ from PyQt5.QtCore import (pyqtProperty, pyqtSignal)
 
 from .edrParse import *
 
+def moving_average(x, n, type='simple'):
+    """
+    compute an n period moving average.
+
+    type is 'simple' | 'exponential'
+
+    """
+    x = np.asarray(x)
+    if type=='simple':
+        weights = np.ones(n)
+    else:
+        weights = np.exp(np.linspace(-1., 0., n))
+
+    weights /= weights.sum()
+
+
+    a =  np.convolve(x, weights, mode='full')[:len(x)]
+    a[:n] = a[n]
+    return a
+
+def relative_strength(prices, n=14):
+    """
+    compute the n period relative strength indicator
+    http://stockcharts.com/school/doku.php?id=chart_school:glossary_r#relativestrengthindex
+    http://www.investopedia.com/terms/r/rsi.asp
+    """
+
+    deltas = np.diff(prices)
+    seed = deltas[:n+1]
+    up = seed[seed>=0].sum()/n
+    down = -seed[seed<0].sum()/n
+    rs = up/down
+    rsi = np.zeros_like(prices)
+    rsi[:n] = 100. - 100./(1.+rs)
+
+    for i in range(n, len(prices)):
+        delta = deltas[i-1] # cause the diff is 1 shorter
+
+        if delta>0:
+            upval = delta
+            downval = 0.
+        else:
+            upval = 0.
+            downval = -delta
+
+        up = (up*(n-1) + upval)/n
+        down = (down*(n-1) + downval)/n
+
+        rs = up/down
+        rsi[i] = 100. - 100./(1.+rs)
+
+    return rsi
+
+def moving_average_convergence(x, nslow=26, nfast=12):
+    """
+    compute the MACD (Moving Average Convergence/Divergence) using a fast and slow exponential moving avg'
+    return value is emaslow, emafast, macd which are len(x) arrays
+    """
+    emaslow = moving_average(x, nslow, type='exponential')
+    emafast = moving_average(x, nfast, type='exponential')
+    return emaslow, emafast, emafast - emaslow
 
 
 class MyMplCanvas(FigureCanvas):
     """Ultimately, this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
     def __init__(self, parent=None, width=5, height=4, dpi=100):
-        fig = Figure(figsize=(width, height), dpi=dpi)
-        self.axes = fig.add_subplot(111)
+        self.fig = Figure(figsize=(width, height), dpi=dpi)
+        self.axes = self.fig.add_subplot(111)
         # We want the axes cleared every time plot() is called
         self.axes.hold(False)
 
         #self.compute_initial_figure()
 
         #
-        FigureCanvas.__init__(self, fig)
+        FigureCanvas.__init__(self, self.fig)
         self.setParent(parent)
 
         FigureCanvas.setSizePolicy(self,
@@ -99,12 +160,21 @@ class showPlot(MyMplCanvas):
         self.x = x
         self.y = y
         self.axes.plot(self.x, self.y)
+        #self.axes.subplot(211)
+        ma20 = moving_average(self.y, 50, type='simple') #
+        self.axes.plot(self.x, ma20)
         self.axes.set_title(title)
         self.axes.set_xlabel(xlabel)
         self.axes.set_ylabel(ylabel)
         self.draw()
         #FigureCanvas.updateGeometry(self)
 
+    def saveFig(self, saveFilename):
+        print('saveName ',saveFilename)
+        try:
+            self.fig.savefig(saveFilename)
+        except Exception as e:
+            print("Error in saving figure ",e)
 
 
 class plotWidget(QWidget):
@@ -133,6 +203,7 @@ class plotWidget(QWidget):
         self.setAttribute(Qt.WA_DeleteOnClose)
 
         self.filename = filename #VIT
+        self.save_title = ''
 
 
 
@@ -160,7 +231,7 @@ class plotWidget(QWidget):
     def updatePlot(self):
         print("Update Plot Yahooooo ")
         row = self.listWidget.currentRow()
-        title = self.listWidget.item(row).text()
+        self.title = self.listWidget.item(row).text()
         print('Row ',row)
         print('----------------------------')
         x,y = self.edrObject.dataExtractFromRow(row)
@@ -169,7 +240,7 @@ class plotWidget(QWidget):
         #print('x ',len(x))
         #print('y ',len(y))
 
-        self.plotToolWidget.plotFigure(x,y, 'ps', unit, title)
+        self.plotToolWidget.plotFigure(x,y, 'ps', unit, self.title)
 
     def readData(self):
         self.edrObject = EdrIO(self.filename, 'float') #for now
@@ -184,3 +255,35 @@ class plotWidget(QWidget):
             self.listWidget.addItem(str(index) + '. ' +i)
             index += 1
 
+
+    def save(self):
+        #: So self.title has to be modified
+        self.save_title  = self.title.split(' ')[1] + '.png'
+        print('save_title is ',self.save_title)
+
+        if "edr" in self.filename:
+            filename = QFileDialog.getSaveFileName(self,
+                    "G.R.O.M. Editor -- Save File As", self.save_title,
+                    "png (*.png  *.*)")
+            print('filename is ',filename)
+            if len(filename[0]) == 0:
+                return
+            self.filenameSave = filename[0]
+            print('Save graph ',self.filenameSave)
+        #self.setWindowTitle(QFileInfo(self.filename).fileName())
+        exception = None
+        fh = None
+        try:
+            #fh = QFile(self.filenameSave)
+            #if not fh.open(QIODevice.WriteOnly):
+                #raise IOError(str(fh.errorString()))
+            self.plotToolWidget.saveFig(self.filenameSave)
+        except EnvironmentError as e:
+            exception = e
+            print('error in saving ',e)
+        #finally:
+            #if fh is not None:
+                #fh.close()
+            #if exception is not None:
+                #raise exception
+#
