@@ -161,8 +161,8 @@ class showPlot(MyMplCanvas):
         self.y = y
         self.axes.plot(self.x, self.y)
         #self.axes.subplot(211)
-        ma20 = moving_average(self.y, 50, type='simple') #
-        self.axes.plot(self.x, ma20)
+        #ma20 = moving_average(self.y, 50, type='simple') #
+        #self.axes.plot(self.x, ma20)
         self.axes.set_title(title)
         self.axes.set_xlabel(xlabel)
         self.axes.set_ylabel(ylabel)
