@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'type_qt5.ui'
+# Form implementation generated from reading ui file '.\type_qt5.ui'
 #
-# Created: Tue Sep 23 23:15:28 2014
-#      by: PyQt5 UI code generator 5.2.1
+# Created by: PyQt5 UI code generator 5.4.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -12,11 +11,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_fileType(object):
     def setupUi(self, fileType):
         fileType.setObjectName("fileType")
-        fileType.resize(388, 200)
+        fileType.resize(440, 260)
         fileType.setMinimumSize(QtCore.QSize(388, 200))
-        fileType.setMaximumSize(QtCore.QSize(390, 200))
+        fileType.setMaximumSize(QtCore.QSize(440, 260))
         self.gridLayout = QtWidgets.QGridLayout(fileType)
         self.gridLayout.setObjectName("gridLayout")
+        self.buttonBox = QtWidgets.QDialogButtonBox(fileType)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setObjectName("buttonBox")
+        self.gridLayout.addWidget(self.buttonBox, 2, 0, 1, 1)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.verticalLayout = QtWidgets.QVBoxLayout()
@@ -46,6 +49,13 @@ class Ui_fileType(object):
         self.verticalLayout.addWidget(self.CoordButton)
         spacerItem1 = QtWidgets.QSpacerItem(20, 22, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem1)
+        self.SerialButton = QtWidgets.QRadioButton(fileType)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap(":/Icons/icons/type/serialConnection.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.SerialButton.setIcon(icon2)
+        self.SerialButton.setIconSize(QtCore.QSize(40, 40))
+        self.SerialButton.setObjectName("SerialButton")
+        self.verticalLayout.addWidget(self.SerialButton)
         self.horizontalLayout.addLayout(self.verticalLayout)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -57,18 +67,17 @@ class Ui_fileType(object):
         self.groupModelType.setFlat(False)
         self.groupModelType.setCheckable(False)
         self.groupModelType.setObjectName("groupModelType")
-        self.widget = QtWidgets.QWidget(self.groupModelType)
-        self.widget.setGeometry(QtCore.QRect(0, 20, 112, 71))
-        self.widget.setObjectName("widget")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget)
-        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.layoutWidget = QtWidgets.QWidget(self.groupModelType)
+        self.layoutWidget.setGeometry(QtCore.QRect(0, 20, 112, 71))
+        self.layoutWidget.setObjectName("layoutWidget")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.layoutWidget)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.pdbButton = QtWidgets.QRadioButton(self.widget)
+        self.pdbButton = QtWidgets.QRadioButton(self.layoutWidget)
         self.pdbButton.setObjectName("pdbButton")
         self.verticalLayout_2.addWidget(self.pdbButton)
         spacerItem3 = QtWidgets.QSpacerItem(20, 22, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_2.addItem(spacerItem3)
-        self.groButton = QtWidgets.QRadioButton(self.widget)
+        self.groButton = QtWidgets.QRadioButton(self.layoutWidget)
         self.groButton.setObjectName("groButton")
         self.verticalLayout_2.addWidget(self.groButton)
         self.verticalLayout_3.addWidget(self.groupModelType)
@@ -76,10 +85,6 @@ class Ui_fileType(object):
         self.verticalLayout_3.addItem(spacerItem4)
         self.horizontalLayout.addLayout(self.verticalLayout_3)
         self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
-        self.buttonBox = QtWidgets.QDialogButtonBox(fileType)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
-        self.buttonBox.setObjectName("buttonBox")
-        self.gridLayout.addWidget(self.buttonBox, 1, 0, 1, 1)
 
         self.retranslateUi(fileType)
         QtCore.QMetaObject.connectSlotsByName(fileType)
@@ -89,6 +94,8 @@ class Ui_fileType(object):
         fileType.setWindowTitle(_translate("fileType", "File Type"))
         self.ParamButton.setText(_translate("fileType", "Param File"))
         self.CoordButton.setText(_translate("fileType", "Coordinate File"))
+        self.SerialButton.setToolTip(_translate("fileType", "Serial Connection"))
+        self.SerialButton.setText(_translate("fileType", "Serial Connection"))
         self.groupModelType.setTitle(_translate("fileType", "Model Type:"))
         self.pdbButton.setText(_translate("fileType", "pdb Format"))
         self.groButton.setText(_translate("fileType", "gro Format"))

@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="Icons">
+    <file>icons/type/serialConnection.png</file>
     <file>settings-icon.png</file>
     <file>xyz.gif</file>
   </qresource>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>388</width>
-    <height>200</height>
+    <width>440</width>
+    <height>260</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -18,14 +18,21 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>390</width>
-    <height>200</height>
+    <width>440</width>
+    <height>260</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>File Type</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -106,6 +113,26 @@
          </property>
         </spacer>
        </item>
+       <item>
+        <widget class="QRadioButton" name="SerialButton">
+         <property name="toolTip">
+          <string>Serial Connection</string>
+         </property>
+         <property name="text">
+          <string>Serial Connection</string>
+         </property>
+         <property name="icon">
+          <iconset resource="type.qrc">
+           <normaloff>:/Icons/icons/type/serialConnection.png</normaloff>:/Icons/icons/type/serialConnection.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>40</width>
+           <height>40</height>
+          </size>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
      <item>
@@ -143,7 +170,7 @@
          <property name="checkable">
           <bool>false</bool>
          </property>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>0</x>
@@ -200,13 +227,6 @@
       </layout>
      </item>
     </layout>
-   </item>
-   <item row="1" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

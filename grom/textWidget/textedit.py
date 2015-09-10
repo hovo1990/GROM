@@ -539,24 +539,30 @@ class TextEdit(QPlainTextEdit):
                 raise exception
 
 
-    def load(self):
+    def load(self): #Windows crash buty why
         exception = None
         fh = None
+
+
+        print("Hello Load Text File")
+        #Looks like there's bug in windows
         try:
             fh = QFile(self.filename)
+            print("fh is ",fh)
             if not fh.open(QIODevice.ReadOnly):
                 raise IOError(str(fh.errorString()))
             stream = QTextStream(fh)
             stream.setCodec("UTF-8")
-            self.setPlainText(stream.readAll())
+            #self.setPlainText("Hello World")
+            self.setPlainText(stream.readAll()) #Here lies the problem how to fix it? PyQt 3.4.2 Works Fine
             self.document().setModified(False)
         except EnvironmentError as e:
             exception = e
-        finally:
-            if fh is not None:
-                fh.close()
-            if exception is not None:
-                raise exception
+        #finally:
+            #if fh is not None:
+                #fh.close()
+            #if exception is not None:
+                #raise exception
 
     def keyPressEvent(self, event):
         self.firstrelease = True

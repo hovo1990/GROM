@@ -48,7 +48,12 @@ from textWidget import textedit # Imports custom Text Editor
 
 from tableWidget import  tableView  #Imports custom TableView widget
 
-from plotWidget import plotTool #Imports Gromacs edr Plot Tool
+try:
+    from plotWidget import plotTool #Imports Gromacs edr Plot Tool
+except:
+    plotTool = None
+
+from rs232Widget import rs232Tool #Imports serial connection stuff
 
 from modules import *  #Import various modules for Help, MultiRename and Choose Dialog Widgets
 
@@ -456,12 +461,37 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
                 elif dialogOption.groButton.isChecked():
                     modelType = 'GRO'
                 self.fileNewCoord(modelType)
+            elif dialogOption.SerialButton.isChecked(): #This is new RS232
+                self.rs232ConnectionTab()
             self.filename = "Untitled"
         #else:
             #QMessageBox.warning(self,'App','Dialog Canceled')
 
 
+    def rs232ConnectionTab(self):
+        if self.tabWidget.count() < self.tabs_allowed  :
+            self.showRS232Stuff()
+        else:
+            QMessageBox.warning(self,"Oops",'No more tabs are allowed')
 
+
+
+    def showRS232Stuff(self):
+        self.tabWidget.show()
+        rs232Tab = rs232Tool.rs232Widget(parent = self)
+        #textEdit = textedit.TextEdit(parent = self)
+        #self.activateEssential(textEdit)
+        self.tabWidget.addTab(rs232Tab, 'RS232 Tab-%s'%self.index_tabs)
+        self.index_tabs += 1
+        self.tabWidget.setCurrentWidget(rs232Tab)
+        #document = textEdit.document()
+        #document.clear()
+        #document.setModified(False)
+        self.tabWidget.currentWidget().setFocus()
+        self.filename = None
+        #self.updateUi()
+        #self.actionZoom_In.setEnabled(True)
+        #self.actionZoom_Out.setEnabled(True)
 
 
     def fileNewParam(self):
