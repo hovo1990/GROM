@@ -71,6 +71,13 @@ from PyQt5.QtWidgets import QShortcut
 from PyQt5.QtWidgets import QMenu
 from PyQt5.QtCore import (pyqtProperty, pyqtSignal)
 
+
+
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import pyqtSignal
+
+
+
 try:
     from PyQt5.QtCore import QString
 except ImportError:
@@ -86,8 +93,8 @@ import sys, serial
 from  .rs232Skeleton import Ui_Form #Imports MainWindow GUI
 
 
-newData = pyqtSignal(QString , name = "newData" )
-errorMSG = pyqtSignal(QString , name = "error" )
+#newDataSignal = pyqtSignal(QString , name = "newData" )
+#errorMsgSignal = pyqtSignal(QString , name = "error" )
 
 
 
@@ -100,7 +107,12 @@ class rs232Widget(QWidget, Ui_Form):
 
     TEXTCHANGED = 0
 
-    customDataChanged = pyqtSignal()
+    #customDataChanged = pyqtSignal()
+
+    newDataSignal = pyqtSignal(QString , name = "newData" )
+    errorMsgSignal = pyqtSignal(QString , name = "error" )
+    finishedSignal = pyqtSignal(QString , name = "finished" )
+
 
     def __init__(self, filename= None, parent=None):
         """
@@ -113,8 +125,8 @@ class rs232Widget(QWidget, Ui_Form):
         """
         super(rs232Widget, self).__init__(parent)
         self.parent = parent
-        self.reader = CReader()
-        self.writer = CWriter()
+        self.reader = CReader(self.newDataSignal,self.errorMsgSignal, self.finishedSignal)
+        self.writer = CWriter(self.newDataSignal,self.errorMsgSignal)
         self.setupRealUi()
 
         self.setAttribute(Qt.WA_DeleteOnClose)
@@ -238,22 +250,36 @@ class rs232Widget(QWidget, Ui_Form):
         self.plotButton.clicked.connect(self.plotResults)
 
 
+        #self.reader.newData.connect(self.updateLog)
+        self.newDataSignal.connect(self.updateLog)
+        self.errorMsgSignal.connect(self.updateLog)
+        #self.finishedSignal.connect(self.parseData)
+
+
+
+
 
     def sendCommandToDevice(self):
         cmd = self.commandEdit.text()
         self.printCmd(cmd)
         self.writer.start(self.ser, cmd)
-        self.self.commandEdit.clear()
+        self.commandEdit.clear()
 
     def connectToDevice(self):
           self.disconnectFromDevice()
+          print("What the hell is ")
           try:
 
              portName = self.getPortName()
+             print("portName" ,portName)
              baudRate = self.getBaudRate()
+             print("baudRate ",baudRate)
              byteSize = self.getByteSize()
+             print("byteSize ",byteSize)
              parityType = self.getParityType()
+             print("parityType ",parityType)
              stopBits  = self.getStopBits()
+             print("stopBits ",parityType)
              self.printInfo("Connecting to %s with %s baud rate." % \
                             (portName, baudRate))
              self.ser = serial.Serial(  port=str(portName),
@@ -264,9 +290,10 @@ class rs232Widget(QWidget, Ui_Form):
                                        )
              self.startReader(self.ser)
              self.printInfo("Connected successfully.")
-          except:
+          except Exception as e:
              self.ser = None
              self.printError("Failed to connect!")
+             self.print("Error ",e)
 
 
     def disconnectFromDevice(self):
@@ -295,7 +322,8 @@ class rs232Widget(QWidget, Ui_Form):
 
     def getParityType(self):
         value = self.parityComboBox.currentText()
-        if value == "odd":
+        print("value is ",value)
+        if value == "Odd":
             returnVal  = serial.PARITY_ODD
         return returnVal
 
@@ -307,7 +335,7 @@ class rs232Widget(QWidget, Ui_Form):
 
 
     def startReader(self, ser):
-        self.reader.start(ser)
+        self.reader.start(ser) #VIP
 
     def stopThreads(self):
           self.stopReader()
@@ -336,10 +364,13 @@ class rs232Widget(QWidget, Ui_Form):
           self.outputText.moveCursor(QTextCursor.End)
 
 
+    @QtCore.pyqtSlot(QString)
     def updateLog(self, text):
          self.outputText.moveCursor(QTextCursor.End)
          self.outputText.insertPlainText(text)
          self.outputText.moveCursor(QTextCursor.End)
+         if "END OF POST SCAN DATA" in self.outputText.toPlainText():
+             self.parseData()
 
     def closeEvent(self, event):
         self.disconnect()
@@ -348,26 +379,44 @@ class rs232Widget(QWidget, Ui_Form):
 
 class CReader(QThread):
 
+   def __init__(self,newDataSignal,errorMsgSignal,finishedSignal):
+      super(CReader, self).__init__()
+      self.newDataSignal = newDataSignal
+      self.errorMsgSignal = errorMsgSignal
+      self.finishedSignal = finishedSignal
+
+
+
    def start(self, ser, priority = QThread.InheritPriority):
-      self.ser = ser
-      QThread.start(self, priority)
+       self.ser = ser
+       QThread.start(self, priority)
 
    def run(self):
       while True:
          try:
-            data = self.ser.read(1)
+            data = self.ser.read(1).decode("ascii")
+            #print("dataRead is ",data)
             n = self.ser.inWaiting()
             if n:
-               data = data + self.ser.read(n)
+               data = data + self.ser.read(n).decode("ascii")
             #self.emit(SIGNAL("newData(QString)"), data)
-            newData.emit(data)
+            self.newDataSignal.emit(data) #Here lies the problem
          except:
             errMsg = "Reader thread is terminated unexpectedly."
             #self.emit(SIGNAL("error(QString)"), errMsg)
-            errorMSG.emit(errMsg)
+            #errorMSG
+            self.errorMsgSignal.emit(errMsg)
             break
 
 class CWriter(QThread):
+
+   def __init__(self,newDataSignal,errorMsgSignal):
+      super(CWriter, self).__init__()
+      self.newDataSignal = newDataSignal
+      self.errorMsgSignal = errorMsgSignal
+
+
+
 
    def start(self, ser, cmd = "", priority = QThread.InheritPriority):
       self.ser = ser
@@ -382,88 +431,10 @@ class CWriter(QThread):
       except:
          errMsg = "Writer thread is terminated unexpectedly."
          #self.emit(SIGNAL("error(QString)"), errMsg)
-         errorMSG.emit(errMsg)
+         self.errorMSG.emit(errMsg)
 
    def terminate(self):
       self.wait()
       QThread.terminate(self)
 
 
-        #self.setWindowTitle(QFileInfo(self.filename).fileName())
-
-        #hbox = QHBoxLayout(self)
-        #self.plotToolWidget = showPlot(self, width=5, height=4, dpi=100)
-
-        #self.listWidget = QListWidget(self)
-        #self.listWidget.currentRowChanged.connect(self.updatePlot)
-        ##self.listWidget.setMinimumWidth(200)
-        #self.listWidget.setMaximumWidth(200)
-
-        #self.splitter = QtWidgets.QSplitter(QtCore.Qt.Horizontal) #This is Yeah
-        #self.splitter.addWidget(self.plotToolWidget)  #This is Yeah
-        #self.splitter.addWidget(self.listWidget) #This is Yeah
-
-        #hbox.addWidget(self.splitter)
-        ##hbox.addWidget(listWidget)
-
-        #self.readData()
-
-    #def updatePlot(self):
-        #print("Update Plot Yahooooo ")
-        #row = self.listWidget.currentRow()
-        #self.title = self.listWidget.item(row).text()
-        #print('Row ',row)
-        #print('----------------------------')
-        #x,y = self.edrObject.dataExtractFromRow(row)
-        #unit = self.edrObject.getUnits(row)
-        #print('Unit is ',unit)
-        ##print('x ',len(x))
-        ##print('y ',len(y))
-
-        #self.plotToolWidget.plotFigure(x,y, 'ps', unit, self.title)
-
-    #def readData(self):
-        #self.edrObject = EdrIO(self.filename, 'float') #for now
-        #print('edrObject ', self.edrObject)
-        #self.populateList()
-
-    #def populateList(self):
-        #self.props = self.edrObject.read('avail quantities')
-        #print('props ',self.props)
-        #index = 0
-        #for i in self.props:
-            #self.listWidget.addItem(str(index) + '. ' +i)
-            #index += 1
-
-
-    #def save(self):
-        ##: So self.title has to be modified
-        #self.save_title  = self.title.split(' ')[1] + '.png'
-        #print('save_title is ',self.save_title)
-
-        #if "edr" in self.filename:
-            #filename = QFileDialog.getSaveFileName(self,
-                    #"G.R.O.M. Editor -- Save File As", self.save_title,
-                    #"png (*.png  *.*)")
-            #print('filename is ',filename)
-            #if len(filename[0]) == 0:
-                #return
-            #self.filenameSave = filename[0]
-            #print('Save graph ',self.filenameSave)
-        ##self.setWindowTitle(QFileInfo(self.filename).fileName())
-        #exception = None
-        #fh = None
-        #try:
-            ##fh = QFile(self.filenameSave)
-            ##if not fh.open(QIODevice.WriteOnly):
-                ##raise IOError(str(fh.errorString()))
-            #self.plotToolWidget.saveFig(self.filenameSave)
-        #except EnvironmentError as e:
-            #exception = e
-            #print('error in saving ',e)
-        ##finally:
-            ##if fh is not None:
-                ##fh.close()
-            ##if exception is not None:
-                ##raise exception
-##

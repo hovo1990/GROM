@@ -68,7 +68,7 @@ except ImportError:
 
 
 
-__version__ = "0.6.5.0"
+__version__ = "0.6.8.0"
 
 
 #file_formats = "*.pdb *.gro *.mdp *.itp *.top"
