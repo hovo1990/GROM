@@ -72,7 +72,7 @@ __version__ = "0.6.5.0"
 
 
 #file_formats = "*.pdb *.gro *.mdp *.itp *.top"
-file_formats = "*.pdb *.gro *.mdp *.itp *.top *.edr" #Adding new format .edr
+file_formats = "*.pdb *.gro *.mdp *.itp *.top *.edr *.rs232" #Adding new format .edr .rs232
 
 
 folder_mainAPP = os.path.realpath(__file__)[:-15]
@@ -515,6 +515,24 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
             QMessageBox.warning(self,"Oops",'No more tabs are allowed')
 
 
+    def loadRS232File(self,filename):
+        rs232Show   = rs232Tool.rs232Widget(filename,self)
+        self.tabWidget.show()
+        try:
+            #textEdit.load()
+            #textEdit.frTextObject.getText()
+            self.index_tabs += 1
+        except EnvironmentError as e:
+            QMessageBox.warning(self,
+                    "G.R.O.M. Editor -- Load Error",
+                    "Failed to load {0}: {1}".format(filename, e))
+            rs232Show.close()
+            del rs232Show
+        else:
+            self.tabWidget.addTab(rs232Show, rs232Show.windowTitle())
+            self.tabWidget.setCurrentWidget(rs232Show)
+            self.deactivateForEdr()
+
     def loadEdrFile(self,filename):
         """
         Method for loading a Gromacs edr File
@@ -556,6 +574,9 @@ class MainWindow(QMainWindow,MW.Ui_MainWindow):
         if ('edr'  in fname):
             print("Oops edr File")
             self.loadEdrFile(fname)
+        elif ("rs232" in fname):
+            print("Oops rs232 file")
+            self.loadRS232File(fname)
         elif ('gro'  not in fname and 'pdb' not in fname): #Later need to add gro support Bug Here
                 if not len(fname) < 2:
                     for i in range(self.tabWidget.count()):

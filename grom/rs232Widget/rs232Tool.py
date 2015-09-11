@@ -59,6 +59,7 @@ from PyQt5.QtGui import QWheelEvent
 from PyQt5.QtGui import QTextCursor
 from PyQt5.QtGui import QPalette
 
+
 #: Import from PyQt5.QtWidgets
 from PyQt5.QtWidgets import QAction
 from PyQt5.QtWidgets import QApplication
@@ -70,9 +71,24 @@ from PyQt5.QtWidgets import QShortcut
 from PyQt5.QtWidgets import QMenu
 from PyQt5.QtCore import (pyqtProperty, pyqtSignal)
 
+try:
+    from PyQt5.QtCore import QString
+except ImportError:
+     #we are using Python3 so QString is not defined
+    QString = str
+
+
+import matplotlib.pyplot as plt
+import numpy as np
+import csv
 
 import sys, serial
 from  .rs232Skeleton import Ui_Form #Imports MainWindow GUI
+
+
+newData = pyqtSignal(QString , name = "newData" )
+errorMSG = pyqtSignal(QString , name = "error" )
+
 
 
 class rs232Widget(QWidget, Ui_Form):
@@ -97,17 +113,117 @@ class rs232Widget(QWidget, Ui_Form):
         """
         super(rs232Widget, self).__init__(parent)
         self.parent = parent
+        self.reader = CReader()
+        self.writer = CWriter()
+        self.setupRealUi()
 
         self.setAttribute(Qt.WA_DeleteOnClose)
 
         self.filename = filename #VIT
+        if (self.filename) != '':
+            self.loadRS232File()
+            self.parseData()
+
+
         self.save_title = ''
         self.ser = None #Testing
 
 
-        self.reader = CReader()
-        self.writer = CWriter()
-        self.setupRealUi()
+
+    def parseData(self): #Yolo
+        self.dataX = []
+        self.dataY = []
+        fullText = self.outputText.toPlainText()
+        #print("Full Text ",fullText)
+        fullText = fullText.split("\n")
+        #print("Full Text ",fullText)
+        for i in fullText:
+            temp = i.split(",")
+            if len(temp) == 2:
+                #print(temp)
+                self.dataX.append(float(temp[0]))
+                self.dataY.append(float(temp[1]))
+
+
+    def plotResults(self):
+        print('what is the problem darn')
+        dataX = np.array(self.dataX)
+        dataY = np.array(self.dataY)
+        plt.plot(dataX, dataY)
+        plt.show()
+
+
+    def saveCSVFile(self):
+        filename = QFileDialog.getSaveFileName(self,
+                "G.R.O.M. Editor -- Save File As", self.filename,
+                "CSV (*.csv *.*)")
+        print('filename is ',filename)
+        if len(filename[0]) == 0:
+            return
+        self.filenameCSV = filename[0]
+        with open(self.filenameCSV, 'w') as csvfile:
+            fieldnames = ['Wave', 'Absorption']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+            writer.writeheader()
+            for x,y in zip(self.dataX, self.dataY):
+                writer.writerow({'Wave': x, 'Absorption': y})
+            #writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
+            #writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
+            #writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
+
+    def saveRS232File(self):
+        #if "Unnamed" in self.filename:
+        filename = QFileDialog.getSaveFileName(self,
+                "G.R.O.M. Editor -- Save File As", self.filename,
+                "RS232 (*.rs232 *.*)")
+        print('filename is ',filename)
+        if len(filename[0]) == 0:
+            return
+        self.filename = filename[0]
+        self.setWindowTitle(QFileInfo(self.filename).fileName())
+        exception = None
+        fh = None
+        try:
+            fh = QFile(self.filename)
+            if not fh.open(QIODevice.WriteOnly):
+                raise IOError(str(fh.errorString()))
+            stream = QTextStream(fh)
+            stream.setCodec("UTF-8")
+            stream << self.outputText.toPlainText()
+            #self.document().setModified(False)
+        except EnvironmentError as e:
+            exception = e
+        finally:
+            if fh is not None:
+                fh.close()
+            if exception is not None:
+                raise exception
+
+
+
+    def loadRS232File(self): #Windows crash buty why
+        exception = None
+        fh = None
+
+
+        print("Hello Load Text File")
+        #Looks like there's bug in windows
+        try:
+            fh = QFile(self.filename)
+            print("fh is ",fh)
+            if not fh.open(QIODevice.ReadOnly):
+                raise IOError(str(fh.errorString()))
+            stream = QTextStream(fh)
+            stream.setCodec("UTF-8")
+            #self.setPlainText("Hello World")
+            self.outputText.setPlainText(stream.readAll()) #Here lies the problem how to fix it? PyQt 3.4.2 Works Fine
+            #self.outputTextdocument().setModified(False)
+        except EnvironmentError as e:
+            exception = e
+            print("Exception is ",exception)
+
+
 
 
     def setupRealUi(self):
@@ -116,6 +232,10 @@ class rs232Widget(QWidget, Ui_Form):
         self.connectButton.clicked.connect(self.connectToDevice)
         self.disconnectButton.clicked.connect(self.disconnectFromDevice)
         self.commandSendButton.clicked.connect(self.sendCommandToDevice)
+
+        self.saveOutputButton.clicked.connect(self.saveRS232File) #For Saving File
+        self.exportCSVButton.clicked.connect(self.saveCSVFile)
+        self.plotButton.clicked.connect(self.plotResults)
 
 
 
@@ -239,10 +359,12 @@ class CReader(QThread):
             n = self.ser.inWaiting()
             if n:
                data = data + self.ser.read(n)
-            self.emit(SIGNAL("newData(QString)"), data)
+            #self.emit(SIGNAL("newData(QString)"), data)
+            newData.emit(data)
          except:
             errMsg = "Reader thread is terminated unexpectedly."
-            self.emit(SIGNAL("error(QString)"), errMsg)
+            #self.emit(SIGNAL("error(QString)"), errMsg)
+            errorMSG.emit(errMsg)
             break
 
 class CWriter(QThread):
@@ -259,7 +381,8 @@ class CWriter(QThread):
          #self.ser.write(str(self.cmd))
       except:
          errMsg = "Writer thread is terminated unexpectedly."
-         self.emit(SIGNAL("error(QString)"), errMsg)
+         #self.emit(SIGNAL("error(QString)"), errMsg)
+         errorMSG.emit(errMsg)
 
    def terminate(self):
       self.wait()
