@@ -331,6 +331,8 @@ class rs232Widget(QWidget, Ui_Form):
         value = self.stopBitsSpinBox.value()
         if value == 2:
             returnVal = serial.STOPBITS_TWO
+        elif value == 1:
+            returnVal = serial.STOPBITS_ONE
         return returnVal
 
 
