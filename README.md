@@ -15,6 +15,8 @@ License
 GPLv3+ (GPLv3 or any other version later published by FSF at your option)
 
 **New Features**
+
+
 Now you can connect your RS232 device, e.g. Spectrometer(Tested with Jenway 6405)
 ![Alt text](/screenshots/screen14.png?raw=true "Screen 14")
 
