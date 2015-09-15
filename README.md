@@ -52,6 +52,19 @@ Before you run it:
             sudo apt-get install python3-pyqt5.qtwebkit
             sudo apt-get install python3-pip #Install pip
             sudo pip3 install pyenchant # For spelling Suggestion of Parameters
+            sudo pip3 install pyserial # For RS232 connection
+
+
+        On Windows:
+        if 64 bit, find, download and install:
+            python-3.4.3.amd64.msi
+            PyQt5-5.4.2-gpl-Py3.4-Qt5.4.2-x64.exe
+            numpy-1.9.2+mkl-cp34-none-win_amd64.whl
+            scipy-0.16.0-cp34-none-win_amd64.whl
+            matplotlib-1.4.3.win-amd64-py3.4.
+            pip3 install pyenchant # For spelling Suggestion of Parameters
+            pip3 install pyserial # For RS232 connection
+
 
 And run it:
 
