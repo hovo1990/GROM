@@ -1,6 +1,6 @@
 GROM
 
-version: 0.6.5
+version: 0.6.9
 
 GROM is a GROMACS(mdp,itp,top) files with Syntax Highlighting and PDB Editor wtih visual cues in one package based on Qt5,PyQt5 and Python3. It's GPL licensed!(See LICENSE)
 
@@ -13,6 +13,13 @@ PyQt >= 5.0
 License
 
 GPLv3+ (GPLv3 or any other version later published by FSF at your option)
+
+**New Features**
+Now you can connect your RS232 device, e.g. Spectrometer(Tested with Jenway 6405)
+![Alt text](/screenshots/screen14.png?raw=true "Screen 14")
+
+
+
 
 Screenshots:
 
@@ -28,7 +35,7 @@ Screenshots:
 ![Alt text](/screenshots/screen10.png?raw=true "Screen 10")
 ![Alt text](/screenshots/screen11.png?raw=true "Screen 11")
 ![Alt text](/screenshots/screen12.png?raw=true "Screen 12")
-![Alt text](/screenshots/screen13.png?raw=true "Screen 12")
+![Alt text](/screenshots/screen13.png?raw=true "Screen 13")
 
 Before you run it:
 
