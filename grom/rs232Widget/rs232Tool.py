@@ -143,51 +143,19 @@ class rs232Widget(QWidget, Ui_Form):
 
 
     def parseData(self): #Yolo
-        self.dataX = []
-        self.dataY = []
-        self.dataWave = []
         fullText = self.outputText.toPlainText()
-        #print("Full Text ",fullText)
-        fullText = fullText.split("\n")
-        #print("Full Text ",fullText)
-        for i in fullText:
-            temp = i.split(",")
-            if ("START WAVELENGTH" in temp[0]):
-                self.dataWave.append(float(temp[1]))
-            if ("END WAVELENGTH" in temp[0]):
-                self.dataWave.append(float(temp[1]))
-            if ("SCAN INTERVAL" in temp[0]):
-                self.dataWave.append(float(temp[1]))
 
-
-            if len(temp) == 2:
-                #print(temp)
-                self.dataX.append(float(temp[0]))
-                self.dataY.append(float(temp[1]))
 
 
     def plotResults(self):
         print('what is the problem darn')
-        dataX = np.array(self.dataX)
-        dataY = np.array(self.dataY)
+        dataX = np.array(self.dataWaveLength)
+        dataY = np.array(self.dataAbs)
         plt.plot(dataX, dataY)
         plt.show()
 
 
 
-    def calcTransmitanceFromAbs(self, absorbance):
-        ##%T = (IT/I0)*100.
-        ##Absorbance is actually log10 (I0/IT)
-        ##100/%T = I0/IT
-
-
-        ##A = 2 - log10 %T //This is the right formula
-        ## - log10 %T = A -2
-        ## log10 %T = (2-A)
-        ## T = 10**(2-A)
-        logT = (2-absorbance)
-        transmittance = (10**logT)
-        return transmittance
 
 
 
@@ -199,18 +167,7 @@ class rs232Widget(QWidget, Ui_Form):
         if len(filename[0]) == 0:
             return
         self.filenameCSV = filename[0]
-        with open(self.filenameCSV, 'wls') as csvfile:
 
-
-            fieldnames = ['Wave', 'Absorption']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-            writer.writeheader()
-            for x,y in zip(self.dataX, self.dataY):
-                writer.writerow({'Wave': x, 'Absorption': y})
-            #writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
-            #writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
-            #writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
 
 
     def saveCSVFile(self):
