@@ -96,7 +96,16 @@ class Ui_Form(object):
         self.toolsLayout.addWidget(self.saveOutputButton)
         self.exportCSVButton = QtWidgets.QPushButton(Form)
         self.exportCSVButton.setObjectName("exportCSVButton")
+
+        #Save mWave file Yolo Bitch
+        self.exportMWaveButton = QtWidgets.QPushButton(Form)
+        self.exportMWaveButton.setObjectName("exportMWaveButton")
+        #--> Finish save_mWaveFile
+
         self.toolsLayout.addWidget(self.exportCSVButton)
+        self.toolsLayout.addWidget(self.exportMWaveButton)
+
+        
         self.plotButton = QtWidgets.QPushButton(Form)
         self.plotButton.setObjectName("plotButton")
         self.toolsLayout.addWidget(self.plotButton)
@@ -124,11 +133,15 @@ class Ui_Form(object):
         self.checkBox_2.setToolTip(_translate("Form", "Enable hardware (RTS/CTS) flow control."))
         self.checkBox_2.setText(_translate("Form", "rtscts"))
         self.checkBox_3.setToolTip(_translate("Form", "Enable hardware (DSR/DTR) flow control."))
-        self.checkBox_3.setText(_translate("Form", "dsrdtr"))
+        self.checkBox_3.setText(_translate("Form", "dsrdtr")) 
         self.commandSendButton.setText(_translate("Form", "Send"))
         self.connectButton.setText(_translate("Form", "Connect"))
         self.disconnectButton.setText(_translate("Form", "Disconnect"))
         self.saveOutputButton.setText(_translate("Form", "Save Output"))
+
+        #SAVE mWave Button
+        self.exportMWaveButton.setText(_translate("Form", "Export to MWave"))
+
         self.exportCSVButton.setText(_translate("Form", "Export to CSV"))
         self.plotButton.setText(_translate("Form", "Plot "))
 

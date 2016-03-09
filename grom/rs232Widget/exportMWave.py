@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-import numpy as np
-import csv
 
 from PyQt5.QtCore import QFile
 from PyQt5.QtCore import QTextStream
@@ -10,7 +8,7 @@ from PyQt5.QtCore import QIODevice
 
 class mWaveFile():
 
-    def __init__(self, filename = None):
+    def __init__(self, filename = None, actualData = None):
         super(mWaveFile, self).__init__()
         self.time = datetime.datetime.now().strftime("%m-%d-%Y, %H:%M:%S")
         self.dataWaveLength = []
@@ -57,7 +55,7 @@ class mWaveFile():
 
 
     def parseOutputData(self,fullText = ""):
-        #print("Full Text ",fullText)
+        print("Full Text ",fullText)
         fullText = fullText.split("\n")
         #print("Full Text ",fullText)
         for i in fullText:
@@ -109,7 +107,7 @@ class mWaveFile():
                 tempText = '''"%s","%s","%s","%s"\n''' %(i,
                                                         int(self.dataWaveLength[-i]),
                                                         self.dataAbs[-i],
-                                                        self.dataTransmittance[-i] )
+                                                        round(self.dataTransmittance[-i],11) )
 
                 mWave.write(tempText)# total frames
 
@@ -121,8 +119,8 @@ class mWaveFile():
 
 
 
-#rs232File = 'Output_test.rs232'
-#mWaveObj = mWaveFile(rs232File )
+# rs232File = 'myTest.rs232'
+# mWaveObj = mWaveFile(rs232File)
 
-#saveFileName = 'Output_test.wls'
-#mWaveObj.saveMWaveFile(saveFileName)
+# saveFileName = 'Output_test.wls'
+# mWaveObj.saveMWaveFile(saveFileName)

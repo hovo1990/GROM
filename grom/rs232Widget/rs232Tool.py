@@ -89,8 +89,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import csv
 
+import os
 import sys, serial
 from  .rs232Skeleton import Ui_Form #Imports MainWindow GUI
+from  .exportMWave import * #Imports MWave save function
 
 
 #newDataSignal = pyqtSignal(QString , name = "newData" )
@@ -159,17 +161,6 @@ class rs232Widget(QWidget, Ui_Form):
 
 
 
-    def saveMWaveFile(self):
-        filename = QFileDialog.getSaveFileName(self,
-                "G.R.O.M. Editor -- Save File As", self.filename,
-                "CSV (*.csv *.*)")
-        print('filename is ',filename)
-        if len(filename[0]) == 0:
-            return
-        self.filenameCSV = filename[0]
-
-
-
     def saveCSVFile(self):
         filename = QFileDialog.getSaveFileName(self,
                 "G.R.O.M. Editor -- Save File As", self.filename,
@@ -219,6 +210,54 @@ class rs232Widget(QWidget, Ui_Form):
 
 
 
+    def saveTempRS232File(self):
+        self.tempRS232Filename = 'tempFile.rs232'
+        exception = None
+        fh = None
+        try:
+            fh = QFile(self.tempRS232Filename)
+            if not fh.open(QIODevice.WriteOnly):
+                raise IOError(str(fh.errorString()))
+            stream = QTextStream(fh)
+            stream.setCodec("UTF-8")
+            stream << self.outputText.toPlainText()
+            #self.document().setModified(False)
+        except EnvironmentError as e:
+            exception = e
+        finally:
+            if fh is not None:
+                fh.close()
+            if exception is not None:
+                raise exception
+
+
+    def delTempRS232File(self):
+        try:
+            print("Yolo Hahahahahahahaha")
+            os.remove(self.tempRS232Filename)
+            print("Print Temp File Deleted")
+        except Exception as e:
+            print("Error in deleting file: ",e)
+
+
+    def saveMWaveFile(self):
+        self.saveTempRS232File() #Saves tempFile
+        filename = QFileDialog.getSaveFileName(self,
+                "G.R.O.M. Editor -- Save File As", self.filename,
+                "MWave wls (*.wls *.*)")
+        print('filename is ',filename)
+        if len(filename[0]) == 0:
+            return
+        self.filenameMWave = filename[0]
+
+        rs232File = self.tempRS232Filename
+        mWaveObj = mWaveFile(rs232File)
+
+        saveFileName = self.filenameMWave
+        mWaveObj.saveMWaveFile(saveFileName)
+        self.delTempRS232File()
+
+
     def loadRS232File(self): #Windows crash buty why
         exception = None
         fh = None
@@ -252,6 +291,10 @@ class rs232Widget(QWidget, Ui_Form):
 
         self.saveOutputButton.clicked.connect(self.saveRS232File) #For Saving File
         self.exportCSVButton.clicked.connect(self.saveCSVFile)
+
+        #Save mWave button
+        self.exportMWaveButton.clicked.connect(self.saveMWaveFile)
+
         self.plotButton.clicked.connect(self.plotResults)
 
 
