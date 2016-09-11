@@ -1,6 +1,9 @@
 GROM
 
 version: 0.6.9
+[![DOI](https://zenodo.org/badge/19024/hovo1990/GROM.svg)](https://zenodo.org/badge/latestdoi/19024/hovo1990/GROM)
+
+
 
 GROM is a GROMACS(mdp,itp,top) files with Syntax Highlighting and PDB Editor wtih visual cues in one package based on Qt5,PyQt5 and Python3. It's GPL licensed!(See LICENSE)
 
