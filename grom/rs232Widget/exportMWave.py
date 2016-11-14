@@ -6,9 +6,9 @@ from PyQt5.QtCore import QFile
 from PyQt5.QtCore import QTextStream
 from PyQt5.QtCore import QIODevice
 
-class mWaveFile():
 
-    def __init__(self, filename = None, actualData = None):
+class mWaveFile():
+    def __init__(self, filename=None, actualData=None):
         super(mWaveFile, self).__init__()
         self.time = datetime.datetime.now().strftime("%m-%d-%Y, %H:%M:%S")
         self.dataWaveLength = []
@@ -22,20 +22,18 @@ class mWaveFile():
             self.loadFile()
             self.parseOutputData()
 
-
     def loadFile(self):
-            fh = QFile(self.filename)
-            print("fh is ",fh)
-            if not fh.open(QIODevice.ReadOnly):
-                raise IOError(str(fh.errorString()))
-            stream = QTextStream(fh)
-            stream.setCodec("UTF-8")
-            #self.setPlainText("Hello World")
-            self.preParse = (stream.readAll()) #Here lies the problem how to fix it? PyQt 3.4.2 Works Fine
-            print(self.preParse)
-            self.parseOutputData(self.preParse)
-            #self.outputTextdocument().setModified(False)
-
+        fh = QFile(self.filename)
+        print("fh is ", fh)
+        if not fh.open(QIODevice.ReadOnly):
+            raise IOError(str(fh.errorString()))
+        stream = QTextStream(fh)
+        stream.setCodec("UTF-8")
+        # self.setPlainText("Hello World")
+        self.preParse = (stream.readAll())  # Here lies the problem how to fix it? PyQt 3.4.2 Works Fine
+        print(self.preParse)
+        self.parseOutputData(self.preParse)
+        # self.outputTextdocument().setModified(False)
 
     def calcTransmitanceFromAbs(self, absorbance):
         ##%T = (IT/I0)*100.
@@ -47,22 +45,19 @@ class mWaveFile():
         ## - log10 %T = A -2
         ## log10 %T = (2-A)
         ## T = 10**(2-A)
-        logT = (2-absorbance)
-        transmittance = (10**logT)
+        logT = (2 - absorbance)
+        transmittance = (10 ** logT)
         return transmittance
 
-
-
-
-    def parseOutputData(self,fullText = ""):
-        print("Full Text ",fullText)
+    def parseOutputData(self, fullText=""):
+        print("Full Text ", fullText)
         fullText = fullText.split("\n")
-        #print("Full Text ",fullText)
+        # print("Full Text ",fullText)
         for i in fullText:
             temp = i.split(" ")
-            #print(temp)
+            # print(temp)
             if ("START WAVELENGTH" in i):
-                #print(temp)
+                # print(temp)
                 waveLen = float(temp[-1].split('nm')[0])
                 self.dataWave.append(waveLen)
             if ("END WAVELENGTH" in i):
@@ -72,45 +67,42 @@ class mWaveFile():
                 waveLen = float(temp[-1].split('nm')[0])
                 self.dataWave.append(waveLen)
 
-            #print('self.dataWave ', self.dataWave)
-            #print('------------------------------')
+            # print('self.dataWave ', self.dataWave)
+            # print('------------------------------')
             temp = i.split(",")
             if len(temp) == 2:
-                #print(temp)
+                # print(temp)
                 self.dataWaveLength.append(float(temp[0]))
                 specData = float(temp[1])
                 self.dataAbs.append(specData)
                 self.dataTransmittance.append(self.calcTransmitanceFromAbs(specData))
 
-        #print('tada ',len(self.dataWaveLength))
+                # print('tada ',len(self.dataWaveLength))
 
-
-
-    def saveMWaveFile(self,filename = "none.mls"):
+    def saveMWaveFile(self, filename="none.mls"):
         with open(filename, 'w') as mWave:
             mWave.write('''"M.Wave File"\n''')
             mWave.write('''"Spectrum Scan"\n''')
-            mWave.write('''"0"\n''') #Maybe Sample
-            mWave.write('''"%s"\n''' %(str(int(self.dataWave[1]))))
-            mWave.write('''"%s"\n''' %(str(int(self.dataWave[0]))))
-            mWave.write('''"%s"\n''' %(str(int(self.dataWave[2]))))
-            mWave.write('''"%s"\n''' %(str(int(self.dataWave[2])))) #This is a ?
+            mWave.write('''"0"\n''')  # Maybe Sample
+            mWave.write('''"%s"\n''' % (str(int(self.dataWave[1]))))
+            mWave.write('''"%s"\n''' % (str(int(self.dataWave[0]))))
+            mWave.write('''"%s"\n''' % (str(int(self.dataWave[2]))))
+            mWave.write('''"%s"\n''' % (str(int(self.dataWave[2]))))  # This is a ?
 
-            mWave.write('''"%s"\n''' %(self.time))# Time and Date
+            mWave.write('''"%s"\n''' % (self.time))  # Time and Date
 
-            mWave.write('''"%s"\n''' %(len(self.dataWaveLength)))# total frames
+            mWave.write('''"%s"\n''' % (len(self.dataWaveLength)))  # total frames
 
-            mWave.write('''"","","",""\n''' )# total frames
+            mWave.write('''"","","",""\n''')  # total frames
 
-            for i in range(1,len(self.dataWaveLength)+1):
-                print(i, self.dataWaveLength[-i], self.dataAbs[-i],self.dataTransmittance[-i]  )
-                tempText = '''"%s","%s","%s","%s"\n''' %(i,
-                                                        int(self.dataWaveLength[-i]),
-                                                        self.dataAbs[-i],
-                                                        round(self.dataTransmittance[-i],11) )
+            for i in range(1, len(self.dataWaveLength) + 1):
+                print(i, self.dataWaveLength[-i], self.dataAbs[-i], self.dataTransmittance[-i])
+                tempText = '''"%s","%s","%s","%s"\n''' % (i,
+                                                          int(self.dataWaveLength[-i]),
+                                                          self.dataAbs[-i],
+                                                          round(self.dataTransmittance[-i], 11))
 
-                mWave.write(tempText)# total frames
-
+                mWave.write(tempText)  # total frames
 
             finalText = '''"File End"'''
             mWave.write(finalText)
@@ -119,8 +111,8 @@ class mWaveFile():
 
 
 
-# rs232File = 'myTest.rs232'
-# mWaveObj = mWaveFile(rs232File)
+            # rs232File = 'myTest.rs232'
+            # mWaveObj = mWaveFile(rs232File)
 
-# saveFileName = 'Output_test.wls'
-# mWaveObj.saveMWaveFile(saveFileName)
+            # saveFileName = 'Output_test.wls'
+            # mWaveObj.saveMWaveFile(saveFileName)

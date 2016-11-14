@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_fileType(object):
     def setupUi(self, fileType):
         fileType.setObjectName("fileType")
@@ -17,7 +18,7 @@ class Ui_fileType(object):
         self.gridLayout = QtWidgets.QGridLayout(fileType)
         self.gridLayout.setObjectName("gridLayout")
         self.buttonBox = QtWidgets.QDialogButtonBox(fileType)
-        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.gridLayout.addWidget(self.buttonBox, 2, 0, 1, 1)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -99,5 +100,6 @@ class Ui_fileType(object):
         self.groupModelType.setTitle(_translate("fileType", "Model Type:"))
         self.pdbButton.setText(_translate("fileType", "pdb Format"))
         self.groButton.setText(_translate("fileType", "gro Format"))
+
 
 import type_rc

@@ -31,18 +31,17 @@ __source__ = "https://github.com/hovo1990/GROM"
 __version__ = "0.6-beta"
 __license__ = "GPL3"
 
-
-
-VERSION = 0,6,0,1
+VERSION = 0, 6, 0, 1
 #: Set to ``True`` for a release. If set to ``False`` then the patch level
 #: will have the suffix "-dev".
 RELEASE = False
 if not RELEASE:
     VERSION = VERSION[:2] + (str(VERSION[2]) + '-dev',)
 
+
 def get_version():
     """Return current package version as a string."""
-    return ".".join(map(str,VERSION))
+    return ".".join(map(str, VERSION))
 
 
 ###############################################################################
@@ -51,7 +50,6 @@ def get_version():
 
 """GROM is Text and Table Editor for GROMACS(.itp,.top,.mdp) and
 """
-
 
 """
 GROM
@@ -87,20 +85,15 @@ from PyQt5.QtWidgets import QApplication
 #: for cx_freeze
 import PyQt5.QtNetwork
 import PyQt5.QtWebKit
-#import PyQt5.QtPrintSupport
+
+# import PyQt5.QtPrintSupport
 sys.path.append('grom/')
 import MainApp
 
 
-
-
-
-
-
-
-#import sys
-#from os.path import join, dirname
-#__path__.append(join(dirname(__file__), sys.platform))
+# import sys
+# from os.path import join, dirname
+# __path__.append(join(dirname(__file__), sys.platform))
 
 ###############################################################################
 # MAIN
@@ -114,6 +107,3 @@ def setup_and_run():
     form = MainApp.MainWindow()
     form.show()
     app.exec_()
-
-
-

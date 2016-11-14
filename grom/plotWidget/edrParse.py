@@ -7,8 +7,10 @@ import difflib
 import os
 import difflib
 
+
 class FeatureNotAvailable(Exception):
     pass
+
 
 class IOHandler(object):
     """Generic base class for file readers and writers.
@@ -93,7 +95,8 @@ class IOHandler(object):
 
         """
         if 'w' not in self.fd.mode and 'x' not in self.fd.mode:
-            raise Exception("The file is not opened in writing mode. If you're using datafile, add the 'w' option.\ndatafile(filename, 'w')")
+            raise Exception(
+                "The file is not opened in writing mode. If you're using datafile, add the 'w' option.\ndatafile(filename, 'w')")
 
         self.check_feature(feature, "write")
 
@@ -121,26 +124,26 @@ class IOHandler(object):
                                       % (feature, str(type(self).__name__),
                                          str(matches)))
 
+
 class FormatNotSupported(ValueError):
     pass
 
-def make_ionotavailable(name, msg, can_read = [], can_write = []):
+
+def make_ionotavailable(name, msg, can_read=[], can_write=[]):
     def read(self, feature):
         raise Exception(msg)
+
     def write(self, feature):
         raise Exception(msg)
 
     new_class = type(name, (IOHandler,), {
-        'can_read' : can_read,
+        'can_read': can_read,
         'can_write': can_write,
-        'read' : read,
+        'read': read,
         'write': write
     })
 
     return new_class
-
-
-
 
 
 def remotefile(url, format=None):
@@ -169,13 +172,9 @@ def remotefile(url, format=None):
     return handler
 
 
-
-
-
-
-
 class QuantityNotAvailable(Exception):
     pass
+
 
 class EdrIO(IOHandler):
     '''EDR files store per-frame information for gromacs
@@ -228,7 +227,7 @@ class EdrIO(IOHandler):
     can_read = ['quantity', 'units', 'avail quantities']
     can_write = []
 
-    def __init__(self, filename, decode_mode = 'float'):
+    def __init__(self, filename, decode_mode='float'):
         self.processed = False
         self.fd = open(filename, 'rb')
         super(EdrIO, self).__init__(self.fd)
@@ -236,8 +235,8 @@ class EdrIO(IOHandler):
         self.decode_mode = decode_mode
 
 
-    #def getProps(self):
-        #return self.props
+        # def getProps(self):
+        # return self.props
 
     def read(self, feature, *args):
         self.check_feature(feature, 'read')
@@ -248,8 +247,7 @@ class EdrIO(IOHandler):
         else:
             frames = self.frames
 
-
-        #print('props right ',self.props)
+        # print('props right ',self.props)
 
         if feature == 'units':
             quant = args[0]
@@ -257,439 +255,419 @@ class EdrIO(IOHandler):
             return self.units[i]
 
         if feature == 'avail quantities':
-            print('tadadadadadad----'*10)
+            print('tadadadadadad----' * 10)
             return self.props
-
-
 
         if feature == 'quantity':
             if not args[0]:
                 raise Exception('the method read("quantity", arg) requires a quantity to get')
 
 
-        #: not active for now
+                #: not active for now
             quant = args[0]
 
             if quant not in self.props:
                 close = difflib.get_close_matches(quant, self.props)
-                raise QuantityNotAvailable('Quantity %s not available. Close matches: %s'%
+                raise QuantityNotAvailable('Quantity %s not available. Close matches: %s' %
                                            (str(quant), str(close)))
-
-
 
             time, data = self.dataExtract(quant)
 
-
-
-            print('--'*20)
+            print('--' * 20)
             print('If data does not make sense, try to run in double decode type')
-            print('--'*20)
-            return time,data
+            print('--' * 20)
+            return time, data
 
-            #i = self.props.index(quant)
-            #ret = []
-            #print('frames is ',frames)
-            #for f in frames:
-                #print('f is ',f)
-                #ret.append(f[i][0])
+            # i = self.props.index(quant)
+            # ret = []
+            # print('frames is ',frames)
+            # for f in frames:
+            # print('f is ',f)
+            # ret.append(f[i][0])
 
-            #return np.array(self.times), np.array(ret)
+            # return np.array(self.times), np.array(ret)
 
-
-    def getUnits(self,row):
+    def getUnits(self, row):
         return self.units[row]
 
-    def dataExtractFromRow(self,row):
+    def dataExtractFromRow(self, row):
         i = row
         ret = []
-        #print('frames is ',frames)
+        # print('frames is ',frames)
         for f in self.frames:
-            #print('f is ',f) #There's a problem with frames check it out
+            # print('f is ',f) #There's a problem with frames check it out
             ret.append(f[i][0])
 
         return np.array(self.times), np.array(ret)
 
+    def dataExtract(self, quant):
+        i = self.props.index(quant)
+        # print('quant is ',quant)
+        # print('i is ',i)
+        # print(self.props[i])
+        #:---------------------------
+        ret = []
+        # print('frames is ',frames)
+        for f in self.frames:
+            # print('f is ',f) #There's a problem with frames check it out
+            ret.append(f[i][0])
 
-    def dataExtract(self,quant):
-            i = self.props.index(quant)
-            #print('quant is ',quant)
-            #print('i is ',i)
-            #print(self.props[i])
-            #:---------------------------
-            ret = []
-            #print('frames is ',frames)
-            for f in self.frames:
-                #print('f is ',f) #There's a problem with frames check it out
-                ret.append(f[i][0])
+        return np.array(self.times), np.array(ret)
 
-            return np.array(self.times), np.array(ret)
-
-
-    def process_frames(self): #This is VERY IMPORTANT
+    def process_frames(self):  # This is VERY IMPORTANT
 
         f = self.fd.read()
         self.up = xdrlib.Unpacker(f)
 
-
-        if self.decode_mode == "float": #This is prototype
+        if self.decode_mode == "float":  # This is prototype
             self.decJob = self.up.unpack_float
         else:
             self.decJob = self.up.unpack_double
-
 
         self.times = [0]
         self.dts = []
         self.frames = []
 
         self._unpack_MyVersion()
-        #self._unpack_start()
-        #fr = self._unpack_frame()
+        # self._unpack_start()
+        # fr = self._unpack_frame()
         ##print('fr is ',fr)
         ##self.frames.append(fr)
 
 
-        #while True:
-            #fr = self._unpack_frame()
-            ##try:
-                #fr = self._unpack_frame()
-            #except EOFError:
-                #print('crap')
-                #pass
-            #self.frames.append(fr)
+        # while True:
+        # fr = self._unpack_frame()
+        ##try:
+        # fr = self._unpack_frame()
+        # except EOFError:
+        # print('crap')
+        # pass
+        # self.frames.append(fr)
 
         return self.frames
 
-
     def _unpack_MyVersion(self):
         print('THis is unpack MyVersion')
-        print('---'*20)
+        print('---' * 20)
         up = self.up
         magic = up.unpack_int()
 
-
-        #print('magic at start ',magic)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        # print('magic at start ',magic)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
         self.version = up.unpack_int()
-        #print('version ',self.version)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        # print('version ',self.version)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
 
         # Number of properties
         self.nre = up.unpack_int()
-        #print('nre is ',self.nre)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        # print('nre is ',self.nre)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
         self.props = props = []
         self.units = units = []
 
         # Strings and units of quantities
         for i in range(self.nre):
-            #index = up.unpack_int()
+            # index = up.unpack_int()
             prop = up.unpack_string()
             unit = up.unpack_string()
 
-            #print('index is ',index)
-            #print('prop is ',prop)
-            #print('unit is ',unit)
+            # print('index is ',index)
+            # print('prop is ',prop)
+            # print('unit is ',unit)
             props.append(prop.decode('utf-8'))
             units.append(unit.decode('utf-8'))
 
+        # print('props ',props)
+        # print('units ',units)
 
-        #print('props ',props)
-        #print('units ',units)
 
-
-        dum = up.unpack_float() #???? i guess its a float -20000000000.0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        dum = up.unpack_float()  # ???? i guess its a float -20000000000.0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
         magic_later = up.unpack_int()
-        #print('magic later ',magic_later) #Here is ok -7777777
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        # print('magic later ',magic_later) #Here is ok -7777777
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
-        dum = up.unpack_int() #Version--- 5
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-
-
-        dum = up.unpack_int() #What is this 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_int() #What is this 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-
-        dum = up.unpack_int() #What is this 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-
-        dum = up.unpack_int() #What is this 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-
-        dum = up.unpack_int() #What is this 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_int() #What is this 1
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-
-        dum = up.unpack_int() #What is this 1
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-
-        dum = up.unpack_double() #What is this 0.002
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_int() #What is this looks like property number
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_int() #What is this looks 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_int() #What is this looks 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_int() #What is this looks 1184
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_float() #What is this looks 0 -----
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_int() #What is this looks 1184
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        dum = up.unpack_int()  # Version--- 5
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
 
 
-       #
-            #for i in range(self.nre):
-                #array = []
-                #for y in range(3):
-                    #value = up.unpack_float() #Value
-                    ##print('value  --> ',value )
-                    ##pos = up.get_position()
-                    ##print('pos is ',pos)
-                    ##print('------------------')
-                    #array.append(value)
-                ##print('array is ',array)
-                #energy.append(array)
-                #array = []
+        dum = up.unpack_int()  # What is this 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        dum = up.unpack_int()  # What is this 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+
+        dum = up.unpack_int()  # What is this 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+
+        dum = up.unpack_int()  # What is this 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+
+        dum = up.unpack_int()  # What is this 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        dum = up.unpack_int()  # What is this 1
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+
+        dum = up.unpack_int()  # What is this 1
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+
+        dum = up.unpack_double()  # What is this 0.002
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        dum = up.unpack_int()  # What is this looks like property number
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        dum = up.unpack_int()  # What is this looks 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        dum = up.unpack_int()  # What is this looks 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        dum = up.unpack_int()  # What is this looks 1184
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        dum = up.unpack_float()  # What is this looks 0 -----
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        dum = up.unpack_int()  # What is this looks 1184
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+
+
+        #
+        # for i in range(self.nre):
+        # array = []
+        # for y in range(3):
+        # value = up.unpack_float() #Value
+        ##print('value  --> ',value )
+        ##pos = up.get_position()
+        ##print('pos is ',pos)
+        ##print('------------------')
+        # array.append(value)
+        ##print('array is ',array)
+        # energy.append(array)
+        # array = []
 
         data = []
         array = []
-        for i in range(self.nre): #this is right
-            temp = [0,0,0]
-            #dum = up.unpack_float() #What is this looks it looks its a float
-            dum = self.decJob() #This part decodes
-            #print('dum ',dum)
+        for i in range(self.nre):  # this is right
+            temp = [0, 0, 0]
+            # dum = up.unpack_float() #What is this looks it looks its a float
+            dum = self.decJob()  # This part decodes
+            # print('dum ',dum)
             temp[0] = dum
-            #pos = up.get_position()
-            #print('pos is ',pos)
-            #print('------------------')
-            #print('temp is ',temp)
+            # pos = up.get_position()
+            # print('pos is ',pos)
+            # print('------------------')
+            # print('temp is ',temp)
             array.append(temp)
         if len(array) == 0:
             print('fuckus')
         data.append(array)
 
-
-
         try:
             while True:
                 temp = self._unpack_timeStep(up)
                 if len(temp) == 0:
-                    #print('Funcking asshole')
-                    print('temp asshole ',temp)
+                    # print('Funcking asshole')
+                    print('temp asshole ', temp)
                     print('---------------------')
                 data.append(temp)
         except Exception as e:
-            print('e is ',e)
+            print('e is ', e)
             pass
 
         self.frames = data
 
-        #print('data 0 ',data[0][0])
+        # print('data 0 ',data[0][0])
 
-        #print('data is ',data)
-        #print('self.times = ',self.times)
-        #print('len ',len(self.times))
+        # print('data is ',data)
+        # print('self.times = ',self.times)
+        # print('len ',len(self.times))
 
-
-
-
-
-    def _unpack_timeStep(self,up): #The quest right it's for single precision, but what if it's
-        #Double Presicision ??????????????????????????
-        #print('----------------------One step\n')
+    def _unpack_timeStep(self, up):  # The quest right it's for single precision, but what if it's
+        # Double Presicision ??????????????????????????
+        # print('----------------------One step\n')
 
         #:--- Header Part
-        dum = up.unpack_float() #What is this looks it looks its a float
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        dum = up.unpack_float()  # What is this looks it looks its a float
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
 
-        magic = up.unpack_int() #What is this  777777777
-        #print('magic -->  ',magic)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        magic = up.unpack_int()  # What is this  777777777
+        # print('magic -->  ',magic)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
 
 
-        version = up.unpack_int() #What is this looks  5
-        #print('version --> ',version)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        version = up.unpack_int()  # What is this looks  5
+        # print('version --> ',version)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
 
-        time = up.unpack_double() #What is this looks 2.0 maybe time what's wrong
+        time = up.unpack_double()  # What is this looks 2.0 maybe time what's wrong
         self.times.append(time)
-        #print('time really --> ',time)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        # print('time really --> ',time)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
-        #dum = up.unpack_int() #What is this looks 0.0 Testing
-        #print('dum after time',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-
-        dum = up.unpack_int() #What is this looks 0.0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        step = up.unpack_int() #What is this looks 1000 maybe step
-        #print('step --> ',step)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_int() #What is this looks 10 maybe sum steps
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        # dum = up.unpack_int() #What is this looks 0.0 Testing
+        # print('dum after time',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
 
-        sumSteps = up.unpack_float() #What is this looks 10 maybe sum steps
-        #print('sumSteps ---> ',sumSteps)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        dum = up.unpack_int()  # What is this looks 0.0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
-        nsteps  = up.unpack_int() #What is this looks 1000 maybe nsteps
-        #print('nsteps --> ',nsteps)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        step = up.unpack_int()  # What is this looks 1000 maybe step
+        # print('step --> ',step)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
-
-        delta_t = up.unpack_double() #What is this looks 0.002 maybe delta_t
-        #print('delta_t --> ',delta_t)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        self.nre = up.unpack_int() #What is this looks 74 number of properties
-        #print('self.nre --> ',self.nre)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_int() #What is this looks 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        dum = up.unpack_int()  # What is this looks 10 maybe sum steps
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
 
-        dum = up.unpack_int() #What is this looks 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        sumSteps = up.unpack_float()  # What is this looks 10 maybe sum steps
+        # print('sumSteps ---> ',sumSteps)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
-        unknown = up.unpack_int() #What is this looks 1184 what is this
-        #print('uknown   -->',unknown)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
-
-        dum = up.unpack_int() #What is this looks 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        nsteps = up.unpack_int()  # What is this looks 1000 maybe nsteps
+        # print('nsteps --> ',nsteps)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
 
-        dum = up.unpack_int() #What is this looks 0
-        #print('dum ',dum)
-        #pos = up.get_position()
-        #print('pos is ',pos)
-        #print('------------------')
+        delta_t = up.unpack_double()  # What is this looks 0.002 maybe delta_t
+        # print('delta_t --> ',delta_t)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        self.nre = up.unpack_int()  # What is this looks 74 number of properties
+        # print('self.nre --> ',self.nre)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        dum = up.unpack_int()  # What is this looks 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+
+        dum = up.unpack_int()  # What is this looks 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        unknown = up.unpack_int()  # What is this looks 1184 what is this
+        # print('uknown   -->',unknown)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+        dum = up.unpack_int()  # What is this looks 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
+
+
+        dum = up.unpack_int()  # What is this looks 0
+        # print('dum ',dum)
+        # pos = up.get_position()
+        # print('pos is ',pos)
+        # print('------------------')
 
 
         #:-----> Value Part
@@ -699,85 +677,81 @@ class EdrIO(IOHandler):
             for i in range(self.nre):
                 array = []
                 for y in range(3):
-                    value = self.decJob() #Value #There are problems
-                    #print('value  --> ',value )
-                    #pos = up.get_position()
-                    #print('pos is ',pos)
-                    #print('------------------')
+                    value = self.decJob()  # Value #There are problems
+                    # print('value  --> ',value )
+                    # pos = up.get_position()
+                    # print('pos is ',pos)
+                    # print('------------------')
                     array.append(value)
-                #print('array is ',array)
+                # print('array is ',array)
                 energy.append(array)
-                if len(array) ==0:
+                if len(array) == 0:
                     print('Shit man really')
                 array = []
 
-
-            #print(len(energy))
-            #eff_array = np.array(energy)
-            #print(eff_array)
+            # print(len(energy))
+            # eff_array = np.array(energy)
+            # print(eff_array)
             return energy
         except Exception as e:
-            print('Yikes ',e)
+            print('Yikes ', e)
             return 1
-
 
     def _unpack_start(self):
         print('THis is unpack start')
         up = self.up
         magic = up.unpack_int()
-        print('magic at start ',magic)
-        if  (magic != -55555):
+        print('magic at start ', magic)
+        if (magic != -55555):
             raise Exception('Format not supported: magic number -55555 not matching')
 
         self.version = up.unpack_int()
-        print('version ',self.version)
+        print('version ', self.version)
 
         # Number of properties
         self.nre = up.unpack_int()
-        print('nre is ',self.nre)
-
+        print('nre is ', self.nre)
 
         self.props = props = []
         self.units = units = []
 
         # Strings and units of quantities
         for i in range(self.nre):
-            #index = up.unpack_int()
+            # index = up.unpack_int()
             prop = up.unpack_string()
             unit = up.unpack_string()
 
-            #print('index is ',index)
-            #print('prop is ',prop)
-            #print('unit is ',unit)
+            # print('index is ',index)
+            # print('prop is ',prop)
+            # print('unit is ',unit)
             props.append(prop.decode('utf-8'))
             units.append(unit.decode('utf-8'))
 
-        #self._unpack_eheader()
+            # self._unpack_eheader()
 
-    def _unpack_eheader(self): #Header part source enxio.c, It does once
+    def _unpack_eheader(self):  # Header part source enxio.c, It does once
         up = self.up
 
-        #data = up.get_buffer()
-        #print("packed:", repr(data))
+        # data = up.get_buffer()
+        # print("packed:", repr(data))
 
         first_real_to_check = -2e10
 
         # Checking the first real for format
         first_real = up.unpack_double()
-        print('first_real ',first_real)
+        print('first_real ', first_real)
 
-
-        #if (first_real != first_real_to_check): #This part also
-            #print('tada ',first_real)
-            #print('tada fuck ',first_real_to_check )
-            #raise Exception('Format not supported, first real not matching.')
+        # if (first_real != first_real_to_check): #This part also
+        # print('tada ',first_real)
+        # print('tada fuck ',first_real_to_check )
+        # raise Exception('Format not supported, first real not matching.')
 
 
         magic = up.unpack_int()
-        print('magic is ',magic)
-        #if  (magic != -7777777): #This part is important
-            #print('magic is ',magic)
-            #raise Exception('Format not supported, magic number not matching -7777777')
+        print('magic is ', magic)
+        # if  (magic != -7777777): #This part is important
+        # print('magic is ',magic)
+        # raise Exception('Format not supported, magic number not matching -7777777')
 
         version = up.unpack_int()
         time = up.unpack_double()
@@ -787,79 +761,73 @@ class EdrIO(IOHandler):
         min = up.unpack_int()
 
         maj = up.unpack_int()
-        print('min is ',min)
-        print('max is ',maj)
+        print('min is ', min)
+        print('max is ', maj)
 
         self.nsum = up.unpack_int()
-        print('nsum is ',self.nsum)
+        print('nsum is ', self.nsum)
 
         ## NSTEPS (again?)
-        #min = up.unpack_int()
-        #print('min is ')
-        #maj = up.unpack_int()
+        # min = up.unpack_int()
+        # print('min is ')
+        # maj = up.unpack_int()
 
         # For version 5
         dt = up.unpack_double()
-        print('dt ',dt)
+        print('dt ', dt)
         self.dts.append(dt)
 
         # Number of properties? Indeed no need for such thing
         self.nre = up.unpack_int()
-        print('nre is ',self.nre)
+        print('nre is ', self.nre)
 
         dum = up.unpack_int()
-        print('dum is ',dum)
+        print('dum is ', dum)
 
         nblock = up.unpack_int() + 1
-        print('nblock is' ,nblock)
-
+        print('nblock is', nblock)
 
         # Block headers:
         id = up.unpack_int()
-        print('id is ',id)
+        print('id is ', id)
         nsubblocks = up.unpack_int()
-        print('nsubblocks is ',nsubblocks)
+        print('nsubblocks is ', nsubblocks)
 
         e_size = up.unpack_int()
 
-        print('e_size is ',e_size)
-        print('-----'*20)
+        print('e_size is ', e_size)
+        print('-----' * 20)
 
-        #for i in range(5000):
-            #tada = up.unpack_double()
-            #print('tada is ',tada)
+        # for i in range(5000):
+        # tada = up.unpack_double()
+        # print('tada is ',tada)
 
-        #dum = up.unpack_int()
-        #dum = up.unpack_int()
-        #up.unpack_int()
+        # dum = up.unpack_int()
+        # dum = up.unpack_int()
+        # up.unpack_int()
 
     def _unpack_frame(self):
         # Energies, averages and rmsd
-        self._unpack_eheader() #for everyframe, 75 and 1184 repeat for every frame
+        self._unpack_eheader()  # for everyframe, 75 and 1184 repeat for every frame
 
         frame = []
 
+        # for i in range(self.nre):
+        # try:
+        # en = self.up.unpack_double()
+        # print('en is --> ',en)
+        ##if self.nsum > 0:
+        ##avg = self.up.unpack_double()
+        ##rmsd = self.up.unpack_double()
 
-        #for i in range(self.nre):
-            #try:
-                #en = self.up.unpack_double()
-                #print('en is --> ',en)
-                ##if self.nsum > 0:
-                    ##avg = self.up.unpack_double()
-                    ##rmsd = self.up.unpack_double()
-
-                    ##frame.append([en, avg, rmsd])
-                ##else:
-                #frame.append([en, en, 0.0])
-            #except Exception as e:
-                #print("Error in unpacking ",e)
-                #break
+        ##frame.append([en, avg, rmsd])
+        ##else:
+        # frame.append([en, en, 0.0])
+        # except Exception as e:
+        # print("Error in unpacking ",e)
+        # break
 
         return frame
-
-
-
-
 
 
 # NOTE: We are adding the default handlers at the end of the file
@@ -867,10 +835,9 @@ _default_handlers = [
     [EdrIO, 'edr', '.edr']
 ]
 
-
-
 _handler_map = {}
 _extensions_map = {}
+
 
 def add_default_handler(ioclass, format, extension=None):
     """Register a new data handler for a given format in
@@ -901,22 +868,24 @@ def add_default_handler(ioclass, format, extension=None):
     if extension is not None:
         _extensions_map[extension] = format
 
+
 # Registering the default handlers
 for h in _default_handlers:
     add_default_handler(*h)
 
-## We add also the cclib handlers
-#load_cclib = False
-#try:
-    #import cclib
-    #load_cclib = True
-#except ImportError:
-    #print('cclib not found. Install cclib for more handlers.')
 
-#if load_cclib:
-    #from .handlers._cclib import _cclib_handlers
-    #for hclass, format in _cclib_handlers:
-        #add_default_handler(hclass, format)
+## We add also the cclib handlers
+# load_cclib = False
+# try:
+# import cclib
+# load_cclib = True
+# except ImportError:
+# print('cclib not found. Install cclib for more handlers.')
+
+# if load_cclib:
+# from .handlers._cclib import _cclib_handlers
+# for hclass, format in _cclib_handlers:
+# add_default_handler(hclass, format)
 
 def get_handler_class(ext):
     """Get the IOHandler that can handle the extension *ext*."""
@@ -975,41 +944,33 @@ def datafile(filename, mode="rb", format=None):
     handler = hc(fd)
     return handler
 
-
-
-
-
-
-
-
 ##filename = 'full_ener.edr' #Problems
-#filename = 'md_2_1.edr' #Problems
+# filename = 'md_2_1.edr' #Problems
 
 ##filename = 'md_3_1.edr' #Problems
 
 ##filename = 'em.edr' #Problems
-#test =  EdrIO(filename, 'float') #datafile(filename)# .read('avail quantities')
+# test =  EdrIO(filename, 'float') #datafile(filename)# .read('avail quantities')
 
 
 
-#props = test.read('avail quantities')
+# props = test.read('avail quantities')
 
-#print('props ', props)
-
-
-
-#for energy  in props:
-    #print('Parameter Name ',energy)
-    #final_data = test.read('quantity', energy)
-    #print(final_data)
-    #print('-----------------------------')
+# print('props ', props)
 
 
-#time, LJ = datafile(filename).read('quantity', 'LJ (SR)')
-#print('time is ',time)
-#print('LJ is ', LJ)
 
-#time, temp = datafile(filename).read('quantity', 'Temperature')
-#print('time ',time)
-#print('temp ', temp)
+# for energy  in props:
+# print('Parameter Name ',energy)
+# final_data = test.read('quantity', energy)
+# print(final_data)
+# print('-----------------------------')
 
+
+# time, LJ = datafile(filename).read('quantity', 'LJ (SR)')
+# print('time is ',time)
+# print('LJ is ', LJ)
+
+# time, temp = datafile(filename).read('quantity', 'Temperature')
+# print('time ',time)
+# print('temp ', temp)

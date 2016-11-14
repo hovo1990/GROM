@@ -9,9 +9,6 @@
     :license: GPL, see LICENSE for more details.
 """
 
-
-
-
 #: Importing from  PyQt5.QtWidgets
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QDialogButtonBox
@@ -19,13 +16,11 @@ from PyQt5.QtWidgets import QDialogButtonBox
 #: Importing from  PyQt5.QtWebKitWidgets
 from  PyQt5.QtWebKitWidgets import QWebView
 
-
 from ui import ui_multiRename as MR
 from ui import ui_typeWindow as TW
 
 
 class Browser(QWebView):
-
     def __init__(self):
         QWebView.__init__(self)
         self.loadFinished.connect(self._result_available)
@@ -35,35 +30,34 @@ class Browser(QWebView):
         print(str(frame.toHtml()).encode('utf-8'))
 
 
-class MultipleRenameDialog(QDialog, MR.Ui_Multi_Rename_Dialog): #Need to fix these
+class MultipleRenameDialog(QDialog, MR.Ui_Multi_Rename_Dialog):  # Need to fix these
 
-    def __init__(self,parent = None):
+    def __init__(self, parent=None):
         super(MultipleRenameDialog, self).__init__(parent)
         self.setupUi(self)
-        #self.ParamButton.setChecked(True)
-        #self.buttonBox.button(QDialogButtonBox.Ok).setDisabled(True)
+        # self.ParamButton.setChecked(True)
+        # self.buttonBox.button(QDialogButtonBox.Ok).setDisabled(True)
 
-        #self.connect(self.ParamButton, SIGNAL('clicked()'), self.update)
-        #self.connect(self.CoordButton, SIGNAL('clicked()'), self.update)
+        # self.connect(self.ParamButton, SIGNAL('clicked()'), self.update)
+        # self.connect(self.CoordButton, SIGNAL('clicked()'), self.update)
 
-        #self.buttonBox.accepted.connect(self.accept) #This way it works right !!! :D
-        #self.buttonBox.rejected.connect(self.reject)
+        # self.buttonBox.accepted.connect(self.accept) #This way it works right !!! :D
+        # self.buttonBox.rejected.connect(self.reject)
 
-    #def update(self):
-        #self.buttonBox.button(QDialogButtonBox.Ok).setDisabled(False)
+        # def update(self):
+        # self.buttonBox.button(QDialogButtonBox.Ok).setDisabled(False)
 
 
 class ChooseDialog(QDialog, TW.Ui_fileType):
-
-    def __init__(self,parent = None):
+    def __init__(self, parent=None):
         super(ChooseDialog, self).__init__(parent)
         self.setupUi(self)
-        #self.ParamButton.setChecked(True)
+        # self.ParamButton.setChecked(True)
         self.buttonBox.button(QDialogButtonBox.Ok).setDisabled(True)
         self.groupModelType.setDisabled(True)
 
         self.ParamButton.clicked.connect(self.update)
-        #self.ParamButton.clicked.connect(self.deactivateModelButtons)
+        # self.ParamButton.clicked.connect(self.deactivateModelButtons)
         self.CoordButton.clicked.connect(self.disableBox)
         self.CoordButton.clicked.connect(self.updateModelButtons)
 
@@ -73,7 +67,7 @@ class ChooseDialog(QDialog, TW.Ui_fileType):
         self.CoordButton.clicked.connect(self.enableModelType)
         self.ParamButton.clicked.connect(self.disableModelType)
 
-        self.buttonBox.accepted.connect(self.accept) #This way it works right !!! :D
+        self.buttonBox.accepted.connect(self.accept)  # This way it works right !!! :D
         self.buttonBox.rejected.connect(self.reject)
 
     def disableBox(self):

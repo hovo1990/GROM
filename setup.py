@@ -6,8 +6,8 @@
 # http://sbcb.bioch.ox.ac.uk/oliver/software/GromacsWrapper/
 from __future__ import with_statement
 
-#from ez_setup import use_setuptools
-#use_setuptools()
+# from ez_setup import use_setuptools
+# use_setuptools()
 from setuptools import setup, find_packages
 
 with open("README.md") as readme:
@@ -41,14 +41,12 @@ setup(name="grom",
                    'Environment :: X11 Applications :: Qt',
                    'Programming Language :: Python :: 3'
                    ],
-      packages=find_packages(include=['exampleFiles','documentation']),
+      packages=find_packages(include=['exampleFiles', 'documentation']),
       package_data={'grom': ['tableWidget/*.py', 'textWidget/*.py',  # template files
-                                'ui/*.py','./*.py'],                                      # server start in VMD
+                             'ui/*.py', './*.py'],  # server start in VMD
                     },
-      install_requires = [
-                          'pyenchant',        # numkit needs it
-                          ],              # basic package (w/o analysis),
-      zip_safe = True,
-)
-
-
+      install_requires=[
+          'pyenchant',  # numkit needs it
+      ],  # basic package (w/o analysis),
+      zip_safe=True,
+      )

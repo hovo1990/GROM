@@ -8,6 +8,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -97,15 +98,14 @@ class Ui_Form(object):
         self.exportCSVButton = QtWidgets.QPushButton(Form)
         self.exportCSVButton.setObjectName("exportCSVButton")
 
-        #Save mWave file Yolo Bitch
+        # Save mWave file Yolo Bitch
         self.exportMWaveButton = QtWidgets.QPushButton(Form)
         self.exportMWaveButton.setObjectName("exportMWaveButton")
-        #--> Finish save_mWaveFile
+        # --> Finish save_mWaveFile
 
         self.toolsLayout.addWidget(self.exportCSVButton)
         self.toolsLayout.addWidget(self.exportMWaveButton)
 
-        
         self.plotButton = QtWidgets.QPushButton(Form)
         self.plotButton.setObjectName("plotButton")
         self.toolsLayout.addWidget(self.plotButton)
@@ -122,9 +122,11 @@ class Ui_Form(object):
         self.portName.setToolTip(_translate("Form", "Device name or port number number"))
         self.portName.setText(_translate("Form", "COM3"))
         self.baudrateSpinbox.setToolTip(_translate("Form", " Baud rate such as 9600 or 115200 etc"))
-        self.bytesizeSpinbox.setToolTip(_translate("Form", "Number of data bits. Possible values: FIVEBITS, SIXBITS, SEVENBITS, EIGHTBITS"))
+        self.bytesizeSpinbox.setToolTip(
+            _translate("Form", "Number of data bits. Possible values: FIVEBITS, SIXBITS, SEVENBITS, EIGHTBITS"))
         self.bytesizeSpinbox.setSuffix(_translate("Form", " bits"))
-        self.stopBitsSpinBox.setToolTip(_translate("Form", "Number of stop bits. Possible values: STOPBITS_ONE, STOPBITS_ONE_POINT_FIVE, STOPBITS_TWO"))
+        self.stopBitsSpinBox.setToolTip(_translate("Form",
+                                                   "Number of stop bits. Possible values: STOPBITS_ONE, STOPBITS_ONE_POINT_FIVE, STOPBITS_TWO"))
         self.parityComboBox.setItemText(0, _translate("Form", "Odd"))
         self.parityComboBox.setItemText(1, _translate("Form", "Even"))
         self.parityComboBox.setItemText(2, _translate("Form", "None"))
@@ -133,15 +135,14 @@ class Ui_Form(object):
         self.checkBox_2.setToolTip(_translate("Form", "Enable hardware (RTS/CTS) flow control."))
         self.checkBox_2.setText(_translate("Form", "rtscts"))
         self.checkBox_3.setToolTip(_translate("Form", "Enable hardware (DSR/DTR) flow control."))
-        self.checkBox_3.setText(_translate("Form", "dsrdtr")) 
+        self.checkBox_3.setText(_translate("Form", "dsrdtr"))
         self.commandSendButton.setText(_translate("Form", "Send"))
         self.connectButton.setText(_translate("Form", "Connect"))
         self.disconnectButton.setText(_translate("Form", "Disconnect"))
         self.saveOutputButton.setText(_translate("Form", "Save Output"))
 
-        #SAVE mWave Button
+        # SAVE mWave Button
         self.exportMWaveButton.setText(_translate("Form", "Export to MWave"))
 
         self.exportCSVButton.setText(_translate("Form", "Export to CSV"))
         self.plotButton.setText(_translate("Form", "Plot "))
-

@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -48,9 +49,9 @@ class Ui_MainWindow(object):
         self.comboBox = QtWidgets.QComboBox(self.moreFrame)
         self.comboBox.setObjectName("comboBox")
         self.gridLayout.addWidget(self.comboBox, 0, 0, 1, 1)
-        self.splitter = QtWidgets.QSplitter(QtCore.Qt.Horizontal) #This is Yeah
-        self.splitter.addWidget(self.MainFrame)  #This is Yeah
-        self.splitter.addWidget(self.moreFrame) #This is Yeah
+        self.splitter = QtWidgets.QSplitter(QtCore.Qt.Horizontal)  # This is Yeah
+        self.splitter.addWidget(self.MainFrame)  # This is Yeah
+        self.splitter.addWidget(self.moreFrame)  # This is Yeah
         self.gridLayout_3.addWidget(self.splitter, 0, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -92,12 +93,14 @@ class Ui_MainWindow(object):
         self.actionIconOpen.setObjectName("actionIconOpen")
         self.actionIconSave = QtWidgets.QAction(MainWindow)
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap(":/Icons/icons/Actions-document-save-icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap(":/Icons/icons/Actions-document-save-icon.png"), QtGui.QIcon.Normal,
+                        QtGui.QIcon.Off)
         self.actionIconSave.setIcon(icon3)
         self.actionIconSave.setObjectName("actionIconSave")
         self.actionIconSaveAs = QtWidgets.QAction(MainWindow)
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap(":/Icons/icons/Actions-document-save-as-icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap(":/Icons/icons/Actions-document-save-as-icon.png"), QtGui.QIcon.Normal,
+                        QtGui.QIcon.Off)
         self.actionIconSaveAs.setIcon(icon4)
         self.actionIconSaveAs.setObjectName("actionIconSaveAs")
         self.actionIconHelp = QtWidgets.QAction(MainWindow)
@@ -111,7 +114,8 @@ class Ui_MainWindow(object):
         self.actionExit.setObjectName("actionExit")
         self.actionFind = QtWidgets.QAction(MainWindow)
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap(":/Search/icons/find/Start-Menu-Search-icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon6.addPixmap(QtGui.QPixmap(":/Search/icons/find/Start-Menu-Search-icon.png"), QtGui.QIcon.Normal,
+                        QtGui.QIcon.Off)
         self.actionFind.setIcon(icon6)
         self.actionFind.setObjectName("actionFind")
         self.actionFind_Next = QtWidgets.QAction(MainWindow)
@@ -121,7 +125,8 @@ class Ui_MainWindow(object):
         self.actionFind_Next.setObjectName("actionFind_Next")
         self.actionReplace = QtWidgets.QAction(MainWindow)
         icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap(":/Search/icons/find/Actions-find-replace-icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon8.addPixmap(QtGui.QPixmap(":/Search/icons/find/Actions-find-replace-icon.png"), QtGui.QIcon.Normal,
+                        QtGui.QIcon.Off)
         self.actionReplace.setIcon(icon8)
         self.actionReplace.setObjectName("actionReplace")
         self.actionSave_as = QtWidgets.QAction(MainWindow)
@@ -199,8 +204,8 @@ class Ui_MainWindow(object):
         self.menuEdit.addAction(self.actionRemove_Row)
         self.menuEdit.addSeparator()
         self.menuEdit.addAction(self.actionMulti_Rename)
-        #self.menuEdit.addAction(self.actionRenumerate)
-        #self.menuEdit.addSeparator()
+        # self.menuEdit.addAction(self.actionRenumerate)
+        # self.menuEdit.addSeparator()
         self.menuSearch.addAction(self.actionFind)
         self.menuSearch.addAction(self.actionReplace)
         self.menubar.addAction(self.menuFile.menuAction())
@@ -276,5 +281,6 @@ class Ui_MainWindow(object):
         self.actionRemove_Row.setText(_translate("MainWindow", "Remove Row"))
         self.actionDeselect_All.setText(_translate("MainWindow", "Deselect All"))
         self.actionDeselect_All.setShortcut(_translate("MainWindow", "Alt+A"))
+
 
 import Icons_rc

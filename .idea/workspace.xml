@@ -2,8 +2,309 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c74e9b02-59a7-4288-85e2-c426a5d48d0a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/exampleFiles/DNA_proc_temp.pdb" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/logo.png" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/logo.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/mdp_param_v4.6/mdp options_files/gmxlogo_small.jpg" afterPath="$PROJECT_DIR$/documentation/mdp_param_v4.6/mdp options_files/gmxlogo_small.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/mdp_param_v5/mdp options_files/gmxlogo_small.jpg" afterPath="$PROJECT_DIR$/documentation/mdp_param_v5/mdp options_files/gmxlogo_small.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/md_2_1.edr" afterPath="$PROJECT_DIR$/exampleFiles/md_2_1.edr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/rs232Skeleton.ui" afterPath="$PROJECT_DIR$/grom/rs232Widget/rs232Skeleton.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/TODO" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/TODO" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/designer/qtermwidget.png" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/designer/qtermwidget.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/pyqt4/config.py.in" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/pyqt4/config.py.in" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/main.o" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/main.o" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTerminal/mainwindow.ui" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTerminal/mainwindow.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/Quantum-master.zip" afterPath="$PROJECT_DIR$/grom/terminalWidget/Quantum-master.zip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/Actions-document-save-as-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/Actions-document-save-as-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/Actions-document-save-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/Actions-document-save-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/Actions-help-about-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/Actions-help-about-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/Avogadro.png" afterPath="$PROJECT_DIR$/grom/ui/icons/Avogadro.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/Files-New-File-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/Files-New-File-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/Imagetools-Expand-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/Imagetools-Expand-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/dnahelixpixels.jpg" afterPath="$PROJECT_DIR$/grom/ui/icons/dnahelixpixels.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/edit/Actions-redo-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/edit/Actions-redo-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/edit/Actions-undo-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/edit/Actions-undo-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/edit/Sign-Delete-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/edit/Sign-Delete-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/edit/Zoom_in.png" afterPath="$PROJECT_DIR$/grom/ui/icons/edit/Zoom_in.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/edit/Zoom_out.png" afterPath="$PROJECT_DIR$/grom/ui/icons/edit/Zoom_out.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/edit/copy-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/edit/copy-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/edit/cut-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/edit/cut-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/edit/paste-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/edit/paste-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/export-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/export-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/find/Actions-find-replace-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/find/Actions-find-replace-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/find/Actions-go-down-search-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/find/Actions-go-down-search-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/find/Actions-go-up-search-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/find/Actions-go-up-search-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/find/Search-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/find/Search-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/find/Start-Menu-Search-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/find/Start-Menu-Search-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/open-file-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/open-file-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/pyMol.jpg" afterPath="$PROJECT_DIR$/grom/ui/icons/pyMol.jpg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/pyMol.png" afterPath="$PROJECT_DIR$/grom/ui/icons/pyMol.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/type/serialConnection.png" afterPath="$PROJECT_DIR$/grom/ui/icons/type/serialConnection.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/type/settings-icon.png" afterPath="$PROJECT_DIR$/grom/ui/icons/type/settings-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/type/xyz.gif" afterPath="$PROJECT_DIR$/grom/ui/icons/type/xyz.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/vmd.png" afterPath="$PROJECT_DIR$/grom/ui/icons/vmd.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/icons/vmd_logo_left.gif" afterPath="$PROJECT_DIR$/grom/ui/icons/vmd_logo_left.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/serialConnection.png" afterPath="$PROJECT_DIR$/grom/ui/serialConnection.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/settings-icon.png" afterPath="$PROJECT_DIR$/grom/ui/settings-icon.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/type_qt5.ui" afterPath="$PROJECT_DIR$/grom/ui/type_qt5.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/ui_findreplace_qt5.ui" afterPath="$PROJECT_DIR$/grom/ui/ui_findreplace_qt5.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/ui_multi_rename_qt5.ui" afterPath="$PROJECT_DIR$/grom/ui/ui_multi_rename_qt5.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/v0.10_qt5.ui" afterPath="$PROJECT_DIR$/grom/ui/v0.10_qt5.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/v0.11_qt5.ui" afterPath="$PROJECT_DIR$/grom/ui/v0.11_qt5.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/v0.12_qt5.ui" afterPath="$PROJECT_DIR$/grom/ui/v0.12_qt5.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/v0.13_qt5.ui" afterPath="$PROJECT_DIR$/grom/ui/v0.13_qt5.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/xyz.gif" afterPath="$PROJECT_DIR$/grom/ui/xyz.gif" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/icon.ico" afterPath="$PROJECT_DIR$/icon.ico" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen1.png" afterPath="$PROJECT_DIR$/screenshots/screen1.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen10.png" afterPath="$PROJECT_DIR$/screenshots/screen10.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen11.png" afterPath="$PROJECT_DIR$/screenshots/screen11.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen12.png" afterPath="$PROJECT_DIR$/screenshots/screen12.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen13.png" afterPath="$PROJECT_DIR$/screenshots/screen13.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen14.png" afterPath="$PROJECT_DIR$/screenshots/screen14.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen2.png" afterPath="$PROJECT_DIR$/screenshots/screen2.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen3.png" afterPath="$PROJECT_DIR$/screenshots/screen3.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen4.png" afterPath="$PROJECT_DIR$/screenshots/screen4.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen5.png" afterPath="$PROJECT_DIR$/screenshots/screen5.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen6.png" afterPath="$PROJECT_DIR$/screenshots/screen6.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen7.png" afterPath="$PROJECT_DIR$/screenshots/screen7.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen8.png" afterPath="$PROJECT_DIR$/screenshots/screen8.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screenshots/screen9.png" afterPath="$PROJECT_DIR$/screenshots/screen9.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/GROM.iml" afterPath="$PROJECT_DIR$/.idea/GROM.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GROM.py" afterPath="$PROJECT_DIR$/GROM.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/LICENSE" afterPath="$PROJECT_DIR$/LICENSE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs.html" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/_content.css" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/_content.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/_print.css" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/_print.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/_reset.css" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/_reset.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/css(1).php" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/css(1).php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/css.php" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/css.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/custom_css.php" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/custom_css.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/ga.js" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/ga.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/javascript.js" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/javascript.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/js.php" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/js.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/nav.js" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/nav.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/print.css" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/print.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/rgbcolor.js" afterPath="$PROJECT_DIR$/documentation/coordinate_file_html/Coordinate File - Gromacs_files/rgbcolor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/mdp_param_v4.6/mdp options.html" afterPath="$PROJECT_DIR$/documentation/mdp_param_v4.6/mdp options.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/mdp_param_v4.6/mdp options_files/style.css" afterPath="$PROJECT_DIR$/documentation/mdp_param_v4.6/mdp options_files/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/mdp_param_v5/mdp options.html" afterPath="$PROJECT_DIR$/documentation/mdp_param_v5/mdp options.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/documentation/mdp_param_v5/mdp options_files/style.css" afterPath="$PROJECT_DIR$/documentation/mdp_param_v5/mdp options_files/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/2BEG.pdb" afterPath="$PROJECT_DIR$/exampleFiles/2BEG.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/3J2T.pdb" afterPath="$PROJECT_DIR$/exampleFiles/3J2T.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/DNA_proc.pdb" afterPath="$PROJECT_DIR$/exampleFiles/DNA_proc.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/Output_test.csv" afterPath="$PROJECT_DIR$/exampleFiles/Output_test.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/Output_test.rs232" afterPath="$PROJECT_DIR$/exampleFiles/Output_test.rs232" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/Output_test2.rs232" afterPath="$PROJECT_DIR$/exampleFiles/Output_test2.rs232" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/Output_test3.csv" afterPath="$PROJECT_DIR$/exampleFiles/Output_test3.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/VIC.pdb" afterPath="$PROJECT_DIR$/exampleFiles/VIC.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/chx.top" afterPath="$PROJECT_DIR$/exampleFiles/chx.top" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/conf.gro" afterPath="$PROJECT_DIR$/exampleFiles/conf.gro" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/em.mdp" afterPath="$PROJECT_DIR$/exampleFiles/em.mdp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/em_real.mdp" afterPath="$PROJECT_DIR$/exampleFiles/em_real.mdp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/md_pull.mdp" afterPath="$PROJECT_DIR$/exampleFiles/md_pull.mdp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/npt_umbrella.mdp" afterPath="$PROJECT_DIR$/exampleFiles/npt_umbrella.mdp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/outPut3.rs232" afterPath="$PROJECT_DIR$/exampleFiles/outPut3.rs232" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/test.pdb" afterPath="$PROJECT_DIR$/exampleFiles/test.pdb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/testUV.rs232" afterPath="$PROJECT_DIR$/exampleFiles/testUV.rs232" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/testUV_1.csv" afterPath="$PROJECT_DIR$/exampleFiles/testUV_1.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/topol_dppc.top" afterPath="$PROJECT_DIR$/exampleFiles/topol_dppc.top" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exampleFiles/yolo.wls" afterPath="$PROJECT_DIR$/exampleFiles/yolo.wls" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ez_setup.py" afterPath="$PROJECT_DIR$/ez_setup.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/freeze.py" afterPath="$PROJECT_DIR$/freeze.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/Icons_rc.py" afterPath="$PROJECT_DIR$/grom/Icons_rc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/MainApp.py" afterPath="$PROJECT_DIR$/grom/MainApp.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/__init__.py" afterPath="$PROJECT_DIR$/grom/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/customQProcess.py" afterPath="$PROJECT_DIR$/grom/customQProcess.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/findandreplacedlg.py" afterPath="$PROJECT_DIR$/grom/findandreplacedlg.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/modules.py" afterPath="$PROJECT_DIR$/grom/modules.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/plotWidget/edrParse.py" afterPath="$PROJECT_DIR$/grom/plotWidget/edrParse.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/plotWidget/movingAverTest.py" afterPath="$PROJECT_DIR$/grom/plotWidget/movingAverTest.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/plotWidget/plotTest.py" afterPath="$PROJECT_DIR$/grom/plotWidget/plotTest.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/plotWidget/plotTool.py" afterPath="$PROJECT_DIR$/grom/plotWidget/plotTool.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/plotWidget/test2.py" afterPath="$PROJECT_DIR$/grom/plotWidget/test2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/Output_test.wls" afterPath="$PROJECT_DIR$/grom/rs232Widget/Output_test.wls" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/ethanol.wls" afterPath="$PROJECT_DIR$/grom/rs232Widget/ethanol.wls" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/exportMWave.py" afterPath="$PROJECT_DIR$/grom/rs232Widget/exportMWave.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/myTest.rs232" afterPath="$PROJECT_DIR$/grom/rs232Widget/myTest.rs232" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/myTest.wls" afterPath="$PROJECT_DIR$/grom/rs232Widget/myTest.wls" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/rs232Skeleton.py" afterPath="$PROJECT_DIR$/grom/rs232Widget/rs232Skeleton.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/rs232Tool.py" afterPath="$PROJECT_DIR$/grom/rs232Widget/rs232Tool.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/specTest.wls" afterPath="$PROJECT_DIR$/grom/rs232Widget/specTest.wls" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/specTest2.wls" afterPath="$PROJECT_DIR$/grom/rs232Widget/specTest2.wls" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/tada.wls" afterPath="$PROJECT_DIR$/grom/rs232Widget/tada.wls" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/rs232Widget/yikesImpro.wls" afterPath="$PROJECT_DIR$/grom/rs232Widget/yikesImpro.wls" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/tableWidget/GRO_parse.py" afterPath="$PROJECT_DIR$/grom/tableWidget/GRO_parse.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/tableWidget/PDB_parse.py" afterPath="$PROJECT_DIR$/grom/tableWidget/PDB_parse.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/tableWidget/frTableEdit.py" afterPath="$PROJECT_DIR$/grom/tableWidget/frTableEdit.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/tableWidget/gro_model.py" afterPath="$PROJECT_DIR$/grom/tableWidget/gro_model.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/tableWidget/pdb_model_0_88.py" afterPath="$PROJECT_DIR$/grom/tableWidget/pdb_model_0_88.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/tableWidget/residColors.py" afterPath="$PROJECT_DIR$/grom/tableWidget/residColors.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/tableWidget/richtextlineedit.py" afterPath="$PROJECT_DIR$/grom/tableWidget/richtextlineedit.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/tableWidget/tableView.py" afterPath="$PROJECT_DIR$/grom/tableWidget/tableView.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/tableWidget/undoCommands.py" afterPath="$PROJECT_DIR$/grom/tableWidget/undoCommands.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/AUTHORS" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/AUTHORS" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/CMakeLists.txt" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/COPYING" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/COPYING" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/Changelog" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/Changelog" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/INSTALL" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/INSTALL" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/README" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/README" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/cmake/cmake_uninstall.cmake.in" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/cmake/cmake_uninstall.cmake.in" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/BlockArray.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/BlockArray.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/BlockArray.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/BlockArray.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/CMakeLists.txt" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Character.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Character.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/CharacterColor.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/CharacterColor.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ColorScheme.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ColorScheme.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ColorScheme.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ColorScheme.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ColorTables.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ColorTables.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/DefaultTranslatorText.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/DefaultTranslatorText.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Emulation.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Emulation.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Emulation.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Emulation.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ExtendedDefaultTranslator.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ExtendedDefaultTranslator.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Filter.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Filter.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Filter.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Filter.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/History.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/History.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/History.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/History.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/KeyboardTranslator.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/KeyboardTranslator.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/KeyboardTranslator.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/KeyboardTranslator.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/LineFont.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/LineFont.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/LineFont.src" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/LineFont.src" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Pty.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Pty.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Pty.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Pty.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/README" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/README" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Screen.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Screen.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Screen.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Screen.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ScreenWindow.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ScreenWindow.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ScreenWindow.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ScreenWindow.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Session.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Session.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Session.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Session.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ShellCommand.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ShellCommand.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ShellCommand.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/ShellCommand.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/TerminalCharacterDecoder.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/TerminalCharacterDecoder.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/TerminalCharacterDecoder.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/TerminalCharacterDecoder.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/TerminalDisplay.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/TerminalDisplay.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/TerminalDisplay.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/TerminalDisplay.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Vt102Emulation.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Vt102Emulation.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Vt102Emulation.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/Vt102Emulation.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/BlackOnLightYellow.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/BlackOnLightYellow.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/BlackOnRandomLight.colorscheme" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/BlackOnRandomLight.colorscheme" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/BlackOnWhite.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/BlackOnWhite.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/CMakeLists.txt" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/DarkPastels.colorscheme" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/DarkPastels.colorscheme" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/GreenOnBlack.colorscheme" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/GreenOnBlack.colorscheme" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/Linux.colorscheme" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/Linux.colorscheme" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/WhiteOnBlack.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/WhiteOnBlack.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/BlackOnLightColor.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/BlackOnLightColor.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/DarkPicture.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/DarkPicture.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Example.Schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Example.Schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/GreenOnBlack.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/GreenOnBlack.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/GreenTint.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/GreenTint.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/GreenTint_MC.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/GreenTint_MC.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/LightPicture.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/LightPicture.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Linux.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Linux.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/README.Schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/README.Schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/README.default.Schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/README.default.Schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Transparent.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Transparent.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Transparent_MC.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Transparent_MC.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Transparent_darkbg.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Transparent_darkbg.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Transparent_lightbg.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/Transparent_lightbg.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/XTerm.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/XTerm.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/syscolor.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/syscolor.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/vim.schema" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/color-schemes/historic/vim.schema" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/default.keytab" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/default.keytab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/designer/qtermwidgetplugin.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/designer/qtermwidgetplugin.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/designer/qtermwidgetplugin.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/designer/qtermwidgetplugin.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/designer/qtermwidgetplugin.qrc" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/designer/qtermwidgetplugin.qrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/README" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/README" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/default.keytab" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/default.keytab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/historic/vt100.keytab" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/historic/vt100.keytab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/historic/x11r5.keytab" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/historic/x11r5.keytab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/linux.keytab" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/linux.keytab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/macbook.keytab" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/macbook.keytab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/solaris.keytab" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/solaris.keytab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/vt420pc.keytab" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kb-layouts/vt420pc.keytab" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/konsole_wcwidth.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/konsole_wcwidth.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/konsole_wcwidth.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/konsole_wcwidth.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kprocess.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kprocess.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kprocess.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kprocess.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kpty.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kpty.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kpty.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kpty.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kpty_p.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kpty_p.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kptydevice.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kptydevice.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kptydevice.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kptydevice.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kptyprocess.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kptyprocess.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kptyprocess.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/kptyprocess.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/qtermwidget.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/qtermwidget.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/qtermwidget.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/qtermwidget.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/tools.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/tools.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/tools.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/lib/tools.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/pyqt4/README" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/pyqt4/README" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/pyqt4/config.py" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/pyqt4/config.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/pyqt4/qtermwidget.sip" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/pyqt4/qtermwidget.sip" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/pyqt4/qtermwidgetconfig.py" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/pyqt4/qtermwidgetconfig.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/qtermwidget.spec" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/qtermwidget.spec" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeCache.txt" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeCache.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeCCompiler.cmake" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeCCompiler.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeCXXCompiler.cmake" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeCXXCompiler.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeDirectoryInformation.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeError.log" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeError.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeOutput.log" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeOutput.log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeSystem.cmake" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CMakeSystem.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CompilerIdC/CMakeCCompilerId.c" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CompilerIdC/CMakeCCompilerId.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/CompilerIdCXX/CMakeCXXCompilerId.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/Makefile.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/Makefile2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/TargetDirectories.txt" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/TargetDirectories.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/cmake.check_cache" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/cmake.check_cache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/progress.marks" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/CXX.includecache" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/CXX.includecache" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/DependInfo.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/build.make" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/build.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/cmake_clean.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/depend.internal" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/depend.internal" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/depend.make" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/depend.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/flags.make" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/flags.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/link.txt" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/link.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/progress.make" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeFiles/test.dir/progress.make" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeLists.txt" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/CMakeLists.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/Makefile" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/Makefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/README" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/README" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/cmake_install.cmake" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/cmake_install.cmake" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/main.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTermWidget/src/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTerminal/QTerminal.pro" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTerminal/QTerminal.pro" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTerminal/main.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTerminal/main.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTerminal/mainwindow.cpp" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTerminal/mainwindow.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/QTerminal/mainwindow.h" afterPath="$PROJECT_DIR$/grom/terminalWidget/QTerminal/mainwindow.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/__init__.py" afterPath="$PROJECT_DIR$/grom/terminalWidget/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/embedTerminal.py" afterPath="$PROJECT_DIR$/grom/terminalWidget/embedTerminal.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/pyqterm/__init__.py" afterPath="$PROJECT_DIR$/grom/terminalWidget/pyqterm/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/pyqterm/backend.py" afterPath="$PROJECT_DIR$/grom/terminalWidget/pyqterm/backend.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/pyqterm/frontend.py" afterPath="$PROJECT_DIR$/grom/terminalWidget/pyqterm/frontend.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/pyqterm/procinfo.py" afterPath="$PROJECT_DIR$/grom/terminalWidget/pyqterm/procinfo.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/terminalWidget/qtermwidget.py" afterPath="$PROJECT_DIR$/grom/terminalWidget/qtermwidget.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/textWidget/GROMHighlight.py" afterPath="$PROJECT_DIR$/grom/textWidget/GROMHighlight.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/textWidget/frTextEdit.py" afterPath="$PROJECT_DIR$/grom/textWidget/frTextEdit.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/textWidget/keyWords.py" afterPath="$PROJECT_DIR$/grom/textWidget/keyWords.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/textWidget/textedit.py" afterPath="$PROJECT_DIR$/grom/textWidget/textedit.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/type_rc.py" afterPath="$PROJECT_DIR$/grom/type_rc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/Icons.qrc" afterPath="$PROJECT_DIR$/grom/ui/Icons.qrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/Icons_rc.py" afterPath="$PROJECT_DIR$/grom/ui/Icons_rc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/Icons_rc_old.py" afterPath="$PROJECT_DIR$/grom/ui/Icons_rc_old.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/__init__.py" afterPath="$PROJECT_DIR$/grom/ui/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/type.qrc" afterPath="$PROJECT_DIR$/grom/ui/type.qrc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/type_rc.py" afterPath="$PROJECT_DIR$/grom/ui/type_rc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/ui_findReplace.py" afterPath="$PROJECT_DIR$/grom/ui/ui_findReplace.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/ui_mainWindow.py" afterPath="$PROJECT_DIR$/grom/ui/ui_mainWindow.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/ui_mainWindow_old.py" afterPath="$PROJECT_DIR$/grom/ui/ui_mainWindow_old.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/ui_mainWindow_oldest.py" afterPath="$PROJECT_DIR$/grom/ui/ui_mainWindow_oldest.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/ui_multiRename.py" afterPath="$PROJECT_DIR$/grom/ui/ui_multiRename.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grom/ui/ui_typeWindow.py" afterPath="$PROJECT_DIR$/grom/ui/ui_typeWindow.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
     </list>
     <ignored path="GROM.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -14,7 +315,6 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -22,14 +322,57 @@
   <component name="FavoritesManager">
     <favorites_list name="GROM" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="GROM.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/GROM.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pdb_model_0_88.py" pinned="false" current-in-tab="false">
+        <entry file="file:///media/Work/MEGA/Programming/GitHub/GROM/grom/tableWidget/pdb_model_0_88.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="662">
+              <caret line="592" column="17" selection-start-line="592" selection-start-column="17" selection-end-line="592" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="59" column="34" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="/media/Work/MEGA/Programming/GitHub/GROM/grom/MainApp.py" />
+        <option value="/media/Work/MEGA/Programming/GitHub/GROM/grom/tableWidget/pdb_model_0_88.py" />
+        <option value="$PROJECT_DIR$/README.md" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-4" />
-    <option name="width" value="1301" />
-    <option name="height" value="772" />
+    <option name="y" value="24" />
+    <option name="width" value="1215" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -56,8 +399,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -66,52 +407,308 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GROM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GROM" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/GROM.py" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
+    <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="RunManager" selected="Python.GROM">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GROM" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GROM" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GROM" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GROM" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GROM" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GROM" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GROM" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="GROM" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/envs/Science/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="GROM" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GROM.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Python.GROM" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="c74e9b02-59a7-4288-85e2-c426a5d48d0a" name="Default" comment="" />
       <created>1446539659633</created>
       <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
       <updated>1446539659633</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
-    <editor active="false" />
+    <frame x="65" y="24" width="1215" height="1000" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24938272" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24980783" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297062" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.39934713" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="2188" y="171" width="1313" height="865" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file:///media/Work/MEGA/Programming/GitHub/GROM/grom/MainApp.py</url>
+          <line>572</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file:///media/Work/MEGA/Programming/GitHub/GROM/grom/tableWidget/pdb_model_0_88.py</url>
+          <line>599</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file:///media/Work/MEGA/Programming/GitHub/GROM/grom/tableWidget/pdb_model_0_88.py</url>
+          <line>593</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="4" />
+    </breakpoint-manager>
     <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file:///media/Work/MEGA/Programming/GitHub/GROM/grom/textWidget/textedit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GROM.pyperf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///media/Work/MEGA/Programming/GitHub/GROM/grom/MainApp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-616">
+          <caret line="578" column="19" selection-start-line="578" selection-start-column="19" selection-end-line="578" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GROM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///media/Work/MEGA/Programming/GitHub/GROM/grom/tableWidget/pdb_model_0_88.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="662">
+          <caret line="592" column="17" selection-start-line="592" selection-start-column="17" selection-end-line="592" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="59" column="34" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

@@ -12,28 +12,25 @@
 
 from __future__ import absolute_import
 
-
-
 import sys
 import random
 import matplotlib
+
 matplotlib.use("Qt5Agg")
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication
-from PyQt5.QtWidgets import  QMainWindow
-from PyQt5.QtWidgets import  QMenu
-from PyQt5.QtWidgets import  QHBoxLayout
-from PyQt5.QtWidgets import  QSizePolicy
-from PyQt5.QtWidgets import  QMessageBox
-from PyQt5.QtWidgets import  QWidget
+from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMenu
+from PyQt5.QtWidgets import QHBoxLayout
+from PyQt5.QtWidgets import QSizePolicy
+from PyQt5.QtWidgets import QMessageBox
+from PyQt5.QtWidgets import QWidget
 from PyQt5.QtWidgets import QListWidget
 from numpy import arange, sin, pi
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 
 #: Import from PyQt5.QtCore
 from PyQt5.QtCore import QCoreApplication
@@ -44,7 +41,6 @@ from PyQt5.QtCore import QFile
 from PyQt5.QtCore import QFileInfo
 from PyQt5.QtCore import QIODevice
 from PyQt5.QtCore import QTextStream
-
 
 #: Import from PyQt5.QtQtGui
 from PyQt5.QtGui import QFont
@@ -69,6 +65,7 @@ from PyQt5.QtCore import (pyqtProperty, pyqtSignal)
 
 from .edrParse import *
 
+
 def moving_average(x, n, type='simple'):
     """
     compute an n period moving average.
@@ -77,17 +74,17 @@ def moving_average(x, n, type='simple'):
 
     """
     x = np.asarray(x)
-    if type=='simple':
+    if type == 'simple':
         weights = np.ones(n)
     else:
         weights = np.exp(np.linspace(-1., 0., n))
 
     weights /= weights.sum()
 
-
-    a =  np.convolve(x, weights, mode='full')[:len(x)]
+    a = np.convolve(x, weights, mode='full')[:len(x)]
     a[:n] = a[n]
     return a
+
 
 def relative_strength(prices, n=14):
     """
@@ -97,30 +94,31 @@ def relative_strength(prices, n=14):
     """
 
     deltas = np.diff(prices)
-    seed = deltas[:n+1]
-    up = seed[seed>=0].sum()/n
-    down = -seed[seed<0].sum()/n
-    rs = up/down
+    seed = deltas[:n + 1]
+    up = seed[seed >= 0].sum() / n
+    down = -seed[seed < 0].sum() / n
+    rs = up / down
     rsi = np.zeros_like(prices)
-    rsi[:n] = 100. - 100./(1.+rs)
+    rsi[:n] = 100. - 100. / (1. + rs)
 
     for i in range(n, len(prices)):
-        delta = deltas[i-1] # cause the diff is 1 shorter
+        delta = deltas[i - 1]  # cause the diff is 1 shorter
 
-        if delta>0:
+        if delta > 0:
             upval = delta
             downval = 0.
         else:
             upval = 0.
             downval = -delta
 
-        up = (up*(n-1) + upval)/n
-        down = (down*(n-1) + downval)/n
+        up = (up * (n - 1) + upval) / n
+        down = (down * (n - 1) + downval) / n
 
-        rs = up/down
-        rsi[i] = 100. - 100./(1.+rs)
+        rs = up / down
+        rsi[i] = 100. - 100. / (1. + rs)
 
     return rsi
+
 
 def moving_average_convergence(x, nslow=26, nfast=12):
     """
@@ -134,51 +132,53 @@ def moving_average_convergence(x, nslow=26, nfast=12):
 
 class MyMplCanvas(FigureCanvas):
     """Ultimately, this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
+
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         self.fig = Figure(figsize=(width, height), dpi=dpi)
         self.axes = self.fig.add_subplot(111)
         # We want the axes cleared every time plot() is called
         self.axes.hold(False)
 
-        #self.compute_initial_figure()
+        # self.compute_initial_figure()
 
         #
         FigureCanvas.__init__(self, self.fig)
         self.setParent(parent)
 
         FigureCanvas.setSizePolicy(self,
-                QSizePolicy.Expanding,
-                QSizePolicy.Expanding)
+                                   QSizePolicy.Expanding,
+                                   QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
 
     def compute_initial_figure(self):
-          pass
+        pass
+
 
 class showPlot(MyMplCanvas):
     """Simple canvas with a sine plot."""
-    def plotFigure(self,x, y, xlabel, ylabel, title):
+
+    def plotFigure(self, x, y, xlabel, ylabel, title):
         self.x = x
         self.y = y
         self.axes.plot(self.x, self.y)
-        #self.axes.subplot(211)
-        #ma20 = moving_average(self.y, 50, type='simple') #
-        #self.axes.plot(self.x, ma20)
+        # self.axes.subplot(211)
+        # ma20 = moving_average(self.y, 50, type='simple') #
+        # self.axes.plot(self.x, ma20)
         self.axes.set_title(title)
         self.axes.set_xlabel(xlabel)
         self.axes.set_ylabel(ylabel)
         self.draw()
-        #FigureCanvas.updateGeometry(self)
+        # FigureCanvas.updateGeometry(self)
 
     def saveFig(self, saveFilename):
-        print('saveName ',saveFilename)
+        print('saveName ', saveFilename)
         try:
             self.fig.savefig(saveFilename)
         except Exception as e:
-            print("Error in saving figure ",e)
+            print("Error in saving figure ", e)
 
 
 class plotWidget(QWidget):
-
     NextId = 1
 
     FONT_MAX_SIZE = 30
@@ -188,7 +188,7 @@ class plotWidget(QWidget):
 
     customDataChanged = pyqtSignal()
 
-    def __init__(self, filename= None, parent=None):
+    def __init__(self, filename=None, parent=None):
         """
         Creates an Instance of QWidget
 
@@ -202,12 +202,8 @@ class plotWidget(QWidget):
 
         self.setAttribute(Qt.WA_DeleteOnClose)
 
-        self.filename = filename #VIT
+        self.filename = filename  # VIT
         self.save_title = ''
-
-
-
-
 
         self.setWindowTitle(QFileInfo(self.filename).fileName())
 
@@ -216,15 +212,15 @@ class plotWidget(QWidget):
 
         self.listWidget = QListWidget(self)
         self.listWidget.currentRowChanged.connect(self.updatePlot)
-        #self.listWidget.setMinimumWidth(200)
+        # self.listWidget.setMinimumWidth(200)
         self.listWidget.setMaximumWidth(200)
 
-        self.splitter = QtWidgets.QSplitter(QtCore.Qt.Horizontal) #This is Yeah
-        self.splitter.addWidget(self.plotToolWidget)  #This is Yeah
-        self.splitter.addWidget(self.listWidget) #This is Yeah
+        self.splitter = QtWidgets.QSplitter(QtCore.Qt.Horizontal)  # This is Yeah
+        self.splitter.addWidget(self.plotToolWidget)  # This is Yeah
+        self.splitter.addWidget(self.listWidget)  # This is Yeah
 
         hbox.addWidget(self.splitter)
-        #hbox.addWidget(listWidget)
+        # hbox.addWidget(listWidget)
 
         self.readData()
 
@@ -232,58 +228,57 @@ class plotWidget(QWidget):
         print("Update Plot Yahooooo ")
         row = self.listWidget.currentRow()
         self.title = self.listWidget.item(row).text()
-        print('Row ',row)
+        print('Row ', row)
         print('----------------------------')
-        x,y = self.edrObject.dataExtractFromRow(row)
+        x, y = self.edrObject.dataExtractFromRow(row)
         unit = self.edrObject.getUnits(row)
-        print('Unit is ',unit)
-        #print('x ',len(x))
-        #print('y ',len(y))
+        print('Unit is ', unit)
+        # print('x ',len(x))
+        # print('y ',len(y))
 
-        self.plotToolWidget.plotFigure(x,y, 'ps', unit, self.title)
+        self.plotToolWidget.plotFigure(x, y, 'ps', unit, self.title)
 
     def readData(self):
-        self.edrObject = EdrIO(self.filename, 'float') #for now
+        self.edrObject = EdrIO(self.filename, 'float')  # for now
         print('edrObject ', self.edrObject)
         self.populateList()
 
     def populateList(self):
         self.props = self.edrObject.read('avail quantities')
-        print('props ',self.props)
+        print('props ', self.props)
         index = 0
         for i in self.props:
-            self.listWidget.addItem(str(index) + '. ' +i)
+            self.listWidget.addItem(str(index) + '. ' + i)
             index += 1
-
 
     def save(self):
         #: So self.title has to be modified
-        self.save_title  = self.title.split(' ')[1] + '.png'
-        print('save_title is ',self.save_title)
+        self.save_title = self.title.split(' ')[1] + '.png'
+        print('save_title is ', self.save_title)
 
         if "edr" in self.filename:
             filename = QFileDialog.getSaveFileName(self,
-                    "G.R.O.M. Editor -- Save File As", self.save_title,
-                    "png (*.png  *.*)")
-            print('filename is ',filename)
+                                                   "G.R.O.M. Editor -- Save File As", self.save_title,
+                                                   "png (*.png  *.*)")
+            print('filename is ', filename)
             if len(filename[0]) == 0:
                 return
             self.filenameSave = filename[0]
-            print('Save graph ',self.filenameSave)
-        #self.setWindowTitle(QFileInfo(self.filename).fileName())
+            print('Save graph ', self.filenameSave)
+        # self.setWindowTitle(QFileInfo(self.filename).fileName())
         exception = None
         fh = None
         try:
-            #fh = QFile(self.filenameSave)
-            #if not fh.open(QIODevice.WriteOnly):
-                #raise IOError(str(fh.errorString()))
+            # fh = QFile(self.filenameSave)
+            # if not fh.open(QIODevice.WriteOnly):
+            # raise IOError(str(fh.errorString()))
             self.plotToolWidget.saveFig(self.filenameSave)
         except EnvironmentError as e:
             exception = e
-            print('error in saving ',e)
-        #finally:
-            #if fh is not None:
-                #fh.close()
-            #if exception is not None:
-                #raise exception
-#
+            print('error in saving ', e)
+            # finally:
+            # if fh is not None:
+            # fh.close()
+            # if exception is not None:
+            # raise exception
+            #

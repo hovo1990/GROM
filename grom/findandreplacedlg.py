@@ -9,19 +9,15 @@
     :license: GPL, see LICENSE for more details.
 """""
 
-
 import re
 import sys
 
-
 #: Importing from  PyQt5.QtCore
-from PyQt5.QtCore import  Qt
-
+from PyQt5.QtCore import Qt
 
 #: Importing from  PyQt5.QtWidgets
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtWidgets import QPlainTextEdit
-
 
 sys.path.append('ui/')
 import ui.ui_findReplace as ui_findReplace
@@ -35,31 +31,28 @@ except ImportError:
 
 
 class FindAndReplaceDlg(QDialog,
-        ui_findReplace.Ui_FindAndReplaceDlg):
-
+                        ui_findReplace.Ui_FindAndReplaceDlg):
     showFrame = False
 
-    def __init__(self,state ='search', table = None, text = None, parent=None):
+    def __init__(self, state='search', table=None, text=None, parent=None):
         super(FindAndReplaceDlg, self).__init__(parent)
         self.__text = str(text)
 
         self.state = state
-        self.__table = table #Careful Here
+        self.__table = table  # Careful Here
         self.setupUi(self)
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
-        self.resize(300,200)
+        self.resize(300, 200)
         self.setAttribute(Qt.WA_DeleteOnClose)
         if not MAC:
             self.findButton.setFocusPolicy(Qt.NoFocus)
             self.replaceButton.setFocusPolicy(Qt.NoFocus)
             self.replaceAllButton.setFocusPolicy(Qt.NoFocus)
             self.closeButton.setFocusPolicy(Qt.NoFocus)
-        self.updateUi() #VIT
+        self.updateUi()  # VIT
 
         #: hides several widgets,since code hasn't been implemented yet
         self.hideObjects()
-
-
 
         #: --> sets Up signals
         self.findButton.clicked.connect(self.findAll)
@@ -70,10 +63,6 @@ class FindAndReplaceDlg(QDialog,
         self.replaceButton.clicked.connect(self.replaceButton_clicked)
         self.replaceAllButton.clicked.connect(self.replaceAllButton_clicked)
         #: Signals End
-
-
-
-
 
     def hideObjects(self):
         """
@@ -87,15 +76,13 @@ class FindAndReplaceDlg(QDialog,
         self.label_3.hide()
         self.CoordOptionsButton.setEnabled(False)
 
-
     def changeFindValue(self):
         self.searchVal = str(self.findLineEdit.text())
-        self.currenWidget.setSearchTextValue(self.searchVal,self.replaceVal)
+        self.currenWidget.setSearchTextValue(self.searchVal, self.replaceVal)
 
     def changeReplaceValue(self):
         self.replaceVal = str(self.replaceLineEdit.text())
-        self.currenWidget.setSearchTextValue(self.searchVal,self.replaceVal)
-
+        self.currenWidget.setSearchTextValue(self.searchVal, self.replaceVal)
 
     def upSearch(self):
         """
@@ -113,9 +100,7 @@ class FindAndReplaceDlg(QDialog,
         self.__index = 0
         self.updateUi()
 
-
-
-    def fillFields(self,searchVal = '',replaceVal = ''):
+    def fillFields(self, searchVal='', replaceVal=''):
         """
         Method to fill the fields for Find and Replace Dialog
 
@@ -127,10 +112,10 @@ class FindAndReplaceDlg(QDialog,
         self.searchVal = searchVal
         self.replaceVal = replaceVal
         self.findLineEdit.setText(self.searchVal)
-        self.replaceLineEdit.setText(self.replaceVal) #Here is the problem
-        self.updateUi() #VIT
+        self.replaceLineEdit.setText(self.replaceVal)  # Here is the problem
+        self.updateUi()  # VIT
 
-    def AddInfo(self,currentWidget = None):
+    def AddInfo(self, currentWidget=None):
         """
         Method to update active Widget reference and set Up Dialog according
         to its instance, whether it's a TextEditor or TableEditr
@@ -141,7 +126,7 @@ class FindAndReplaceDlg(QDialog,
         self.currenWidget = currentWidget
         if self.currenWidget is None:
             pass
-        elif  isinstance(self.currenWidget, QPlainTextEdit):
+        elif isinstance(self.currenWidget, QPlainTextEdit):
             self.findButton.hide()
             self.CoordOptionsButton.setEnabled(False)
             self.frameCoord.hide()
@@ -151,13 +136,9 @@ class FindAndReplaceDlg(QDialog,
         try:
             values = self.currenWidget.getSearchTextValue()
             #:Fills Dialog Fields with Values
-            self.fillFields(values[0],values[1])
+            self.fillFields(values[0], values[1])
         except:
             pass
-
-
-
-
 
     def replaceButton_clicked(self):
         """
@@ -165,9 +146,7 @@ class FindAndReplaceDlg(QDialog,
         """
         self.replaceVal = str(self.replaceLineEdit.text())
         self.syntaxCombo = str(self.syntaxComboBox.currentText())
-        self.currenWidget.replace(self.replaceVal,self.syntaxCombo)
-
-
+        self.currenWidget.replace(self.replaceVal, self.syntaxCombo)
 
     def replaceAllButton_clicked(self):
         """
@@ -176,8 +155,7 @@ class FindAndReplaceDlg(QDialog,
         self.searchVal = str(self.findLineEdit.text())
         self.replaceVal = str(self.replaceLineEdit.text())
         self.syntaxCombo = str(self.syntaxComboBox.currentText())
-        self.currenWidget.replaceAll(self.searchVal,self.replaceVal)
-
+        self.currenWidget.replaceAll(self.searchVal, self.replaceVal)
 
     def search(self):
         """
@@ -188,10 +166,9 @@ class FindAndReplaceDlg(QDialog,
             self.syntaxCombo = str(self.syntaxComboBox.currentText())
             self.searchVal = str(self.findLineEdit.text())
             self.replaceVal = str(self.replaceLineEdit.text())
-            self.currenWidget.search(self.searchVal,self.replaceVal,self.syntaxCombo)
+            self.currenWidget.search(self.searchVal, self.replaceVal, self.syntaxCombo)
         except:
             self.currenWidget.updateToZero()
-
 
     def findAll(self):
         """
@@ -201,19 +178,18 @@ class FindAndReplaceDlg(QDialog,
             self.searchVal = str(self.findLineEdit.text())
             self.currenWidget.findAll(self.searchVal)
         except Exception as error:
-            print("Error: ",error)
+            print("Error: ", error)
 
     def updateUi(self):
         """
         Method that checks length of findLineedit and enables Buttons
         """
-        enable = not len(self.findLineEdit.text()) <1 #need to fix this
+        enable = not len(self.findLineEdit.text()) < 1  # need to fix this
         self.DownSearch.setEnabled(enable)
         self.UpSearch.setEnabled(enable)
         self.findButton.setEnabled(enable)
         self.replaceButton.setEnabled(enable)
         self.replaceAllButton.setEnabled(enable)
-
 
     #: ---> This methods are for a future release
     def deactivateCoordChecks(self):
@@ -244,10 +220,8 @@ class FindAndReplaceDlg(QDialog,
         self.checkBoxTempFact.setChecked(True)
         self.checkBoxElem.setChecked(True)
 
-
-
-    def activateFrame(self): #!!!!!!!
-        self.resize(200,200)
+    def activateFrame(self):  # !!!!!!!
+        self.resize(200, 200)
         if self.showFrame == False:
             self.frameCoord.show()
             self.showFrame = True
@@ -255,7 +229,4 @@ class FindAndReplaceDlg(QDialog,
             self.showFrame = False
             self.frameCoord.hide()
 
-    #: ---> END
-
-
-
+            #: ---> END

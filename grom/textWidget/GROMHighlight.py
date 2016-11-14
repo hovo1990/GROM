@@ -10,8 +10,6 @@
     :license: GPL, see LICENSE for more details.
 """""
 
-
-
 import sys
 import re
 
@@ -25,15 +23,12 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtGui import QSyntaxHighlighter
 from PyQt5.QtGui import QTextCharFormat
 
-
-
-
-
 from .keyWords import Total
+
 sys.path.append('ui/')
 
-class GROMHighlighter(QSyntaxHighlighter):
 
+class GROMHighlighter(QSyntaxHighlighter):
     Rules = []
     Red_Rules = []
     Algorithm_Rules = []
@@ -49,7 +44,6 @@ class GROMHighlighter(QSyntaxHighlighter):
         keywordFormat.setFontWeight(QFont.Bold)
         self.keyFormatAdress = keywordFormat
 
-
         #: adds all dictionary content to Rules
         for section in Total:
             keys = list(section.keys())
@@ -58,41 +52,39 @@ class GROMHighlighter(QSyntaxHighlighter):
                 GROMHighlighter.Red_Rules.append(i[2:-2])
                 if len(list_is) > 0:
                     for element in list_is:
-                        text = r"\b%s\b" %(element[2:-2])
+                        text = r"\b%s\b" % (element[2:-2])
                         GROMHighlighter.Red_Rules.append(text)
                         GROMHighlighter.Algorithm_Rules.append(text)
-                        GROMHighlighter.Rules.append((QRegularExpression(text,QRegularExpression.CaseInsensitiveOption), keywordFormat)) #testing for underline yellow
-
+                        GROMHighlighter.Rules.append((
+                            QRegularExpression(text, QRegularExpression.CaseInsensitiveOption),
+                            keywordFormat))  # testing for underline yellow
 
         topolFormat = QTextCharFormat()
         topolFormat.setForeground(Qt.yellow)
         topolFormat.setFontWeight(QFont.Bold)
-        for pattern_top in ((r"\[ defaults \]", r"\[ moleculetype \]", r"\[ atoms \]",r"\[ atomtypes \]",
-                r"\[ bonds \]", r"\[ pairs \]", r"\[ angles \]",
-                r"\[ dihedrals \]", r"\[ system \]", r"\[ molecules \]",r"\[ position_restraints \]")):
+        for pattern_top in ((r"\[ defaults \]", r"\[ moleculetype \]", r"\[ atoms \]", r"\[ atomtypes \]",
+                             r"\[ bonds \]", r"\[ pairs \]", r"\[ angles \]",
+                             r"\[ dihedrals \]", r"\[ system \]", r"\[ molecules \]", r"\[ position_restraints \]")):
             GROMHighlighter.Rules.append((QRegularExpression(pattern_top),
-                                           topolFormat))
+                                          topolFormat))
 
-
-        #--> Rule for 'N' to color red
+        # --> Rule for 'N' to color red
         NoFormat = QTextCharFormat()
         NoFormat.setForeground(Qt.red)
         NoFormat.setFontWeight(QFont.Bold)
         pattern_No = r"\bN\b"
         GROMHighlighter.Rules.append((QRegularExpression(pattern_No),
-                                           NoFormat))
+                                      NoFormat))
 
-        #--> Rule for 'Y' to color green
+        # --> Rule for 'Y' to color green
         YesFormat = QTextCharFormat()
         YesFormat.setForeground(Qt.green)
         YesFormat.setFontWeight(QFont.Bold)
         pattern_Yes = r"\bY\b"
         GROMHighlighter.Rules.append((QRegularExpression(pattern_Yes),
-                                           YesFormat))
+                                      YesFormat))
 
-
-
-        #--> Rules for number patterns  to color orange
+        # --> Rules for number patterns  to color orange
         number = QTextCharFormat()
         number.setForeground(QColor(255, 165, 0))
         number.setFontWeight(QFont.Bold)
@@ -105,30 +97,28 @@ class GROMHighlighter(QSyntaxHighlighter):
         GROMHighlighter.Rules.append((patternNum3, number))
         GROMHighlighter.Rules.append((patternNum4, number))
 
-
         #: --> Rule to color #include to darkCyan
         keywordInclude = QTextCharFormat()
         keywordInclude.setForeground(Qt.darkCyan)
         keywordInclude.setFontWeight(QFont.Bold)
-        patternkeyGroIncl = QRegularExpression(  r"(#include).*$")
+        patternkeyGroIncl = QRegularExpression(r"(#include).*$")
         GROMHighlighter.Rules.append((patternkeyGroIncl, keywordInclude))
 
         #: --> Rule to color #ifdef and #endif
-        keywordIf = QTextCharFormat() #Here My Modif
-        keywordIf.setForeground(QColor(180,202,138,220))
+        keywordIf = QTextCharFormat()  # Here My Modif
+        keywordIf.setForeground(QColor(180, 202, 138, 220))
         keywordIf.setFontWeight(QFont.Bold)
         patternkeyGroIf = QRegularExpression(
-                                  r"(#ifdef).*$"
-                                  r"|(#endif).*$")
+            r"(#ifdef).*$"
+            r"|(#endif).*$")
         GROMHighlighter.Rules.append((patternkeyGroIf, keywordIf))
 
         #: --> Rule to color POSRE
         POSREformat = QTextCharFormat()
-        POSREformat.setForeground(QColor(255,85,0))
+        POSREformat.setForeground(QColor(255, 85, 0))
         POSREformat.setFontWeight(QFont.Bold)
         patternPOSRE = QRegularExpression(r"(-DPOSRE).*$")
-        GROMHighlighter.Rules.append((patternPOSRE , POSREformat))
-
+        GROMHighlighter.Rules.append((patternPOSRE, POSREformat))
 
         #: --> Rule to color title to yellow
         titleFormat = QTextCharFormat()
@@ -136,8 +126,7 @@ class GROMHighlighter(QSyntaxHighlighter):
         titleFormat.setFontItalic(True)
         titleFormat.setFontWeight(QFont.Bold)
         GROMHighlighter.Rules.append((QRegularExpression(r"title[^\n]*"),
-                                        titleFormat))
-
+                                      titleFormat))
 
         #: --> Rule for Gromacs comment to color green
         commentFormat = QTextCharFormat()
@@ -145,11 +134,9 @@ class GROMHighlighter(QSyntaxHighlighter):
         commentFormat.setFontItalic(True)
         commentFormat.setFontWeight(QFont.Bold)
         GROMHighlighter.Rules.append((QRegularExpression(r";[^\n]*"),
-                                        commentFormat))
+                                      commentFormat))
 
-
-
-    def spellCheck(self,text,Rule1,Rule2):
+    def spellCheck(self, text, Rule1, Rule2):
         """
         Method defines to underline text if word not in Rules
 
@@ -165,12 +152,12 @@ class GROMHighlighter(QSyntaxHighlighter):
         format_under.setUnderlineStyle(QTextCharFormat.SpellCheckUnderline)
 
         #: Underlines word if not in Rules
-        for word_object in re.finditer(self.WORDS, text,re.IGNORECASE):
+        for word_object in re.finditer(self.WORDS, text, re.IGNORECASE):
             comment_location = text.find(';')
             word = word_object.group()
-            if (word not in  Rule1  or word in  Rule2 or text[:comment_location].count(str(word)) > 1):
+            if (word not in Rule1 or word in Rule2 or text[:comment_location].count(str(word)) > 1):
                 self.setFormat(word_object.start(),
-                    word_object.end() - word_object.start(),   format_under)
+                               word_object.end() - word_object.start(), format_under)
 
     def highlightBlock(self, text):
         """
@@ -185,14 +172,12 @@ class GROMHighlighter(QSyntaxHighlighter):
 
         NORMAL, TRIPLESINGLE, TRIPLEDOUBLE = range(3)
 
-
-
-        #Used to highlight according to its Rules
-        for regex, format in GROMHighlighter.Rules: #Works This is a better Choice
+        # Used to highlight according to its Rules
+        for regex, format in GROMHighlighter.Rules:  # Works This is a better Choice
             startpos = 0
             match = regex.globalMatch(text, startpos)
             while match.hasNext():
-                i  = match.next()
+                i = match.next()
                 iCont = i.capturedTexts()[0]
                 comment_location = text.find(';')
                 number_of_times = text[:comment_location].count(iCont)
@@ -200,11 +185,8 @@ class GROMHighlighter(QSyntaxHighlighter):
                     pass
                 else:
                     for index in range(i.lastCapturedIndex() + 1):
-                            self.setFormat(i.capturedStart(index), i.capturedLength(index), format)
-
-
-
+                        self.setFormat(i.capturedStart(index), i.capturedLength(index), format)
 
         self.setCurrentBlockState(NORMAL)
-        #if self.stringRe.indexIn(text) != -1:
-            #return
+        # if self.stringRe.indexIn(text) != -1:
+        # return

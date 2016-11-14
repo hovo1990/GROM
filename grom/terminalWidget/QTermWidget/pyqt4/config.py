@@ -53,9 +53,9 @@ installs.append(["qtermwidgetconfig.py", config.default_mod_dir])
 # pyqtconfig module takes care of all the extra preprocessor, compiler and
 # linker flags needed by the Qt library.
 makefile = pyqtconfig.QtGuiModuleMakefile(
-    configuration = config,
-    build_file = build_file,
-    installs = installs)
+    configuration=config,
+    build_file=build_file,
+    installs=installs)
 
 # Add the library we are wrapping.  The name doesn't include any platform
 # specific prefixes or extensions (e.g. the "lib" prefix on UNIX, or the

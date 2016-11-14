@@ -1,6 +1,7 @@
 import sys
 import random
 import matplotlib
+
 matplotlib.use("Qt5Agg")
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMenu, QVBoxLayout, QSizePolicy, QMessageBox, QWidget
@@ -11,6 +12,7 @@ from matplotlib.figure import Figure
 
 class MyMplCanvas(FigureCanvas):
     """Ultimately, this is a QWidget (as well as a FigureCanvasAgg, etc.)."""
+
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
         self.axes = fig.add_subplot(111)
@@ -24,24 +26,25 @@ class MyMplCanvas(FigureCanvas):
         self.setParent(parent)
 
         FigureCanvas.setSizePolicy(self,
-                QSizePolicy.Expanding,
-                QSizePolicy.Expanding)
+                                   QSizePolicy.Expanding,
+                                   QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
 
     def compute_initial_figure(self):
-          pass
+        pass
+
 
 class MyStaticMplCanvas(MyMplCanvas):
     """Simple canvas with a sine plot."""
+
     def compute_initial_figure(self):
         t = arange(0.0, 3.0, 0.01)
-        s = sin(2*pi*t)
+        s = sin(2 * pi * t)
         self.axes.plot(t, s)
 
 
-#"""A canvas that updates itself every second with a new plot."""
+# """A canvas that updates itself every second with a new plot."""
 class MyDynamicMplCanvas(MyMplCanvas):
-
     def __init__(self, *args, **kwargs):
         MyMplCanvas.__init__(self, *args, **kwargs)
         timer = QtCore.QTimer(self)
@@ -59,7 +62,6 @@ class MyDynamicMplCanvas(MyMplCanvas):
         self.draw()
 
 
-
 class ApplicationWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -68,7 +70,7 @@ class ApplicationWindow(QMainWindow):
 
         self.file_menu = QMenu('&File', self)
         self.file_menu.addAction('&Quit', self.fileQuit,
-                QtCore.Qt.CTRL + QtCore.Qt.Key_Q)
+                                 QtCore.Qt.CTRL + QtCore.Qt.Key_Q)
         self.menuBar().addMenu(self.file_menu)
 
         self.help_menu = QMenu('&Help', self)
@@ -98,18 +100,19 @@ class ApplicationWindow(QMainWindow):
 
     def about(self):
         QMessageBox.about(self, "About",
-  """embedding_in_qt5.py example
-  Copyright 2015 BoxControL
+                          """embedding_in_qt5.py example
+                          Copyright 2015 BoxControL
 
-  This program is a simple example of a Qt5 application embedding matplotlib
-  canvases. It is base on example from matplolib documentation, and initially was
-  developed from Florent Rougon and Darren Dale.
+                          This program is a simple example of a Qt5 application embedding matplotlib
+                          canvases. It is base on example from matplolib documentation, and initially was
+                          developed from Florent Rougon and Darren Dale.
 
-  http://matplotlib.org/examples/user_interfaces/embedding_in_qt4.html
+                          http://matplotlib.org/examples/user_interfaces/embedding_in_qt4.html
 
-  It may be used and modified with no restriction; raw copies as well as
-  modified versions may be distributed without limitation."""
-  )
+                          It may be used and modified with no restriction; raw copies as well as
+                          modified versions may be distributed without limitation."""
+                          )
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
@@ -117,5 +120,5 @@ if __name__ == '__main__':
     aw = ApplicationWindow()
     aw.setWindowTitle("PyQt5 Matplot Example")
     aw.show()
-    #sys.exit(qApp.exec_())
+    # sys.exit(qApp.exec_())
     app.exec_()

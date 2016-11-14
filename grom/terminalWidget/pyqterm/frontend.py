@@ -9,12 +9,10 @@ from PyQt4.QtGui import (
 
 from .backend import Session
 
-
 DEBUG = False
 
 
 class TerminalWidget(QWidget):
-
     foreground_color_map = {
         0: "#000",
         1: "#b00",
@@ -62,16 +60,16 @@ class TerminalWidget(QWidget):
         Qt.Key_Delete: "~4",
         Qt.Key_F1: "~a",
         Qt.Key_F2: "~b",
-        Qt.Key_F3:  "~c",
-        Qt.Key_F4:  "~d",
-        Qt.Key_F5:  "~e",
-        Qt.Key_F6:  "~f",
-        Qt.Key_F7:  "~g",
-        Qt.Key_F8:  "~h",
-        Qt.Key_F9:  "~i",
-        Qt.Key_F10:  "~j",
-        Qt.Key_F11:  "~k",
-        Qt.Key_F12:  "~l",
+        Qt.Key_F3: "~c",
+        Qt.Key_F4: "~d",
+        Qt.Key_F5: "~e",
+        Qt.Key_F6: "~f",
+        Qt.Key_F7: "~g",
+        Qt.Key_F8: "~h",
+        Qt.Key_F9: "~i",
+        Qt.Key_F10: "~j",
+        Qt.Key_F11: "~k",
+        Qt.Key_F12: "~l",
     }
 
     session_closed = pyqtSignal()
@@ -79,7 +77,7 @@ class TerminalWidget(QWidget):
     def __init__(self, parent=None, command="/bin/bash",
                  font_name="Monospace", font_size=18):
         super(TerminalWidget, self).__init__(parent)
-        #self.parent().setTabOrder(self, self)
+        # self.parent().setTabOrder(self, self)
         self.setFocusPolicy(Qt.WheelFocus)
         self.setAutoFillBackground(False)
         self.setAttribute(Qt.WA_OpaquePaintEvent, True)
@@ -167,7 +165,8 @@ class TerminalWidget(QWidget):
                 self.killTimer(self._timer_id)
                 self._timer_id = None
             if DEBUG:
-                print "Session closed"
+                print
+                "Session closed"
             self.session_closed.emit()
             return
         last_change = self._session.last_change()
@@ -318,7 +317,7 @@ class TerminalWidget(QWidget):
         if ctrl and key == Qt.Key_Plus:
             self.zoom_in()
         elif ctrl and key == Qt.Key_Minus:
-                self.zoom_out()
+            self.zoom_out()
         else:
             if text and key != Qt.Key_Backspace:
                 self.send(text.encode("utf-8"))
@@ -327,16 +326,21 @@ class TerminalWidget(QWidget):
                 if s:
                     self.send(s.encode("utf-8"))
                 elif DEBUG:
-                    print "Unkonwn key combination"
-                    print "Modifiers:", modifiers
-                    print "Key:", key
+                    print
+                    "Unkonwn key combination"
+                    print
+                    "Modifiers:", modifiers
+                    print
+                    "Key:", key
                     for name in dir(Qt):
                         if not name.startswith("Key_"):
                             continue
                         value = getattr(Qt, name)
                         if value == key:
-                            print "Symbol: Qt.%s" % name
-                    print "Text: %r" % text
+                            print
+                            "Symbol: Qt.%s" % name
+                    print
+                    "Text: %r" % text
         event.accept()
         if key in (Qt.Key_Enter, Qt.Key_Return):
             self.return_pressed.emit()
@@ -419,7 +423,8 @@ class TerminalWidget(QWidget):
 
             sel = self.text_selection()
             if DEBUG:
-                print "%r copied to xselection" % sel
+                print
+                "%r copied to xselection" % sel
             self._clipboard.setText(sel, QClipboard.Selection)
 
             self.update_screen()
@@ -454,7 +459,8 @@ class TerminalWidget(QWidget):
 
         sel = self.text_selection()
         if DEBUG:
-            print "%r copied to xselection" % sel
+            print
+            "%r copied to xselection" % sel
         self._clipboard.setText(sel, QClipboard.Selection)
 
         self.update_screen()

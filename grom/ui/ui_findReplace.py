@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+
 class Ui_FindAndReplaceDlg(object):
     def setupUi(self, FindAndReplaceDlg):
         FindAndReplaceDlg.setObjectName("FindAndReplaceDlg")
@@ -83,7 +84,8 @@ class Ui_FindAndReplaceDlg(object):
         self.DownSearch.setAutoFillBackground(True)
         self.DownSearch.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(":/Search/icons/find/Actions-go-down-search-icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/Search/icons/find/Actions-go-down-search-icon.png"), QtGui.QIcon.Normal,
+                       QtGui.QIcon.Off)
         self.DownSearch.setIcon(icon)
         self.DownSearch.setIconSize(QtCore.QSize(24, 24))
         self.DownSearch.setAutoRepeat(False)
@@ -96,7 +98,8 @@ class Ui_FindAndReplaceDlg(object):
         self.UpSearch.setAutoFillBackground(True)
         self.UpSearch.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(":/Search/icons/find/Actions-go-up-search-icon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(":/Search/icons/find/Actions-go-up-search-icon.png"), QtGui.QIcon.Normal,
+                        QtGui.QIcon.Off)
         self.UpSearch.setIcon(icon1)
         self.UpSearch.setIconSize(QtCore.QSize(24, 24))
         self.UpSearch.setAutoRepeat(False)
@@ -237,5 +240,6 @@ class Ui_FindAndReplaceDlg(object):
         self.checkBoxElem.setText(_translate("FindAndReplaceDlg", "element"))
         self.pushButton_AllColumns.setText(_translate("FindAndReplaceDlg", "All Columns"))
         self.pushButton_NoColumns.setText(_translate("FindAndReplaceDlg", "No Columns"))
+
 
 import Icons_rc

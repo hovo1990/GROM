@@ -2,9 +2,6 @@
 import os
 import sys
 
-
-
-
 try:
     from PySide import QtCore
     from PySide import QtWidgets
@@ -18,90 +15,86 @@ except:
 
 
 class CustomQProcess(QProcess):
+    def __init__(self):
+        # Call base class method
+        QProcess.__init__(self)
+        self.setProcessChannelMode(QProcess.MergedChannels)
 
-      def __init__(self):
-           #Call base class method
-           QProcess.__init__(self)
-           self.setProcessChannelMode(QProcess.MergedChannels)
+        # self.data = []
+        # self.final_data = None
 
-           #self.data = []
-           #self.final_data = None
+        self.runningProgram = None
 
-           self.runningProgram = None
+        self.readyReadStandardOutput.connect(self.readStdOutput)
+        self.finished.connect(self.killProcess)
 
-           self.readyReadStandardOutput.connect(self.readStdOutput)
-           self.finished.connect(self.killProcess)
+    def startVMD(self, filename, tableWidgetAddress):  # OK
+        self.widgetAddress = tableWidgetAddress
+        self.runningProgram = 'vmd'
+        self.start("vmd %s" % filename)
 
-      def startVMD(self, filename,  tableWidgetAddress): #OK
-          self.widgetAddress = tableWidgetAddress
-          self.runningProgram = 'vmd'
-          self.start("vmd %s" %filename)
+    def startPYMOL(self, filename, tableWidgetAddress):  # OK
+        self.widgetAddress = tableWidgetAddress
+        self.runningProgram = 'pymol'
+        self.start("pymol %s" % filename)
 
-
-      def startPYMOL(self, filename,  tableWidgetAddress): #OK
-          self.widgetAddress = tableWidgetAddress
-          self.runningProgram = 'pymol'
-          self.start("pymol %s" %filename)
-
-      #Define Slot Here
-      #@pyqtSlot()
+    # Define Slot Here
+    # @pyqtSlot()
 
 
 
 
-      def readStdOutput(self):
-          self.res = str(self.readAllStandardOutput())
-          #print('test VIP------------>',self.res)
-          #test = self.res.split("\\n")
-          self.parseOutput(self.res)
+    def readStdOutput(self):
+        self.res = str(self.readAllStandardOutput())
+        # print('test VIP------------>',self.res)
+        # test = self.res.split("\\n")
+        self.parseOutput(self.res)
 
-      def parseOutput(self, res):
-          if self.runningProgram == 'vmd':
-              self.parseVMD(res)
-          elif self.runningProgram == 'pymol':
-              self.parsePYMOL(res)
-          ##print('res is ',res) #Need to parse this down
-          #temp = res.split("%")
-          ##print('shit ',temp)
-          #temp2 = temp[0].split('[')
-          ##print('fuck temp2 ',temp2)
-          #self.final_data = temp2[1]
-          ##return self.final_data
-          ##print('buhahah ',self.final_data)
+    def parseOutput(self, res):
+        if self.runningProgram == 'vmd':
+            self.parseVMD(res)
+        elif self.runningProgram == 'pymol':
+            self.parsePYMOL(res)
+            ##print('res is ',res) #Need to parse this down
+            # temp = res.split("%")
+            ##print('shit ',temp)
+            # temp2 = temp[0].split('[')
+            ##print('fuck temp2 ',temp2)
+            # self.final_data = temp2[1]
+            ##return self.final_data
+            ##print('buhahah ',self.final_data)
 
-      def parseVMD(self,output): #THere are so many things to do
-          #print("parseVMD called")
-          if "picked atom" in output:
-              print('output is ',output)
-              part1 = output.split("name:")
-              #print(part1)
-              part2 = part1[1].split("\\n")
-              #print(part2)
-              part3 = part2[0].split(' ')
-              result = part3[-1]
-              print(result)
-              self.widgetAddress.findAll(result)
+    def parseVMD(self, output):  # THere are so many things to do
+        # print("parseVMD called")
+        if "picked atom" in output:
+            print('output is ', output)
+            part1 = output.split("name:")
+            # print(part1)
+            part2 = part1[1].split("\\n")
+            # print(part2)
+            part3 = part2[0].split(' ')
+            result = part3[-1]
+            print(result)
+            self.widgetAddress.findAll(result)
 
-      def parsePYMOL(self,output): #THere are so many things to do
-          #print("parseVMD called")
-          if "You clicked" in output:
-              print(output)
-              #Example: b' You clicked /VIC_temp//Z/VIC`1/C18\n'
-              #part1 = output.split("name:")
-              ##print(part1)
-              #part2 = part1[1].split("\\n")
-              ##print(part2)
-              #part3 = part2[0].split(' ')
-              #result = part3[-1]
-              #print(result)
-              #self.widgetAddress.findAll(result)
-
-
-      #def getData(self):
-          #return self.final_data #Shit there's a problem'
+    def parsePYMOL(self, output):  # THere are so many things to do
+        # print("parseVMD called")
+        if "You clicked" in output:
+            print(output)
+            # Example: b' You clicked /VIC_temp//Z/VIC`1/C18\n'
+            # part1 = output.split("name:")
+            ##print(part1)
+            # part2 = part1[1].split("\\n")
+            ##print(part2)
+            # part3 = part2[0].split(' ')
+            # result = part3[-1]
+            # print(result)
+            # self.widgetAddress.findAll(result)
 
 
-      def killProcess(self):
+            # def getData(self):
+            # return self.final_data #Shit there's a problem'
 
-            self.kill()
+    def killProcess(self):
 
+        self.kill()

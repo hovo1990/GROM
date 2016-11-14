@@ -17,12 +17,10 @@ import struct
 import select
 import subprocess
 
-
 __version__ = "0.1"
 
 
 class Terminal(object):
-
     def __init__(self, w, h):
         self.w = w
         self.h = h
@@ -37,75 +35,75 @@ class Terminal(object):
             0x2260, 0xa3, 0xb7, 0x7f
         ]
         self.vt100_esc = {
-            '#8':	self.esc_DECALN,
-            '(A':	self.esc_G0_0,
-            '(B':	self.esc_G0_1,
-            '(0':	self.esc_G0_2,
-            '(1':	self.esc_G0_3,
-            '(2':	self.esc_G0_4,
-            ')A':	self.esc_G1_0,
-            ')B':	self.esc_G1_1,
-            ')0':	self.esc_G1_2,
-            ')1':	self.esc_G1_3,
-            ')2':	self.esc_G1_4,
-            '7':	self.esc_DECSC,
-            '8':	self.esc_DECRC,
-            '=':	self.esc_DECKPAM,
-            '>':	self.esc_DECKPNM,
-            'D':	self.esc_IND,
-            'E':	self.esc_NEL,
-            'H':	self.esc_HTS,
-            'M':	self.esc_RI,
-            'N':	self.esc_SS2,
-            'O':	self.esc_SS3,
-            'P':	self.esc_DCS,
-            'X':	self.esc_SOS,
-            'Z':	self.esc_DECID,
-            '[':	self.esc_CSI,
-            '\\':	self.esc_ST,
-            ']':	self.esc_OSC,
-            '^':	self.esc_PM,
-            '_':	self.esc_APC,
-            'c':	self.reset_hard,
+            '#8': self.esc_DECALN,
+            '(A': self.esc_G0_0,
+            '(B': self.esc_G0_1,
+            '(0': self.esc_G0_2,
+            '(1': self.esc_G0_3,
+            '(2': self.esc_G0_4,
+            ')A': self.esc_G1_0,
+            ')B': self.esc_G1_1,
+            ')0': self.esc_G1_2,
+            ')1': self.esc_G1_3,
+            ')2': self.esc_G1_4,
+            '7': self.esc_DECSC,
+            '8': self.esc_DECRC,
+            '=': self.esc_DECKPAM,
+            '>': self.esc_DECKPNM,
+            'D': self.esc_IND,
+            'E': self.esc_NEL,
+            'H': self.esc_HTS,
+            'M': self.esc_RI,
+            'N': self.esc_SS2,
+            'O': self.esc_SS3,
+            'P': self.esc_DCS,
+            'X': self.esc_SOS,
+            'Z': self.esc_DECID,
+            '[': self.esc_CSI,
+            '\\': self.esc_ST,
+            ']': self.esc_OSC,
+            '^': self.esc_PM,
+            '_': self.esc_APC,
+            'c': self.reset_hard,
         }
         self.vt100_csi = {
-            '@':	self.csi_ICH,
-            'A':	self.csi_CUU,
-            'B':	self.csi_CUD,
-            'C':	self.csi_CUF,
-            'D':	self.csi_CUB,
-            'E':	self.csi_CNL,
-            'F':	self.csi_CPL,
-            'G':	self.csi_CHA,
-            'H':	self.csi_CUP,
-            'I':	self.csi_CHT,
-            'J':	self.csi_ED,
-            'K':	self.csi_EL,
-            'L':	self.csi_IL,
-            'M':	self.csi_DL,
-            'P':	self.csi_DCH,
-            'S':	self.csi_SU,
-            'T':	self.csi_SD,
-            'W':	self.csi_CTC,
-            'X':	self.csi_ECH,
-            'Z':	self.csi_CBT,
-            '`':	self.csi_HPA,
-            'a':	self.csi_HPR,
-            'b':	self.csi_REP,
-            'c':	self.csi_DA,
-            'd':	self.csi_VPA,
-            'e':	self.csi_VPR,
-            'f':	self.csi_HVP,
-            'g':	self.csi_TBC,
-            'h':	self.csi_SM,
-            'l':	self.csi_RM,
-            'm':	self.csi_SGR,
-            'n':	self.csi_DSR,
-            'r':	self.csi_DECSTBM,
-            's':	self.csi_SCP,
-            'u':	self.csi_RCP,
-            'x':	self.csi_DECREQTPARM,
-            '!p':	self.csi_DECSTR,
+            '@': self.csi_ICH,
+            'A': self.csi_CUU,
+            'B': self.csi_CUD,
+            'C': self.csi_CUF,
+            'D': self.csi_CUB,
+            'E': self.csi_CNL,
+            'F': self.csi_CPL,
+            'G': self.csi_CHA,
+            'H': self.csi_CUP,
+            'I': self.csi_CHT,
+            'J': self.csi_ED,
+            'K': self.csi_EL,
+            'L': self.csi_IL,
+            'M': self.csi_DL,
+            'P': self.csi_DCH,
+            'S': self.csi_SU,
+            'T': self.csi_SD,
+            'W': self.csi_CTC,
+            'X': self.csi_ECH,
+            'Z': self.csi_CBT,
+            '`': self.csi_HPA,
+            'a': self.csi_HPR,
+            'b': self.csi_REP,
+            'c': self.csi_DA,
+            'd': self.csi_VPA,
+            'e': self.csi_VPR,
+            'f': self.csi_HVP,
+            'g': self.csi_TBC,
+            'h': self.csi_SM,
+            'l': self.csi_RM,
+            'm': self.csi_SGR,
+            'n': self.csi_DSR,
+            'r': self.csi_DECSTBM,
+            's': self.csi_SCP,
+            'u': self.csi_RCP,
+            'x': self.csi_DECREQTPARM,
+            '!p': self.csi_DECSTR,
         }
         self.vt100_keyfilter_ansikeys = {
             '~': '~',
@@ -1107,11 +1105,11 @@ def synchronized(func):
         finally:
             self.lock.release()
         return result
+
     return wrapper
 
 
 class Multiplexer(object):
-
     def __init__(self, cmd="/bin/bash", env_term="xterm-color", timeout=60 * 60 * 24):
         # Set Linux signal handler
         if sys.platform in ("linux2", "linux3"):
@@ -1153,10 +1151,10 @@ class Multiplexer(object):
             # Start a new session
             self.session[sid] = {
                 'state': 'unborn',
-                'term':	Terminal(w, h),
-                'time':	time.time(),
-                'w':	w,
-                'h':	h}
+                'term': Terminal(w, h),
+                'time': time.time(),
+                'w': w,
+                'h': h}
             return self.proc_spawn(sid, cmd)
         elif self.session[sid]['state'] == 'alive':
             self.session[sid]['time'] = time.time()
@@ -1408,8 +1406,9 @@ if __name__ == "__main__":
     multiplex = Multiplexer(cmd)
     sid = "session-id-%s"
     if multiplex.proc_keepalive(sid, w, h):
-        #multiplex.proc_write(sid, k)
+        # multiplex.proc_write(sid, k)
         time.sleep(1)
         # print multiplex.proc_dump(sid)
-        print "Output:", multiplex.proc_dump(sid)
+        print
+        "Output:", multiplex.proc_dump(sid)
     multiplex.stop()

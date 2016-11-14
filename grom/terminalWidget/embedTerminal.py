@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# !/usr/bin/env python
+# -*- coding:utf-8 -*-
 
-import  sys
+import sys
 from PyQt4.QtGui import QApplication
-#import atexit
+# import atexit
 from pyqterm import *
-#Very slow
+
+# Very slow
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -14,4 +15,3 @@ if __name__ == "__main__":
     win.resize(800, 600)
     win.show()
     app.exec_()
-
