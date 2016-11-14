@@ -71,7 +71,18 @@ And run it:
 .. code:: bash
     $ python3 GROM.py
 
+Citing:
 
+[![DOI](https://zenodo.org/badge/19024/hovo1990/GROM.svg)](https://zenodo.org/badge/latestdoi/19024/hovo1990/GROM)
+
+GROM was written by Hovakim Grabski.
+
+If you find this package useful and use it in published work I'd be grateful if it was acknowledged in text as
+
+"... used GROM (Hovakim Grabski, https://github.com/hovo1990/GROM/ doi: 10.5281/zenodo.62061)"
+or in the Acknowledgements section.
+
+Thank you.
 
 
 Author:2014 by Hovakim Grabski(hovakim_grabski@yahoo.com,johnwo1990@hotmail.com)
